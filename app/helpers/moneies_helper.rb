@@ -1,0 +1,2 @@
+module MoneiesHelper
+end
