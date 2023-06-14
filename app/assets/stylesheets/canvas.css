@@ -1,5 +1,30 @@
-canvas {
+#canvas_1 {
   border-radius: 350px;
-  border: 10px solid #000;
+  border: 10px solid rgb(0, 100, 200);
   transform: rotate(-90deg);
+}
+
+.canvas_view {
+  display: flex;
+}
+
+#canvas_frame_2 {
+  height: 5px;
+  width: 200px;
+  background-color: rgba(0, 200, 200, 0.25);
+  display: flex;
+}
+
+.bar_view {
+  margin-top: 12px;
+}
+
+.parcent_num {
+  display: flex;
+  padding-right: 7.5px;
+}
+
+#canvas_2 {
+  height: 5px;
+  background-color: rgb(0, 150, 255);
 }
