@@ -1,3 +1,5 @@
+// import number_setting from 'number_setting'
+
 let parcent_num = document.getElementById("num");
 // let conditon_num = Math.floor(Math.random() * 99);
 let speed = 1;

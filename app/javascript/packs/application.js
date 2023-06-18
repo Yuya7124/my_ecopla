@@ -7,9 +7,9 @@ require("@rails/ujs").start()
 // require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
-require("../number_setting")
-require("../canvas_1")
+// require("../canvas_1")
 require("../canvas_2")
+require("../number_setting")
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
@@ -18,3 +18,5 @@ require("../canvas_2")
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+//= require jquery
+//= require jquery_ujs

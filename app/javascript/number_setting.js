@@ -12,10 +12,10 @@ function number_setting(){
     let init_num = 0;
 
     const count_up = () => {
-      target.innerHTML = zero_padding(init_num, targetNum);
+      target.innerText = `${zero_padding(init_num, targetNum)}`;
       init_num++;
       if (init_num > targetNum){
-        target.innerHTML = targetNum;
+        target.innerText = targetNum;
         clearInterval(data_num);
       }
     }
