@@ -1,0 +1,14 @@
+<header>
+<h1>MyEcopla</h1>
+  <div class="login_nav">
+    <% if user_signed_in? %>
+      <div class="user_nav grid-6">
+        <%= link_to "新規登録", "#", class: "post" %>
+        <div class="setting_nav">
+          <%= link_to "設定", "#", class: "post" %>
+          <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+        <div>
+      </div>
+    <% end %>
+  </div>
+</header>
