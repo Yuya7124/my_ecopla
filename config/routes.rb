@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
-  get 'moneys/index'
-  root to: "moneys#index"
-  resources :moneys, only:[:index, :new]
+  get 'payments_balances/index'
+  root to: "payments_balances#index"
+  resources :payments_balances, only:[:index, :new, :create]
 end
