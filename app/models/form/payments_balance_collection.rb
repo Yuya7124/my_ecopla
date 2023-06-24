@@ -20,8 +20,8 @@ class Form::PaymentsBalanceCollection < Form::Base
         balance.save!
       end
     end
-    true
-  rescue => e
-    false
+      true
+    rescue => e
+      false
   end
 end
