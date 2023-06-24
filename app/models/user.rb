@@ -12,8 +12,8 @@ class User < ApplicationRecord
     validates :password, format: { with: VALID_PASSWORD_REGEX, allow_blank: true }
   end
   
-  has_one  :budget
   has_one  :money
+  has_many :budgets, foreign_key: 'user_id'
   has_many :payments_balances
 
   #バリデーションの重複撤去

@@ -14,6 +14,7 @@ ActiveRecord::Schema.define(version: 2023_06_20_135113) do
 
   create_table "budgets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
+    t.date "date", null: false
     t.bigint "payments_balances_id", null: false
     t.bigint "money_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -34,12 +35,11 @@ ActiveRecord::Schema.define(version: 2023_06_20_135113) do
   end
 
   create_table "payments_balances", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.date "date", null: false
+    t.bigint "user_id", null: false
     t.integer "amount", null: false
     t.string "purpose", null: false
     t.integer "payment_id", null: false
     t.integer "payment_times", null: false
-    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_payments_balances_on_user_id"
