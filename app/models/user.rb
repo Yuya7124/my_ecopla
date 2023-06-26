@@ -13,7 +13,7 @@ class User < ApplicationRecord
   end
   
   has_one  :money
-  has_many :budgets, foreign_key: 'user_id'
+  has_many :budgets
   has_many :payments_balances
 
   #バリデーションの重複撤去
