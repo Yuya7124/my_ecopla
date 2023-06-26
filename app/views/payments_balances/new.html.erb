@@ -1,0 +1,26 @@
+<h1>Budget List</h1>
+<%= form_with model: @form, url: payments_balances_path, method: :post, local: true do |form| %>
+  <table>
+    <thead>
+      <tr>
+        <th> purpose </th>
+        <th> amount </th>
+        <th> payment </th>
+        <th> times </th>
+      </tr>
+    </thead>
+  <tbody>
+    <%= form.fields_for :payments_balances do |f| %>
+      <tr>
+        <%# <%= render 'devise/shared/error_messages', model: f.object %>
+        <td><%= f.text_field :purpose %></td>
+        <td><%= f.text_field :amount %></td>
+        <td><%= f.collection_select(:payment_id, Payment.all, :id, :name, {}, {class:"select-box", id:"item-category"}) %></td>
+        <td><%= f.text_field :payment_times %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+  <%= form.submit "登録" %>
+  <%= link_to "戻る", root_path %>
+<% end %>

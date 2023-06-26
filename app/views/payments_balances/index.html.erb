@@ -1,6 +1,4 @@
 <%= render "devise/shared/header" %>
-<h2>現在設計中</h2>
-<p>Designing Now...</p>
 
 <div class="canvas_views" id="num_counter">
   <%# <div class="canvas_view">
@@ -16,3 +14,7 @@
     </div>
   </div>
 </div>
+
+<%= month_calendar do |date| %>
+  <%= date.day %>
+<% end %>

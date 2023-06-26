@@ -73,3 +73,5 @@ gem 'active_hash'
 gem 'ancestry'
 gem 'pry-rails'
 gem 'jquery-rails'
+gem "simple_calendar", "~> 2.4"
+gem 'rails-i18n'
