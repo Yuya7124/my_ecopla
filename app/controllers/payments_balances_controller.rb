@@ -10,8 +10,7 @@ class PaymentsBalancesController < ApplicationController
   end
 
   def create
-    binding.pry
-    @form = Form::PaymentsBalanceCollection.new(payments_balance_collection_params.merge(user_id: current_user.id))
+    @form = Form::PaymentsBalanceCollection.new(budget_payments_balance_params.merge(user_id: current_user.id))
     if @form.save
       redirect_to root_path
     else
@@ -21,9 +20,8 @@ class PaymentsBalancesController < ApplicationController
   
   private
   
-  def payments_balance_collection_params
+  def budget_payments_balance_params
     params.require(:form_payments_balance_collection)
-          .permit(payments_balances_attributes: [:amount, :purpose, :payment_id, :payment_times])
-          .merge(user_id: current_user.id)
+    .permit(:date, payments_balances_attributes: [:amount, :purpose, :payment_id, :payment_times])
   end
 end

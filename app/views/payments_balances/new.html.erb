@@ -1,5 +1,10 @@
 <h1>Budget List</h1>
 <%= form_with model: @form, url: payments_balances_path, method: :post, local: true do |form| %>
+  <div class="field">
+    <%= form.label :date, 'Date' %>
+    <%= form.date_field :date %>
+  </div>
+
   <table>
     <thead>
       <tr>

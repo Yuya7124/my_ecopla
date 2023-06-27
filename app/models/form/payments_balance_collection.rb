@@ -2,11 +2,12 @@ class Form::PaymentsBalanceCollection < Form::Base
   extend ActiveHash::Associations::ActiveRecordExtensions
   FORM_COUNT = 3
 
-  attr_accessor :payments_balances, :user_id
+  attr_accessor :date, :payments_balances, :user_id
 
   def initialize(attributes = {})
     super attributes
-    self.payments_balances = FORM_COUNT.times.map { PaymentsBalance.new() } unless self.payments_balances.present?
+    self.date = Date.today unless self.date.present?
+    self.payments_balances = FORM_COUNT.times.map { PaymentsBalance.new } unless self.payments_balances.present?
   end
 
   def payments_balances_attributes=(attributes)
