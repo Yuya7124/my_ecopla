@@ -8,7 +8,7 @@ class PaymentsBalance < ApplicationRecord
   #   validates :payment_times
   # end
   
-  belongs_to  :user
+  # belongs_to  :user
   belongs_to  :budget
   belongs_to  :payment
   # has_ancestry

@@ -16,15 +16,15 @@ class Form::PaymentsBalanceCollection < Form::Base
   end
   
   def save
-    binding.pry
+    # binding.pry
     budget = Budget.create(date: date, user_id: user_id)
     payments_balances.each do |balance|
       budget.payments_balances.build(balance.attributes)
+      balance.budget_id = budget.id
     end
     budget.save
-    puts budget.errors.full_messages
-    return !budget.errors.any?
-  rescue => e
-    return false
-  end  
+      return true
+    rescue => e
+      return false
+  end
 end
