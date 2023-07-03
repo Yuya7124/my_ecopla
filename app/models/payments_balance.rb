@@ -9,7 +9,7 @@ class PaymentsBalance < ApplicationRecord
   # end
   
   belongs_to  :user
-  has_many    :budgets
+  belongs_to  :budget
   belongs_to  :payment
   # has_ancestry
 end

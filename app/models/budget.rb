@@ -1,5 +1,5 @@
 class Budget < ApplicationRecord
   belongs_to  :user
-  belongs_to  :payments_balance
+  has_many    :payments_balances
   # validates :date, presence: true
 end
