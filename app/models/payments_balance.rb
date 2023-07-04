@@ -4,12 +4,12 @@ class PaymentsBalance < ApplicationRecord
   # with_options presence: true do
   #   validates :amount
   #   validates :purpose
-  #   validates :payment_id, numericality: { other_than: 0, message: "can't be blank"}
+  #   validates :payment_id, numericality: { other_than: 0, message: "が選択されていません" }
   #   validates :payment_times
+  #   validates :budget_id, presence: true
   # end
   
-  # belongs_to  :user
-  belongs_to  :budget
-  belongs_to  :payment
+  belongs_to :budget
+  belongs_to :payment
   # has_ancestry
 end
