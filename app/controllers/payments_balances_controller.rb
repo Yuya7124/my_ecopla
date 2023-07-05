@@ -11,17 +11,18 @@ class PaymentsBalancesController < ApplicationController
 
   def create
     @form = Form::BudgetPaymentsBalanceCollection.new(budget_payments_balance_params)
+    @form.valid?
+    @form.payments_balances.each do |balance|
+      balance.valid?
+    end
+  
     if @form.save
       redirect_to root_path
     else
-      @form.valid?
-      @form.payments_balances.each do |balance|
-        balance.valid?
-        puts balance.errors.full_messages
-      end
       render :new
     end
   end
+  
   
   private
   
