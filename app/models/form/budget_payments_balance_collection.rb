@@ -1,7 +1,7 @@
 class Form::BudgetPaymentsBalanceCollection < Form::Base
   extend ActiveHash::Associations::ActiveRecordExtensions
 
-  FORM_COUNT = 3
+  FORM_COUNT = 1
 
   attr_accessor :date, :payments_balances, :user_id, :budget_id
 

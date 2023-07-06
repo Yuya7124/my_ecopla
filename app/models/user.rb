@@ -14,7 +14,7 @@ class User < ApplicationRecord
   
   has_one  :money
   has_many :budgets
-  has_many :payments_balances
+  has_many :payments_balances, through: :budgets
 
   #バリデーションの重複撤去
   def remove_unnecessary_error_messages

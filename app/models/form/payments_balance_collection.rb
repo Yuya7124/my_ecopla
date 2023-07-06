@@ -1,0 +1,29 @@
+class Form::PaymentsBalanceCollection < Form::Base
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  FORM_COUNT = 3
+
+  attr_accessor :payments_balances, :date, :user_id
+
+  def initialize(attributes = {})
+    super attributes
+    self.date = Date.today unless self.date.present?
+    self.payments_balances = Array.new(FORM_COUNT) { PaymentsBalance.new } unless self.payments_balances.present?
+  end
+
+  def payments_balances_attributes=(attributes)
+    self.payments_balances = attributes.map { |_key, value| PaymentsBalance.new(value) }
+  end
+
+  def save
+    PaymentsBalance.transaction do
+      self.payments_balances.each do |balance|
+        balance.date = self.date
+        balance.user_id = user_id
+        balance.save
+      end
+    end
+    return errors.empty?
+  rescue => e
+    return false
+  end
+end
