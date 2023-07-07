@@ -17,9 +17,9 @@
 
 <%= month_calendar event: @payments_balances do |date, _| %>
   <%= date.day %><br/>
-  <% count_amount = PaymentsBalance.where(date: date).count %>
-  <% unless count_amount == 0 %>
-    <% total_amount = PaymentsBalance.where(date: date).sum(:amount) %>
-    <%= total_amount %>
-  <% end %>
+    <% count_amount = PaymentsBalance.where(date: date, user_id: current_user.id).count %>
+    <% unless count_amount == 0 %>
+      <% total_amount = PaymentsBalance.where(date: date, user_id: current_user.id).sum(:amount) %>
+      <%= total_amount %>
+    <% end %>
 <% end %>
