@@ -14,6 +14,10 @@ class Form::PaymentsBalanceCollection < Form::Base
     self.payments_balances = attributes.map { |_key, value| PaymentsBalance.new(value) }
   end
 
+  def payments_balances
+    @payments_balances ||= []
+  end
+
   def save
     PaymentsBalance.transaction do
       self.payments_balances.each do |balance|

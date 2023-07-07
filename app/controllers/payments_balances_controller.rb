@@ -2,7 +2,7 @@ class PaymentsBalancesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    # @payments_balances = PaymentsBalance.all
+    @payments_balances = PaymentsBalance.all
   end
 
   def new
