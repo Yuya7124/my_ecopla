@@ -1,5 +1,12 @@
 <h1>Budget List</h1>
-<%= form_with model: @form, url: payments_balances_path, method: :post, local: true do |form| %>
+<%= form_with model: @form, url: payments_balances_path, local: true do |form| %>
+<%= render 'devise/shared/error_messages', model: @form %>
+  <div class="field">
+    
+    <%= form.label :date, 'Date' %>
+    <%= form.date_field :date, type: "date" %>
+  </div>
+
   <table>
     <thead>
       <tr>
@@ -10,15 +17,15 @@
       </tr>
     </thead>
   <tbody>
-    <%= form.fields_for :payments_balances do |f| %>
+    <%= form.fields_for :payments_balances do |balance| %>
       <tr>
-        <%# <%= render 'devise/shared/error_messages', model: f.object %>
-        <td><%= f.text_field :purpose %></td>
-        <td><%= f.text_field :amount %></td>
-        <td><%= f.collection_select(:payment_id, Payment.all, :id, :name, {}, {class:"select-box", id:"item-category"}) %></td>
-        <td><%= f.text_field :payment_times %></td>
+        <td><%= balance.text_field :purpose, placeholder: "まだ未実装" %></td>
+        <td><%= balance.text_field :amount, placeholder: "0"  %></td>
+        <td><%= balance.collection_select(:payment_id, Payment.all, :id, :name, {}, {class:"select-box", id:"item-category"}) %></td>
+        <td><%= balance.text_field :payment_times, placeholder: "1" %></td>
       </tr>
     <% end %>
+
     </tbody>
   </table>
   <%= form.submit "登録" %>

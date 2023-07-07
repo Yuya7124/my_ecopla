@@ -1,0 +1,33 @@
+=> [32m#<Form::PaymentsBalanceCollection:0x00007fa0f980bac8[0m
+ @date[32m=[0m[31m[1;31m"[0m[31m2023-07-06[1;31m"[0m[31m[0m,
+ @payments_balances[32m=[0m
+  [[32m#<PaymentsBalance:0x00007fa0f97f6790[0m
+    id: [1;36mnil[0m,
+    date: [1;36mnil[0m,
+    amount: [1;34m1243[0m,
+    purpose: [31m[1;31m"[0m[31mまだ[1;31m"[0m[31m[0m,
+    payment_id: [1;34m1[0m,
+    payment_times: [1;34m1[0m,
+    user_id: [1;36mnil[0m,
+    created_at: [1;36mnil[0m,
+    updated_at: [1;36mnil[0m[32m>[0m,
+   [32m#<PaymentsBalance:0x00007fa0f97c5ca8[0m
+    id: [1;36mnil[0m,
+    date: [1;36mnil[0m,
+    amount: [1;34m523[0m,
+    purpose: [31m[1;31m"[0m[31mまだ[1;31m"[0m[31m[0m,
+    payment_id: [1;34m1[0m,
+    payment_times: [1;34m1[0m,
+    user_id: [1;36mnil[0m,
+    created_at: [1;36mnil[0m,
+    updated_at: [1;36mnil[0m[32m>[0m,
+   [32m#<PaymentsBalance:0x00007fa0f97c5668[0m
+    id: [1;36mnil[0m,
+    date: [1;36mnil[0m,
+    amount: [1;34m365[0m,
+    purpose: [31m[1;31m"[0m[31mまだ[1;31m"[0m[31m[0m,
+    payment_id: [1;34m1[0m,
+    payment_times: [1;34m1[0m,
+    user_id: [1;36mnil[0m,
+    created_at: [1;36mnil[0m,
+    updated_at: [1;36mnil[0m[32m>[0m][32m>[0m
