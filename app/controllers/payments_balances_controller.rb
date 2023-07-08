@@ -2,7 +2,7 @@ class PaymentsBalancesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @payments_balances = PaymentsBalance.all
+    @payments_balances = PaymentsBalance.where(user_id: current_user.id)
   end
 
   def new
@@ -18,7 +18,11 @@ class PaymentsBalancesController < ApplicationController
       render :new
     end
   end
-  
+
+  def show
+    @selected_date = Date.parse(params[:date])
+    @payments_balance = PaymentsBalance.where(date: @selected_date, user_id: current_user.id)
+  end
   
   private
   
