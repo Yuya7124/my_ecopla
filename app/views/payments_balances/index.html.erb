@@ -16,14 +16,12 @@
 </div>
 
 <%= month_calendar event: @payments_balances do |date, _| %>
-<% if @payments_balances.any? %>
-  <%= link_to date.day, payments_balances_path(date: date) %><br/>
   <% count_amount = PaymentsBalance.where(date: date, user_id: current_user.id).count %>
   <% unless count_amount.zero? %>
+    <%= link_to date.day, payments_balances_path(date: date) %><br/>
     <% total_amount = PaymentsBalance.where(date: date, user_id: current_user.id).sum(:amount) %>
     <%= total_amount %>
-  <% end %>
   <% else %>
-    <%= link_to date.day %>
+    <%= date.day %>
   <% end %>
 <% end %>

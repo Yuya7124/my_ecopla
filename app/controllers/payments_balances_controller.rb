@@ -10,7 +10,6 @@ class PaymentsBalancesController < ApplicationController
   end
 
   def create
-    date = Date.today
     @form = Form::PaymentsBalanceCollection.new(payments_balance_params)
     if @form.save
       redirect_to root_path
