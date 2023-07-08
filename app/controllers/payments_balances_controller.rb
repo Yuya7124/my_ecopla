@@ -31,4 +31,5 @@ class PaymentsBalancesController < ApplicationController
     .permit(:date, payments_balances_attributes: [:amount, :purpose, :payment_id, :payment_times])
     .merge(user_id: current_user.id)
   end
+  
 end

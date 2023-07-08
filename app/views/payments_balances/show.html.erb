@@ -1,5 +1,7 @@
 <h1>Payments Balance List</h1>
 
+<%= @selected_date %>
+
 <% if @payments_balance.any? %>
   <table>
     <thead>
@@ -24,4 +26,6 @@
 <% else %>
   <p>No data found.</p>
 <% end %>
+
+<%= link_to "戻る", root_path %>
 
