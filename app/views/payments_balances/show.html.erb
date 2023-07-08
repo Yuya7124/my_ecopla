@@ -1,0 +1,31 @@
+<h1>Payments Balance List</h1>
+
+<%= @selected_date %>
+
+<% if @payments_balance.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th> purpose </th>
+        <th> amount </th>
+        <th> payment </th>
+        <th> times </th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @payments_balance.each do |balance| %>
+        <tr>
+          <td><%= balance.purpose %></td>
+          <td><%= balance.amount %></td>
+          <td><%= balance.payment.name %></td>
+          <td><%= balance.payment_times %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No data found.</p>
+<% end %>
+
+<%= link_to "戻る", root_path %>
+
