@@ -23,6 +23,7 @@
         <td><%= balance.text_field :amount, placeholder: "0"  %></td>
         <td><%= balance.collection_select(:payment_id, Payment.all, :id, :name, {}, {class:"select-box", id:"item-category"}) %></td>
         <td><%= balance.text_field :payment_times, placeholder: "1" %></td>
+        <td><%= link_to "削除", "#", class: "delete-form", data: { form_id: balance.object_id } %></td>
       </tr>
     <% end %>
 

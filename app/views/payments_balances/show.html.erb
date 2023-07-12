@@ -13,7 +13,7 @@
       </tr>
     </thead>
     <tbody>
-    <% @payments_balance.each do |balance| %>
+      <% @payments_balance.each do |balance| %>
         <tr>
           <td><%= balance.purpose %></td>
           <td><%= balance.amount %></td>
@@ -27,5 +27,6 @@
   <p>No data found.</p>
 <% end %>
 
+<%= link_to "編集", edit_payments_balance_path(date: @selected_date, id: @payments_balance.pluck(:id).join(',')) %>
 <%= link_to "戻る", root_path %>
 
