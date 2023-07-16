@@ -43,10 +43,6 @@ class PaymentsBalancesController < ApplicationController
     .merge(user_id: current_user.id)
   end
 
-  def payments_balances_update_params
-    params.require(:payments_balance).permit(payments_balances: [:id, :date, :amount, :purpose, :payment_id, :payment_times, :_destroy])
-  end
-
   def set_payments_balance
     @selected_date = Date.parse(params[:date])
     @payments_balance = PaymentsBalance.where(date: @selected_date, user_id: current_user.id)
