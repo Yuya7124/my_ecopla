@@ -1,30 +1,31 @@
 <h1>Budget List</h1>
 <%= form_with model: @form, url: payments_balances_path, local: true do |form| %>
 <%= render 'devise/shared/error_messages', model: @form %>
-  <table>
-    <thead>
-      <tr>
-        <th> date </th>
-        <th> purpose </th>
-        <th> amount </th>
-        <th> payment </th>
-        <th> times </th>
-      </tr>
-    </thead>
-  <tbody>
+  <button type="button" id="add-form-button">追加</button>
+    <table>
+      <thead>
+        <tr>
+          <th> date </th>
+          <th> purpose </th>
+          <th> amount </th>
+          <th> payment </th>
+          <th> times </th>
+        </tr>
+      </thead>
+    <tbody>
     <%= form.fields_for :payments_balances do |balance| %>
       <tr>
-        <td><%= balance.date_field :date, type: "date" %></td>
-        <td><%= balance.text_field :purpose, placeholder: "まだ未実装" %></td>
-        <td><%= balance.text_field :amount, placeholder: "0"  %></td>
-        <td><%= balance.collection_select(:payment_id, Payment.all, :id, :name, {}, {class:"select-box", id:"item-category"}) %></td>
-        <td><%= balance.text_field :payment_times, placeholder: "1" %></td>
-        <td><%= link_to "削除", "#", class: "delete-form", data: { form_id: balance.object_id } %></td>
+        <td class="balance_form"><%= balance.date_field :date, type: "date", id:"add-form-button" %></td>
+        <td class="balance_form"><%= balance.text_field :purpose, placeholder: "まだ未実装", type: "text", id:"inputform_purpose" %></td>
+        <td class="balance_form"><%= balance.text_field :amount, placeholder: "0", type: "number", id:"inputform_amount" %></td>
+        <td class="balance_form"><%= balance.collection_select(:payment_id, Payment.all, :id, :name, {}, {class:"select-box", id:"item-category"}) %></td>
+        <td class="balance_form"><%= balance.text_field :payment_times, placeholder: "1", type: "number", id:"inputform_payment_times" %></td>
+        <td class="balance_form"><%= link_to "削除", "", class: "delete-form", data: { form_id: balance.object_id } %></td>
       </tr>
     <% end %>
-
     </tbody>
   </table>
+  <div class="balance_forms" id="form_area"></div>
   <%= form.submit "登録" %>
   <%= link_to "戻る", root_path %>
 <% end %>

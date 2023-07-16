@@ -1,6 +1,7 @@
 class PaymentsBalancesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_payments_balance, only: [:edit, :show, :update, :destroy]
+  before_action :no_found_page, only: :show
 
   def index
     @payments_balances = PaymentsBalance.where(user_id: current_user.id)
@@ -11,7 +12,6 @@ class PaymentsBalancesController < ApplicationController
   end
 
   def create
-    binding.pry
     @form = Form::PaymentsBalanceCollection.new(payments_balance_params)
     if @form.save
       redirect_to root_path
@@ -33,7 +33,7 @@ class PaymentsBalancesController < ApplicationController
     end
   end
 
-  def show 
+  def show
   end
 
   private
@@ -47,5 +47,11 @@ class PaymentsBalancesController < ApplicationController
   def set_payments_balance
     @selected_date = Date.parse(params[:date])
     @payments_balance = PaymentsBalance.where(date: @selected_date, user_id: current_user.id)
+  end
+
+  def no_found_page
+    if @payments_balance.none?
+      redirect_to root_path
+    end
   end
 end
