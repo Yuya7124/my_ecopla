@@ -1,15 +1,10 @@
 <h1>Budget List</h1>
 <%= form_with model: @form, url: payments_balances_path, local: true do |form| %>
 <%= render 'devise/shared/error_messages', model: @form %>
-  <div class="field">
-    
-    <%= form.label :date, 'Date' %>
-    <%= form.date_field :date, type: "date" %>
-  </div>
-
   <table>
     <thead>
       <tr>
+        <th> date </th>
         <th> purpose </th>
         <th> amount </th>
         <th> payment </th>
@@ -19,6 +14,7 @@
   <tbody>
     <%= form.fields_for :payments_balances do |balance| %>
       <tr>
+        <td><%= balance.date_field :date, type: "date" %></td>
         <td><%= balance.text_field :purpose, placeholder: "まだ未実装" %></td>
         <td><%= balance.text_field :amount, placeholder: "0"  %></td>
         <td><%= balance.collection_select(:payment_id, Payment.all, :id, :name, {}, {class:"select-box", id:"item-category"}) %></td>

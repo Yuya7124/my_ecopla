@@ -6,7 +6,7 @@ class Form::PaymentsBalanceCollection < Form::Base
 
   def initialize(attributes = {})
     super attributes
-    self.date = Date.today unless self.date.present?
+    # self.date = Date.today unless self.date.present?
     self.payments_balances = Array.new(FORM_COUNT) { PaymentsBalance.new } unless self.payments_balances.present?
   end
 
@@ -21,7 +21,7 @@ class Form::PaymentsBalanceCollection < Form::Base
   def save
     PaymentsBalance.transaction do
       self.payments_balances.each do |balance|
-        balance.date = self.date
+        # balance.date = self.date
         balance.user_id = user_id
         balance.save
       end

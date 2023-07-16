@@ -10,6 +10,7 @@
   <table>
     <thead>
       <tr>
+        <th> date </th>
         <th> purpose </th>
         <th> amount </th>
         <th> payment </th>
@@ -20,6 +21,7 @@
     <% @payments_balance.each_with_index do |balance, index| %>
       <%= form.fields_for :payments_balances, balance, index: index do |pb| %>
         <tr>
+          <td><%= pb.date_field :date, type: "date" %></td>
           <td><%= pb.text_field :purpose, placeholder: "まだ未実装" %></td>
           <td><%= pb.text_field :amount, placeholder: "0"  %></td>
           <td><%= pb.collection_select(:payment_id, Payment.all, :id, :name, {}, {class:"select-box", id:"item-category"}) %></td>

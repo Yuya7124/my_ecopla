@@ -11,6 +11,7 @@ class PaymentsBalancesController < ApplicationController
   end
 
   def create
+    binding.pry
     @form = Form::PaymentsBalanceCollection.new(payments_balance_params)
     if @form.save
       redirect_to root_path
@@ -34,12 +35,12 @@ class PaymentsBalancesController < ApplicationController
 
   def show 
   end
-   
+
   private
   
   def payments_balance_params
     params.require(:form_payments_balance_collection)
-          .permit(:date, payments_balances_attributes: [:amount, :purpose, :payment_id, :payment_times])
+          .permit(:date, payments_balances_attributes: [:date, :amount, :purpose, :payment_id, :payment_times])
     .merge(user_id: current_user.id)
   end
 
