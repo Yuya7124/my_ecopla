@@ -1,0 +1,35 @@
+<h1>Budget List</h1>
+<%= form_with model: @payments_balance, url: payments_balance_path(date: @selected_date), method: :patch, local: true do |form| %>
+<%# <%= render 'devise/shared/error_messages', model: @payments_balance %> 
+  <div class="field">
+    
+    <%= form.label :date, 'Date' %>
+    <%= @selected_date %>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th> purpose </th>
+        <th> amount </th>
+        <th> payment </th>
+        <th> times </th>
+      </tr>
+    </thead>
+  <tbody>
+    <% @payments_balance.each_with_index do |balance, index| %>
+      <%= form.fields_for :payments_balances, balance, index: index do |pb| %>
+        <tr>
+          <td><%= pb.text_field :purpose, placeholder: "まだ未実装" %></td>
+          <td><%= pb.text_field :amount, placeholder: "0"  %></td>
+          <td><%= pb.collection_select(:payment_id, Payment.all, :id, :name, {}, {class:"select-box", id:"item-category"}) %></td>
+          <td><%= pb.text_field :payment_times, placeholder: "1" %></td>
+        </tr>
+      <% end %>
+    <% end %>
+
+    </tbody>
+  </table>
+  <%= form.submit "登録" %>
+  <%= link_to "戻る", payments_balance_path(date: @selected_date) %>
+<% end %>

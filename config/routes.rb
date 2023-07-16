@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :payments_balances, format: false do
     collection do
       get :show, format: false
+      get :edit, format: false
     end
   end
 end
