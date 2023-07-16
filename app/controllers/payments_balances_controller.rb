@@ -11,7 +11,7 @@ class PaymentsBalancesController < ApplicationController
   end
 
   def create
-    @form = Form::PaymentsBalanceCollection.new(payments_balance_collection_params)
+    @form = Form::PaymentsBalanceCollection.new(payments_balance_params)
     if @form.save
       redirect_to root_path
     else
@@ -23,41 +23,28 @@ class PaymentsBalancesController < ApplicationController
   end
 
   def update
-    if @payments_balance.update(payments_balances_params)
+    ids = params[:id].split(',').map(&:to_i)
+    attributes = params[:payments_balance][:payments_balances].values
+    if @payments_balance.update(ids, attributes)
       redirect_to payments_balances_path(date: @selected_date)
     else
       render :edit
     end
   end
-  
-  def destroy 
-    date = @payments_balance.date
-    @payments_balance.destroy
-    redirect_to payments_balances_path(date: date)
-  end
 
   def show 
   end
-  
-  def update_multiple
-    binding.pry
-    @payments_balance.each do |balance|
-      balance.update(payments_balances_params)
-    end
-    redirect_to payments_balances_path(date: @selected_date)
-  end 
-  
+   
   private
   
-  def payments_balance_collection_params
+  def payments_balance_params
     params.require(:form_payments_balance_collection)
           .permit(:date, payments_balances_attributes: [:amount, :purpose, :payment_id, :payment_times])
     .merge(user_id: current_user.id)
   end
 
-  def payments_balances_params
-    params.require(:payments_balance)
-          .permit(payments_balances_attributes: [:id, :amount, :purpose, :payment_id, :payment_times, :_destroy])
+  def payments_balances_update_params
+    params.require(:payments_balance).permit(payments_balances: [:id, :date, :amount, :purpose, :payment_id, :payment_times, :_destroy])
   end
 
   def set_payments_balance

@@ -10,6 +10,7 @@
   <table>
     <thead>
       <tr>
+        <th> id </th>
         <th> purpose </th>
         <th> amount </th>
         <th> payment </th>
@@ -17,9 +18,10 @@
       </tr>
     </thead>
   <tbody>
-    <% @payments_balance.each do |balance| %>
-      <%= form.fields_for :payments_balances, balance do |pb| %>
+    <% @payments_balance.each_with_index do |balance, index| %>
+      <%= form.fields_for :payments_balances, balance, index: index do |pb| %>
         <tr>
+          <td><%= pb.label balance.id %></td>
           <td><%= pb.text_field :purpose, placeholder: "まだ未実装" %></td>
           <td><%= pb.text_field :amount, placeholder: "0"  %></td>
           <td><%= pb.collection_select(:payment_id, Payment.all, :id, :name, {}, {class:"select-box", id:"item-category"}) %></td>
