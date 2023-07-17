@@ -1,66 +1,93 @@
 function form_option() {
   add_form();
+  remove_form();
 }
 
-function add_form(){
-  const addButton = document.getElementById("add-form-button");
-  const formArea = document.getElementById("form_area");
-  let formCount = (`<%= @payments_balance.payments_balances.size %>`);
-
-  addButton.addEventListener("click", () => {
-    const formHtml = `
-      <div class="balance_forms" id="form_area">
+function buildForm(index) {
+  const formHtml = `
+      <div class="balance_forms" id="form_area" data-form_id="${index}>
         <tr class="balance_forms">
           <td class="balance_form">
-            <input type="date" name="form_payments_balance_collection[payments_balances_attributes][${formCount}][date]" />
+            <input type="date" name="form_payments_balance_collection[payments_balances_attributes][${index}][date]" />
           </td>
           <td class="balance_form">
-            <input type="text" name="form_payments_balance_collection[payments_balances_attributes][${formCount}][purpose]" placeholder="まだ未実装" />
+            <input type="text" name="form_payments_balance_collection[payments_balances_attributes][${index}][purpose]" placeholder="まだ未実装" />
           </td>
           <td class="balance_form">
-            <input type="number" name="form_payments_balance_collection[payments_balances_attributes][${formCount}][amount]" placeholder="0" />
+            <input type="number" name="form_payments_balance_collection[payments_balances_attributes][${index}][amount]" placeholder="0" />
           </td>
-          <select class="select-box" id="item-category" name="form_payments_balance_collection[payments_balances_attributes][[${formCount}][payment_id]">
+          <select class="select-box" id="item-category" name="form_payments_balance_collection[payments_balances_attributes][[${index}][payment_id]">
             <option value="1">現金</option>
             <option value="2">クレジット決済</option>
             <option value="3">口座振込</option></select>
           </select>
           <td class="balance_form">
-            <input type="number" name="form_payments_balance_collection[payments_balances_attributes][${formCount}][payment_times]" placeholder="1" />
+            <input type="number" name="form_payments_balance_collection[payments_balances_attributes][${index}][payment_times]" placeholder="1" />
           </td>
           <td class="balance_form">
-            <a href="" class="delete-form" data-form_id="${formCount}">削除</a>
+            <span class="delete-form">削除する</span>
           </td>
         </tr>
       </div>
     `;
-
-    // フォームをテーブルの末尾に追加
-    formArea.insertAdjacentHTML("beforeend", formHtml);
-    formCount++;
-
-    // カテゴリーの選択肢を取得して追加
-    const categorySelect = document.getElementById(`item-category-${formCount - 1}`);
-    const categories = (`<%= Payment.all.to_json %>`); // PaymentモデルのカテゴリーデータをJavaScriptに埋め込む方法はサーバーサイドテンプレートエンジンに依存します
-
-    categories.forEach((category) => {
-      const option = document.createElement("option");
-      option.value = category.id;
-      option.textContent = category.name;
-      categorySelect.appendChild(option);
-    });
-  });
+  return formHtml;
 }
 
+const fetchCategories = async () => {
+  const response = await fetch('/api/categories');
+  const data = await response.json();
+  return data;
+};
+
+const buildOptionElement = (category) => {
+  const option = $('<option></option>');
+  option.val(category.id);
+  option.text(category.name);
+  return option;
+};
+
+function add_form() {
+  let formIndex = [0];
+  let obj = {}
+  let lastIndex = $(".balance_forms:last").data("data-index");
+  for (let i = 0; i <= lastIndex; i++) {
+    formIndex.push(i);
+  }
+
+  let formCount = $(".delete-form").length;
+  let displayCount = $(".balance_forms").length;
+  
+
+  $(".hidden-destroy").hide();
+
+  const addButton = $("#add-form-button");
+  const formArea = $("#form_area");
+
+  addButton.on("click", async () => {
+    // フォーム追加
+    formArea.append(buildForm(formIndex[0]));
+    formIndex.shift();
+
+    // カテゴリーの選択肢を取得して追加
+    // const index = $(".balance_forms").length - 1;
+    // const categorySelect = $(`#item-category-${index}`);
+    // const categories = await fetchCategories();
+
+    // categories.forEach((category) => {
+    //   const option = buildOptionElement(category);
+    //   categorySelect.append(option);
+    // });
+    displayCount += 1;
+  });
+};
+
 function remove_form() {
-  document.addEventListener('click', function(event) {
-    if (event.target.classList.contains('delete-form')) {
-      event.preventDefault();
-      const formId = event.target.dataset.formId;
-      const formToRemove = document.getElementById(`form_${formId}`);
-      if (formToRemove) {
-        formToRemove.remove();
-      }
+  $(document).on('click', '.delete-form', function(event) {
+    event.preventDefault();
+    const formId = $(this).data('formId');
+    const formToRemove = $(`#form_${formId}`);
+    if (formToRemove.length > 0) {
+      formToRemove.closest('.balance_forms').remove();
     }
   });
 }
