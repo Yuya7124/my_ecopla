@@ -5,7 +5,7 @@ function form_option() {
 
 function buildForm(index) {
   const formHtml = `
-      <div class="balance_forms" id="form_area" data-form_id="${index}>
+      <div class="balance_forms">
         <tr class="balance_forms">
           <td class="balance_form">
             <input type="date" name="form_payments_balance_collection[payments_balances_attributes][${index}][date]" />
@@ -16,7 +16,7 @@ function buildForm(index) {
           <td class="balance_form">
             <input type="number" name="form_payments_balance_collection[payments_balances_attributes][${index}][amount]" placeholder="0" />
           </td>
-          <select class="select-box" id="item-category" name="form_payments_balance_collection[payments_balances_attributes][[${index}][payment_id]">
+          <select class="select-box" id="item-category" name="form_payments_balance_collection[payments_balances_attributes][${index}][payment_id]">
             <option value="1">現金</option>
             <option value="2">クレジット決済</option>
             <option value="3">口座振込</option></select>
@@ -25,12 +25,14 @@ function buildForm(index) {
             <input type="number" name="form_payments_balance_collection[payments_balances_attributes][${index}][payment_times]" placeholder="1" />
           </td>
           <td class="balance_form">
-            <span class="delete-form">削除する</span>
+            <button type="button" class="delete-form" id="form_area_${index}" data-form-id="form_${index}">削除</button>
           </td>
         </tr>
       </div>
     `;
-  return formHtml;
+  const formNode = document.createElement("div");
+  formNode.innerHTML = formHtml;
+  return formNode;
 }
 
 const fetchCategories = async () => {
@@ -47,47 +49,39 @@ const buildOptionElement = (category) => {
 };
 
 function add_form() {
-  let formIndex = [0];
-  let obj = {}
-  let lastIndex = $(".balance_forms:last").data("data-index");
-  for (let i = 0; i <= lastIndex; i++) {
-    formIndex.push(i);
+  let formIndex = 0;
+  const addButton = document.getElementById("add-form-button");
+  const formArea = document.getElementById("form_area");
+  let forms = document.querySelectorAll(".balance_forms");
+  let lastIndex = forms.length;
+  console.log(lastIndex)
+
+  for (let i = 1; i <= lastIndex; i++) {
+    formIndex++;
   }
 
-  let formCount = $(".delete-form").length;
-  let displayCount = $(".balance_forms").length;
-  
-
-  $(".hidden-destroy").hide();
-
-  const addButton = $("#add-form-button");
-  const formArea = $("#form_area");
-
-  addButton.on("click", async () => {
-    // フォーム追加
-    formArea.append(buildForm(formIndex[0]));
-    formIndex.shift();
-
-    // カテゴリーの選択肢を取得して追加
-    // const index = $(".balance_forms").length - 1;
-    // const categorySelect = $(`#item-category-${index}`);
-    // const categories = await fetchCategories();
-
-    // categories.forEach((category) => {
-    //   const option = buildOptionElement(category);
-    //   categorySelect.append(option);
-    // });
-    displayCount += 1;
+  addButton.addEventListener("click", () => {
+    formIndex += 1;
+    formArea.appendChild(buildForm(formIndex));
   });
-};
+}
 
 function remove_form() {
-  $(document).on('click', '.delete-form', function(event) {
-    event.preventDefault();
-    const formId = $(this).data('formId');
-    const formToRemove = $(`#form_${formId}`);
-    if (formToRemove.length > 0) {
-      formToRemove.closest('.balance_forms').remove();
+  document.addEventListener('click', function(event) {
+    const targetElement = event.target;
+    if (targetElement.classList.contains('delete-form')) {
+      event.preventDefault();
+      const formId = targetElement.dataset.formId;
+      const formToRemove = targetElement.closest('.balance_forms');
+      console.log(formToRemove)
+      if (formToRemove) {
+        formToRemove.parentNode.removeChild(formToRemove);
+        // フォームを削除した場合、hidden-destroyクラスを持つ要素も一緒に削除する必要があります。
+        const hiddenDestroyInput = document.querySelector(`[name="form_payments_balance_collection[payments_balances_attributes][${formId}][_destroy]"]`);
+        if (hiddenDestroyInput) {
+          hiddenDestroyInput.parentNode.removeChild(hiddenDestroyInput);
+        }
+      }
     }
   });
 }
