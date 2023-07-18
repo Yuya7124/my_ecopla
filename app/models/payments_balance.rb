@@ -4,7 +4,6 @@ class PaymentsBalance < ApplicationRecord
   with_options presence: true do
     validates :date
     validates :amount
-    validates :purpose
     validates :payment_id, numericality: { other_than: 0, message: "が選択されていません" }
     validates :payment_times
   end
@@ -16,5 +15,10 @@ class PaymentsBalance < ApplicationRecord
 
   def self.total_amount_by_date(date)
     where(date: date).sum(:amount)
+  end
+
+  #バリデーションの重複撤去
+  def remove_unnecessary_error_messages
+    errors.messages.delete(:payments_balance)
   end
 end

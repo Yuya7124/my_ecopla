@@ -1,6 +1,7 @@
 class PaymentsBalancesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_payments_balance, only: [:edit, :show, :update, :destroy]
+  before_action :no_found_page, only: :show
 
   def index
     @payments_balances = PaymentsBalance.where(user_id: current_user.id)
@@ -32,19 +33,25 @@ class PaymentsBalancesController < ApplicationController
     end
   end
 
-  def show 
+  def show
   end
-   
+
   private
   
   def payments_balance_params
     params.require(:form_payments_balance_collection)
-          .permit(:date, payments_balances_attributes: [:amount, :purpose, :payment_id, :payment_times])
+          .permit(:date, payments_balances_attributes: [:date, :amount, :purpose, :payment_id, :payment_times])
     .merge(user_id: current_user.id)
   end
 
   def set_payments_balance
     @selected_date = Date.parse(params[:date])
     @payments_balance = PaymentsBalance.where(date: @selected_date, user_id: current_user.id)
+  end
+
+  def no_found_page
+    if @payments_balance.none?
+      redirect_to root_path
+    end
   end
 end
