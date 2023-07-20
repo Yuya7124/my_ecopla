@@ -5,7 +5,6 @@ class PaymentsBalance < ApplicationRecord
     validates :date
     validates :amount
     validates :payment_id, numericality: { other_than: 0, message: "が選択されていません" }
-    validates :payment_times
   end
   
   has_many   :users, through: :budgets

@@ -36,7 +36,6 @@ ActiveRecord::Schema.define(version: 2023_06_20_135113) do
     t.integer "amount", null: false
     t.string "purpose", null: false
     t.integer "payment_id", null: false
-    t.integer "payment_times", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
