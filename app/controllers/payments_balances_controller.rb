@@ -33,8 +33,7 @@ class PaymentsBalancesController < ApplicationController
     deleted_form_ids = ids - existing_form_ids
 
     # 新規フォーム作成
-    new_form_ids = Hash.new
-    unless new_form_ids.empty?
+    if params.key?(:form_payments_balance_collection)
       new_form_ids = Form::PaymentsBalanceCollection.new(payments_balance_params)
       unless new_form_ids.save
         render :edit
