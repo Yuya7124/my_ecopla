@@ -1,14 +1,15 @@
 function form_option() {
   //payments_balance要素数
-  const paymentsBalanceData = document.getElementById('payments-balance-data');
-  const paymentCount = parseInt(paymentsBalanceData.dataset.paymentCount, 10);
-  console.log("Payments Balance Count:", paymentCount);
+  // const paymentsBalanceData = document.getElementById('payments-balance-data');
+  // const paymentCount = parseInt(paymentsBalanceData.dataset.paymentCount, 10);
+  // console.log("Payments Balance Count:", paymentCount);
 
   let formIndex = [];
   const addButton = document.getElementById("add-form-button");
   const formArea = document.getElementById("form_area");
   let forms = document.querySelectorAll(".balance_forms");
   let lastIndex = forms.length;
+  console.log(lastIndex);
 
   for (let i = 1; i < lastIndex; i++) {
     formIndex.push(i);
@@ -20,7 +21,7 @@ function form_option() {
     formIndex.push(lastIndex);
     lastIndex++;  
     // 新しいフォームのindexを非表示のフィールドに設定
-    const deletedFormIdsInput = document.getElementById("payments_balance_deleted_form_ids");
+    const deletedFormIdsInput = document.getElementById("deleted_form_ids");
     deletedFormIdsInput.value += "," + formIndex[lastIndex - 2];
     console.log(deletedFormIdsInput)
   });
@@ -42,7 +43,7 @@ function form_option() {
           hiddenDestroyInput.parentNode.removeChild(hiddenDestroyInput);
         }
         // 非表示のフィールドから削除したフォームIDをカンマで区切って追加
-        const deletedFormIdsInput = document.getElementById("payments_balance_deleted_form_ids");
+        const deletedFormIdsInput = document.getElementById("deleted_form_ids");
         deletedFormIdsInput.value += "," + formId;
         console.log(deletedFormIdsInput)
       }

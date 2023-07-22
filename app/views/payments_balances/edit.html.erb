@@ -13,7 +13,6 @@
         <th> purpose </th>
         <th> amount </th>
         <th> payment </th>
-        <th> times </th>
       </tr>
     </thead>
   <tbody>
@@ -25,9 +24,10 @@
             <td class="balance_form"><%= pb.text_field :purpose, placeholder: "まだ未実装", type: "text", id:"inputform_purpose" %></td>
             <td class="balance_form"><%= pb.text_field :amount, placeholder: "0", type: "number", id:"inputform_amount" %></td>
             <td class="balance_form"><%= pb.collection_select(:payment_id, Payment.all, :id, :name, {}, {class:"select-box", id:"item-category"}) %></td>
-            <td class="balance_form"><button type="button" class="delete-form" id="payments_balance_deleted_form_ids" data-form_id="form_<%= index %>">削除</button></td>
+            <td class="balance_form"><button type="button" class="delete-form", id="deleted_form_ids">
+            <%= link_to "", payments_balance_path(balance.id), method: :delete %>削除</button></td>
+            <%= pb.hidden_field :id %>
           </tr>
-          <%= form.hidden_field "#{balance.id}" %>
         </div>
       <% end %>
     <% end %>
