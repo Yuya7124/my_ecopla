@@ -1,6 +1,7 @@
 class PaymentsBalancesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_payments_balance, only: [:edit, :show, :update]
+  before_action :new_form_ids, only: :update
   before_action :no_found_page, only: :show
 
   def index
@@ -24,29 +25,27 @@ class PaymentsBalancesController < ApplicationController
   end
 
   def update
-    binding.pry
+    # binding.pry
     ids = params[:id].split(',').map(&:to_i)
-    attributes = params[:payments_balance][:payments_balances].values
-
-    # 既存フォーム削除
-    existing_form_ids = attributes.map { |nested_hash| nested_hash["id"].to_i }
-    deleted_form_ids = ids - existing_form_ids
-
-    # 新規フォーム作成
-    if params.key?(:form_payments_balance_collection)
-      new_form_ids = Form::PaymentsBalanceCollection.new(payments_balance_params)
-      unless new_form_ids.save
+    if params[:payments_balance] && params[:payments_balance][:payments_balances]
+      attributes = params[:payments_balance][:payments_balances].values
+      existing_form_ids = attributes.map { |nested_hash| nested_hash["id"].to_i }
+      deleted_form_ids = ids - existing_form_ids
+      # 既存フォーム更新
+      if @payments_balance.update(existing_form_ids, attributes)
+        # 既存フォーム削除
+        PaymentsBalance.where(id: deleted_form_ids).destroy_all
+        redirect_to payments_balances_path(date: @selected_date)
+      else
         render :edit
       end
-    end
-
-    # 既存フォーム更新
-    if @payments_balance.update(existing_form_ids, attributes)
-      PaymentsBalance.where(id: deleted_form_ids).destroy_all
-      redirect_to payments_balances_path(date: @selected_date)
     else
-      render :edit
-    end
+      # 既存フォーム全削除
+      PaymentsBalance.where(id: ids).destroy_all
+      # 新規フォーム作成
+      # new_form_ids
+      redirect_to payments_balances_path(date: @selected_date)
+    end    
   end  
   
   def show
@@ -71,9 +70,13 @@ class PaymentsBalancesController < ApplicationController
     # @balances = PaymentsBalance.find(params[:id])
   end
 
-  def deleted_form(ids)
-    deleted_form_ids = PaymentsBalance.find(params[:id])
-    return deleted_form
+  def new_form_ids
+    if params.key?(:form_payments_balance_collection)
+      new_form_ids = Form::PaymentsBalanceCollection.new(payments_balance_params)
+      unless new_form_ids.save
+        render :edit
+      end
+    end
   end
 
   def no_found_page
