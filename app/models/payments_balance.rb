@@ -9,8 +9,8 @@ class PaymentsBalance < ApplicationRecord
   
   has_many   :users, through: :budgets
   has_many   :budgets
+  belongs_to :purpose
   belongs_to :payment
-  # has_ancestry
 
   def self.total_amount_by_date(date)
     where(date: date).sum(:amount)

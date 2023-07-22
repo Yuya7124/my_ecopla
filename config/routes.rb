@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'purposes/new'
   devise_for :users
   get 'payments_balances/index'
   root to: "payments_balances#index"
@@ -8,4 +9,6 @@ Rails.application.routes.draw do
       get :edit, format: false
     end
   end
+  resources :purposes, only:[:new, :edit], shallow: true
+  get 'purpose/:id', to: 'purposes#search'
 end

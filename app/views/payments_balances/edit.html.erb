@@ -1,6 +1,6 @@
 <h1>Budget List</h1>
 <%= form_with model: @payments_balance, url: payments_balance_path(date: @selected_date), method: :patch, id: "pb_form", local: true do |form| %>
-<%# <%= render 'devise/shared/error_messages', model: @payments_balance %>
+<%# <%= render 'devise/shared/error_messages', model: @payments_balance %> 
   <button type="button" id="add-form-button">追加</button>
   <div class="field">
     <%= form.label :date, 'Date' %>

@@ -3,9 +3,12 @@ class PaymentsBalancesController < ApplicationController
   before_action :set_payments_balance, only: [:edit, :show, :update]
   before_action :new_form_ids, only: :update
   before_action :no_found_page, only: :show
+  before_action :set_purpose, only: [:new, :edit]
 
   def index
     @payments_balances = PaymentsBalance.where(user_id: current_user.id)
+    payments_balance_id = params[:payments_balance_id]
+    date = params[:date]
   end
 
   def new
@@ -25,7 +28,6 @@ class PaymentsBalancesController < ApplicationController
   end
 
   def update
-    # binding.pry
     ids = params[:id].split(',').map(&:to_i)
     if params[:payments_balance] && params[:payments_balance][:payments_balances]
       attributes = params[:payments_balance][:payments_balances].values
@@ -43,7 +45,6 @@ class PaymentsBalancesController < ApplicationController
       # 既存フォーム全削除
       PaymentsBalance.where(id: ids).destroy_all
       # 新規フォーム作成
-      # new_form_ids
       redirect_to payments_balances_path(date: @selected_date)
     end    
   end  
@@ -67,7 +68,6 @@ class PaymentsBalancesController < ApplicationController
     @selected_date = Date.parse(params[:date])
     @payments_balance = PaymentsBalance.where(date: @selected_date, user_id: current_user.id)
     @payments_balances = PaymentsBalance.where(user_id: current_user.id)
-    # @balances = PaymentsBalance.find(params[:id])
   end
 
   def new_form_ids
@@ -83,5 +83,10 @@ class PaymentsBalancesController < ApplicationController
     if @payments_balance.none?
       redirect_to root_path
     end
+  end
+
+  def set_purpose
+    @purpose = Purpose.new
+    @main_purpose = Purpose.all.order("id ASC").limit(2)
   end
 end

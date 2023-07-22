@@ -15,7 +15,7 @@
     <%= form.fields_for :payments_balances do |balance| %>
       <tr class="balance_forms">
         <td class="balance_form"><%= balance.date_field :date, type: "date", id:"inputform_date" %></td>
-        <td class="balance_form"><%= balance.text_field :purpose, placeholder: "まだ未実装", type: "text", id:"inputform_purpose" %></td>
+        <td class="balance_form"><%= balance.collection_select :purpose, Purpose.roots, :id, :name, { include_blank: "---" }, { id: "parent-category" } %></td>
         <td class="balance_form"><%= balance.text_field :amount, placeholder: "0", type: "number", id:"inputform_amount" %></td>
         <td class="balance_form"><%= balance.collection_select(:payment_id, Payment.all, :id, :name, {}, {class:"select-box", id:"item-category"}) %></td>
         <td class="balance_form"><button type="button" class="delete-form" id="deleted_form_ids" data-form_id="form_0">削除</button></td>
@@ -27,4 +27,3 @@
   <%= form.submit "登録", class: "save_btn", id: "save-button" %>
   <%= link_to "戻る", root_path %>
 <% end %>
-
