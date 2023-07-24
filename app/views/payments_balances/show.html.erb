@@ -14,7 +14,7 @@
     <tbody>
       <% @payments_balance.each do |balance| %>
         <tr>
-          <td><%= balance.purpose %></td>
+          <td><%= balance.purpose.name %></td>
           <td><%= balance.amount %></td>
           <td><%= balance.payment.name %></td>
         </tr>

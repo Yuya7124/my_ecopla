@@ -56,12 +56,12 @@ class PaymentsBalancesController < ApplicationController
   
   def payments_balance_params
     params.require(:form_payments_balance_collection)
-          .permit(:date, payments_balances_attributes: [:date, :amount, :purpose, :payment_id])
+          .permit(:date, payments_balances_attributes: [:date, :purpose, :ancestry, :parent_id, :amount, :payment_id])
     .merge(user_id: current_user.id)
   end
 
   def payments_balance_params_id
-    params.require(:payments_balance).permit(payments_balances_attributes: [:id, :date, :purpose, :amount, :payment_id, :_destroy])
+    params.require(:payments_balance).permit(payments_balances_attributes: [:id, :date, :purpose, :ancestry, :parent_id, :amount, :payment_id, :_destroy])
   end
 
   def set_payments_balance

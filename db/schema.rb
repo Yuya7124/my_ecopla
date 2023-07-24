@@ -34,12 +34,14 @@ ActiveRecord::Schema.define(version: 2023_07_22_131311) do
   create_table "payments_balances", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.date "date", null: false
     t.integer "amount", null: false
-    t.string "purpose", null: false
     t.integer "payment_id", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "ancestry"
+    t.integer "parent_id"
     t.bigint "purpose_id", null: false
+    t.index ["ancestry"], name: "index_payments_balances_on_ancestry"
     t.index ["purpose_id"], name: "index_payments_balances_on_purpose_id"
     t.index ["user_id"], name: "index_payments_balances_on_user_id"
   end
