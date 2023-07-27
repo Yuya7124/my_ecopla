@@ -1,0 +1,33 @@
+
+[1mFrom:[0m /home/yuya7124/project/my_ecopla/app/models/form/payments_balance_collection.rb:13 Form::PaymentsBalanceCollection#payments_balances_attributes=:
+
+    [1;34m12[0m: [32mdef[0m [1;34mpayments_balances_attributes=[0m(attributes)
+ => [1;34m13[0m:   binding.pry
+    [1;34m14[0m:   [1;36mself[0m.payments_balances = attributes.map [32mdo[0m |_key, value|
+    [1;34m15[0m:     purpose_id = value.fetch([31m[1;31m"[0m[31mpurpose_ids[1;31m"[0m[31m[0m)
+    [1;34m16[0m:     purpose = [1;34;4mPurpose[0m.find(purpose_id).self_and_ancestors.ids
+    [1;34m17[0m: 
+    [1;34m18[0m:     [1;34m# 選択したカテゴリーの祖先カテゴリーID群を取得[0m
+    [1;34m19[0m:     ancestry_ids = purpose.ancestry ? purpose.ancestry.split([31m[1;31m'[0m[31m/[1;31m'[0m[31m[0m) : []
+    [1;34m20[0m: 
+    [1;34m21[0m:     [1;34m# 親カテゴリーのIDを取得[0m
+    [1;34m22[0m:     parent_id = value.fetch([31m[1;31m"[0m[31mparent_ids[1;31m"[0m[31m[0m, [1;36mnil[0m)
+    [1;34m23[0m: 
+    [1;34m24[0m:     [1;34m# 親カテゴリーが存在する場合は、親カテゴリーと一緒に保存する[0m
+    [1;34m25[0m:     [32mif[0m parent_id.present?
+    [1;34m26[0m:       parent = [1;34;4mPurpose[0m.find(parent_id)
+    [1;34m27[0m:       balance = [1;34;4mPaymentsBalance[0m.new(value.merge([35mpurpose[0m: purpose, [35mparent[0m: parent))
+    [1;34m28[0m:     [32melse[0m
+    [1;34m29[0m:       [1;34m# 祖先カテゴリーが存在する場合は、祖先カテゴリーと一緒に保存する[0m
+    [1;34m30[0m:       [32mif[0m ancestry_ids.any?
+    [1;34m31[0m:         parent_id = ancestry_ids.last
+    [1;34m32[0m:         balance = [1;34;4mPaymentsBalance[0m.new(value.merge([35mpurpose[0m: purpose, [35mparent_id[0m: parent_id))
+    [1;34m33[0m:       [32melse[0m
+    [1;34m34[0m:         balance = [1;34;4mPaymentsBalance[0m.new(value.merge([35mpurpose[0m: purpose))
+    [1;34m35[0m:       [32mend[0m
+    [1;34m36[0m:     [32mend[0m
+    [1;34m37[0m: 
+    [1;34m38[0m:     balance
+    [1;34m39[0m:   [32mend[0m
+    [1;34m40[0m: [32mend[0m
+

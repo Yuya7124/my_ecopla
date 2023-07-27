@@ -21,7 +21,12 @@
         <div id="payments-balance-data" data-payment-count="<%= @payments_balances.count %>">
           <tr class="balance_forms">
             <td class="balance_form"><%= pb.date_field :date, type: "date", value: @selected_date, id:"inputform_date" %></td>
-            <td class="balance_form"><%= pb.text_field :purpose, placeholder: "まだ未実装", type: "text", id:"inputform_purpose" %></td>
+            <td class="balance_form" id="select_purpose">
+              <%= pb.collection_select :purpose_id, Purpose.roots, :id, :name, { include_blank: "---" }, { id: "parent-category" } %>
+              <% if @selected_purpose_id.present? %>
+                <%= render_child_categories(@selected_purpose_id) %>
+              <% end %>
+            </td>
             <td class="balance_form"><%= pb.text_field :amount, placeholder: "0", type: "number", id:"inputform_amount" %></td>
             <td class="balance_form"><%= pb.collection_select(:payment_id, Payment.all, :id, :name, {}, {class:"select-box", id:"item-category"}) %></td>
             <td class="balance_form"><button type="button" class="delete-form", id="deleted_form_ids">

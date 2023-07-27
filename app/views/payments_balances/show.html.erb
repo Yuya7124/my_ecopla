@@ -14,7 +14,13 @@
     <tbody>
       <% @payments_balance.each do |balance| %>
         <tr>
-          <td><%= balance.purpose.name %></td>
+          <td>
+            <% balance.purpose.ancestors.each do |category| %>
+              <span><%= category.name %></span>
+              <span>,</span>
+            <% end %>
+            <span><%= balance.purpose.name %></span>
+          </td>
           <td><%= balance.amount %></td>
           <td><%= balance.payment.name %></td>
         </tr>

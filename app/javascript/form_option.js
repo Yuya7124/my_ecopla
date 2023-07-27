@@ -1,15 +1,9 @@
 function form_option() {
-  //payments_balance要素数
-  // const paymentsBalanceData = document.getElementById('payments-balance-data');
-  // const paymentCount = parseInt(paymentsBalanceData.dataset.paymentCount, 10);
-  // console.log("Payments Balance Count:", paymentCount);
-
   let formIndex = [];
   const addButton = document.getElementById("add-form-button");
   const formArea = document.getElementById("form_area");
   let forms = document.querySelectorAll(".balance_forms");
   let lastIndex = forms.length;
-  console.log(lastIndex);
 
   for (let i = 1; i < lastIndex; i++) {
     formIndex.push(i);
@@ -23,7 +17,6 @@ function form_option() {
     // 新しいフォームのindexを非表示のフィールドに設定
     const deletedFormIdsInput = document.getElementById("deleted_form_ids");
     deletedFormIdsInput.value += "," + formIndex[lastIndex - 2];
-    console.log(deletedFormIdsInput)
   });
 
   //フォーム削除
@@ -36,7 +29,7 @@ function form_option() {
       if (formToRemove) {
         formToRemove.style.display = "none";
         formToRemove.parentNode.removeChild(formToRemove);
-        // フォームを削除した場合、hidden-destroyクラスを持つ要素も一緒に削除する必要があります。
+        // フォームを削除した場合、hidden-destroyクラスを持つ要素も一緒に削除
         const hiddenDestroyInput = document.querySelector(`[name="form_payments_balance_collection[payments_balances_attributes][${formId}][_destroy]"]`);
         if (hiddenDestroyInput) {
           hiddenDestroyInput.value = "1";
@@ -45,7 +38,6 @@ function form_option() {
         // 非表示のフィールドから削除したフォームIDをカンマで区切って追加
         const deletedFormIdsInput = document.getElementById("deleted_form_ids");
         deletedFormIdsInput.value += "," + formId;
-        console.log(deletedFormIdsInput)
       }
     }
   });
@@ -58,9 +50,9 @@ function buildForm(index) {
           <td class="balance_form">
             <input type="date" name="form_payments_balance_collection[payments_balances_attributes][${index}][date]" />
           </td>
-          <td class="balance_form">
-            <input type="text" name="form_payments_balance_collection[payments_balances_attributes][${index}][purpose]" placeholder="まだ未実装" />
-          </td>
+          <td class="balance_form" id="select_purpose"><select id="parent-category" name="form_payments_balance_collection[payments_balances_attributes][${index}][purpose_id]"><option value="">---</option>
+            <option value="1">収入</option>
+            <option value="2">支出</option></select></td>
           <td class="balance_form">
             <input type="number" name="form_payments_balance_collection[payments_balances_attributes][${index}][amount]" placeholder="0" />
           </td>

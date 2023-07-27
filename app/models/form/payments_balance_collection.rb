@@ -10,12 +10,11 @@ class Form::PaymentsBalanceCollection < Form::Base
   end
 
   def payments_balances_attributes=(attributes)
-    binding.pry
     self.payments_balances = attributes.map do |_key, value|
-      purpose_id = value.fetch("purpose")  # "purpose"キーの値を取得して削除
-      purpose = Purpose.find(purpose_id) if purpose_id.present?  # "purpose"キーの値が存在すれば、対応するPurposeを取得
+      purpose_id = value.fetch("purpose_id")
+      purpose = Purpose.find(purpose_id).path_ids
       balance = if purpose
-        PaymentsBalance.new(value.merge(purpose: purpose))  # Purposeが存在する場合は、PaymentsBalanceにpurposeを紐付ける
+        PaymentsBalance.new(value.merge(purpose_id: purpose_id))  # Purposeが存在する場合は、PaymentsBalanceにpurposeを紐付ける
       else
         PaymentsBalance.new(value)
       end

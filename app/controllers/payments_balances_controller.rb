@@ -3,7 +3,6 @@ class PaymentsBalancesController < ApplicationController
   before_action :set_payments_balance, only: [:edit, :show, :update]
   before_action :new_form_ids, only: :update
   before_action :no_found_page, only: :show
-  before_action :set_purpose, only: [:new, :edit]
 
   def index
     @payments_balances = PaymentsBalance.where(user_id: current_user.id)
@@ -13,6 +12,8 @@ class PaymentsBalancesController < ApplicationController
 
   def new
     @form = Form::PaymentsBalanceCollection.new
+    @purpose = Purpose.new
+    @main_purpose = Purpose.all.order("id ASC").limit(2)
   end
 
   def create
@@ -25,9 +26,12 @@ class PaymentsBalancesController < ApplicationController
   end
 
   def edit
+    @existing_form = PaymentsBalance.find(params[:id])
+    @selected_purpose_id = PaymentsBalance.where(purpose_id: :purpose_id)
   end
 
   def update
+    binding.pry
     ids = params[:id].split(',').map(&:to_i)
     if params[:payments_balance] && params[:payments_balance][:payments_balances]
       attributes = params[:payments_balance][:payments_balances].values
@@ -56,12 +60,8 @@ class PaymentsBalancesController < ApplicationController
   
   def payments_balance_params
     params.require(:form_payments_balance_collection)
-          .permit(:date, payments_balances_attributes: [:date, :purpose, :ancestry, :parent_id, :amount, :payment_id])
+          .permit(:date, payments_balances_attributes: [:date, :purpose_id, :ancestry, :amount, :payment_id, :parent_id, :child_category, :grandchild_category])
     .merge(user_id: current_user.id)
-  end
-
-  def payments_balance_params_id
-    params.require(:payments_balance).permit(payments_balances_attributes: [:id, :date, :purpose, :ancestry, :parent_id, :amount, :payment_id, :_destroy])
   end
 
   def set_payments_balance
@@ -83,10 +83,5 @@ class PaymentsBalancesController < ApplicationController
     if @payments_balance.none?
       redirect_to root_path
     end
-  end
-
-  def set_purpose
-    @purpose = Purpose.new
-    @main_purpose = Purpose.all.order("id ASC").limit(2)
   end
 end

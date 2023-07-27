@@ -15,7 +15,7 @@
     <%= form.fields_for :payments_balances do |balance| %>
       <tr class="balance_forms">
         <td class="balance_form"><%= balance.date_field :date, type: "date", id:"inputform_date" %></td>
-        <td class="balance_form" id="select_purpose"><%= balance.collection_select :purpose, Purpose.roots, :id, :name, { include_blank: "---" }, { id: "parent-category" } %></td>
+        <td class="balance_form" id="select_purpose"><%= balance.collection_select :purpose_id, Purpose.roots, :id, :name, { include_blank: "---" }, { id: "parent-category" } %></td>
         <td class="balance_form"><%= balance.text_field :amount, placeholder: "0", type: "number", id:"inputform_amount" %></td>
         <td class="balance_form"><%= balance.collection_select(:payment_id, Payment.all, :id, :name, {}, {class:"select-box", id:"item-category"}) %></td>
         <td class="balance_form"><button type="button" class="delete-form" id="deleted_form_ids" data-form_id="form_0">削除</button></td>
