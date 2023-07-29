@@ -3,6 +3,7 @@ class PaymentsBalancesController < ApplicationController
   before_action :set_payments_balance, only: [:edit, :show, :update]
   before_action :new_form_ids, only: :update
   before_action :no_found_page, only: :show
+  # before_action :render_child_categories, only: :edit
 
   def index
     @payments_balances = PaymentsBalance.where(user_id: current_user.id)
@@ -26,12 +27,10 @@ class PaymentsBalancesController < ApplicationController
   end
 
   def edit
-    @existing_form = PaymentsBalance.find(params[:id])
-    @selected_purpose_id = PaymentsBalance.where(purpose_id: :purpose_id)
+    @selected_purpose_ids = @payments_balance.map { |balance| balance.purpose.path_ids }
   end
 
   def update
-    binding.pry
     ids = params[:id].split(',').map(&:to_i)
     if params[:payments_balance] && params[:payments_balance][:payments_balances]
       attributes = params[:payments_balance][:payments_balances].values
@@ -84,4 +83,20 @@ class PaymentsBalancesController < ApplicationController
       redirect_to root_path
     end
   end
+
+#   def render_child_categories(pb, selected_purpose_ids)
+#     if selected_purpose_ids.present?
+#       parent_id, child_id = selected_purpose_ids
+#       parent = Purpose.find(parent_id)
+#       child_categories = parent.children
+#       pb.collection_select :purpose_id, child_categories, :id, :name, { include_blank: "---" }, { id: "child-category" }
+  
+#       grandchild_id = child_id
+#       if grandchild_id.present?
+#         child = Purpose.find(grandchild_id)
+#         grandchild_categories = child.children
+#         pb.collection_select :purpose_id, grandchild_categories, :id, :name, { include_blank: "---" }, { id: "grandchild-category" }
+#       end
+#     end
+#   end  
 end

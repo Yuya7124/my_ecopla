@@ -11,7 +11,8 @@ require("channels")
 require("../canvas_2")
 require("../number_setting")
 require("../form_option")
-require("../purpose")
+require("../new_purpose")
+require("../edit_purpose")
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference

@@ -1,11 +1,12 @@
-function purpose() {
-  const parentCategory = document.getElementById('parent-category');
-  const selectWrap = document.getElementById('select_purpose');
+function new_purpose() {
+  const selectWrap = document.getElementById('new-select-purpose');
+  const parentCategory = document.getElementById('new-parent-category');
   const newNameAttribute = 'form_payments_balance_collection[payments_balances_attributes][0][purpose_id]';
 
   // 選択フォームを繰り返し表示
   const selectChildElement = (selectForm) => { 
     if (document.getElementById(selectForm) !== null) {
+      console.log(selectForm)
       document.getElementById(selectForm).remove()
     }
   }
@@ -27,12 +28,19 @@ function purpose() {
     XHR.onload = () => {
       const purposes = XHR.response.purpose;
       console.log(purposes);
+
+      // 既存の孫カテゴリーのプルダウンを削除
+      const grandchildWrap = document.getElementById('new-grand-child-select-wrap');
+      if (grandchildWrap) {
+        grandchildWrap.remove();
+      }
+      
       appendChildSelect(purposes);
       
-      const childCategory = document.getElementById('child-select');
+      const childCategory = document.getElementById('new-child-select');
 
       childCategory.addEventListener('change', () => {
-        selectChildElement('grand-child-select-wrap');
+        selectChildElement('new-grand-child-select-wrap');
         getGrandchildCategoryData(childCategory);
       });
     }
@@ -44,23 +52,12 @@ function purpose() {
     const childSelect = document.createElement('select');
     console.log(selectWrap)
 
-    childWrap.setAttribute('id', 'child-select-wrap');
+    childWrap.setAttribute('id', 'new-child-select-wrap');
     childWrap.setAttribute('class', 'c_select_w');
 
-    childSelect.setAttribute('id', 'child-select');
+    childSelect.setAttribute('id', 'new-child-select');
     childSelect.setAttribute('class', 'c_select');
     childSelect.setAttribute('name', newNameAttribute);
-
-    const editNameBase = 'payments_balance[payments_balances]';
-
-    let forms = document.querySelectorAll('.balance_forms');
-    for (let index = 0; index < forms.length - 2; index++) {
-      const form = forms[index];
-      
-      const editNameAttribute = `${editNameBase}[${index}][purpose_id]`;
-      const ChildSelectQuery = form.querySelector('.c_select');
-      ChildSelectQuery.setAttribute('name', editNameAttribute);
-    }
 
     purposes.forEach(purpose => {
       const childOption = document.createElement('option');
@@ -90,29 +87,19 @@ function purpose() {
   //孫カテゴリーのプルダウン
   const appendGrandChildSelect = (purposes) => {
 
-    const childWrap = document.getElementById('child-select-wrap')
+    const childWrap = document.getElementById('new-child-select-wrap')
     const grandchildWrap = document.createElement('td')
     const grandchildSelect = document.createElement('select')
     
 
     console.log(selectWrap)
 
-    grandchildWrap.setAttribute('id', 'child-select-wrap');
+    grandchildWrap.setAttribute('id', 'new-grand-child-select-wrap');
     grandchildWrap.setAttribute('class', 'c_select_w');
 
-    grandchildSelect.setAttribute('id', 'child-select');
+    grandchildSelect.setAttribute('id', 'new-grand-child-select')
     grandchildSelect.setAttribute('class', 'c_select');
     grandchildSelect.setAttribute('name', newNameAttribute);
-
-    const editNameBase = 'payments_balance[payments_balances]';
-
-    const forms = document.querySelectorAll('.balance_forms');
-    for (let index = 0; index < forms.length; index++) {
-      const form = forms[index];
-      const editNameAttribute = `${editNameBase}[${index}][purpose_id]`;
-      const grandchildSelectQuery = form.querySelector('.c_select');
-      grandchildSelectQuery.setAttribute('name', editNameAttribute);
-    }
  
      purposes.forEach(purpose => {
       const grandchildOption = document.createElement('option');
@@ -127,16 +114,9 @@ function purpose() {
  
 
   parentCategory.addEventListener('change', function () {
-    selectChildElement('child-select-wrap');
+    selectChildElement('new-child-select-wrap');
     getChildCategoryData();
   });
-
-  // カテゴリー選択済みの場合、子・孫カテゴリーフォームを表示
-  const selectedValue = parentCategory.value;
-  console.log(selectedValue)
-  if (selectedValue !== '') {
-    getChildCategoryData();
-  }
 }
 
-window.addEventListener('load', purpose); 
+window.addEventListener('load', new_purpose); 
