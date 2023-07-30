@@ -83,20 +83,4 @@ class PaymentsBalancesController < ApplicationController
       redirect_to root_path
     end
   end
-
-#   def render_child_categories(pb, selected_purpose_ids)
-#     if selected_purpose_ids.present?
-#       parent_id, child_id = selected_purpose_ids
-#       parent = Purpose.find(parent_id)
-#       child_categories = parent.children
-#       pb.collection_select :purpose_id, child_categories, :id, :name, { include_blank: "---" }, { id: "child-category" }
-  
-#       grandchild_id = child_id
-#       if grandchild_id.present?
-#         child = Purpose.find(grandchild_id)
-#         grandchild_categories = child.children
-#         pb.collection_select :purpose_id, grandchild_categories, :id, :name, { include_blank: "---" }, { id: "grandchild-category" }
-#       end
-#     end
-#   end  
 end
