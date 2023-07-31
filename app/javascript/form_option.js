@@ -17,14 +17,6 @@ function form_option() {
     // 新しいフォームのindexを非表示のフィールドに設定
     const deletedFormIdsInput = document.getElementById("deleted_form_ids");
     deletedFormIdsInput.value += "," + formIndex[lastIndex - 2];
-
-    // 新しく追加されたフォームに対してイベントリスナーを設定
-    const newIndex = lastIndex - 2;
-    const newParentCategory = document.getElementById(`new-parent-category-${newIndex}`);
-    newParentCategory.addEventListener('change', () => {
-      selectChildElement(`new-child-select-wrap-${newIndex}`);
-      getChildCategoryData(newIndex);
-    });
   });
 
   //フォーム削除
@@ -51,60 +43,14 @@ function form_option() {
   });
 }
 
-function appendGrandChildSelect(purposes, index) {
-  const childWrap = document.getElementById(`new-child-select-wrap-${index}`);
-  const grandchildWrap = document.createElement('td');
-  const grandchildSelect = document.createElement('select');
-
-  grandchildWrap.setAttribute('id', `new-grand-child-select-wrap-${index}`);
-  grandchildWrap.setAttribute('class', 'c_select_w');
-
-  grandchildSelect.setAttribute('id', `new-grand-child-select-${index}`);
-  grandchildSelect.setAttribute('class', 'c_select');
-  grandchildSelect.setAttribute('name', `form_payments_balance_collection[payments_balances_attributes][${index}][grandchild_id]`);
-
-  purposes.forEach(purpose => {
-    const grandchildOption = document.createElement('option');
-    grandchildOption.innerHTML = purpose.name;
-    grandchildOption.setAttribute('value', purpose.id);
-    grandchildSelect.appendChild(grandchildOption);
-  });
-
-  grandchildWrap.appendChild(grandchildSelect);
-  childWrap.appendChild(grandchildWrap);
-}
-
-function getChildCategoryData(index) {
-  const parentValue = parentCategory.value;
-  categoryXHR(parentValue);
-
-  XHR.onload = () => {
-    const purposes = XHR.response.purpose;
-    console.log(purposes);
-
-    // 既存の孫カテゴリーのプルダウンを削除
-    const grandchildWrap = document.getElementById(`new-grand-child-select-wrap-${index}`);
-    if (grandchildWrap) {
-      grandchildWrap.remove();
-    }
-    
-    appendChildSelect(purposes, index);
-
-    const childCategory = document.getElementById(`new-child-select-${index}`);
-    childCategory.addEventListener('change', () => {
-      selectChildElement(`new-grand-child-select-wrap-${index}`);
-      getGrandchildCategoryData(childCategory, index);
-    });
-  }
-}
-
+// buildForm関数を変更し、selectedValueを受け取るようにする
 function buildForm(index) {
   const formHtml = `
     <tr class="balance_forms">
       <td class="balance_form">
         <input type="date" name="form_payments_balance_collection[payments_balances_attributes][${index}][date]" />
       </td>
-      <td class="balance_form" id="new-select_purpose-${index}">
+      <td class="balance_form" id="new-select-purpose-${index}">
         <select id="new-parent-category-${index}" name="form_payments_balance_collection[payments_balances_attributes][${index}][purpose_id]">
           <option value="">---</option>
           <option value="1">収入</option>
@@ -114,13 +60,11 @@ function buildForm(index) {
       <td class="balance_form">
         <input type="number" name="form_payments_balance_collection[payments_balances_attributes][${index}][amount]" placeholder="0" />
       </td>
-      <td class="balance_form">
-        <select class="select-box" id="item-category" name="form_payments_balance_collection[payments_balances_attributes][${index}][payment_id]">
-          <option value="1">現金</option>
-          <option value="2">クレジット決済</option>
-          <option value="3">口座振込</option>
-        </select>
-      </td>
+      <select class="select-box" id="item-category" name="form_payments_balance_collection[payments_balances_attributes][${index}][payment_id]">
+        <option value="1">現金</option>
+        <option value="2">クレジット決済</option>
+        <option value="3">口座振込</option>
+      </select>
       <td class="balance_form">
         <button type="button" class="delete-form" id="payments_balance_deleted_form_ids" data-form-id="form_${index}">削除</button>
       </td>
@@ -129,18 +73,132 @@ function buildForm(index) {
   `;
   const formNode = document.createElement("tr");
   formNode.innerHTML = formHtml;
-  return formNode;
+  
+  const selectWrap = formNode.querySelector(`#new-select-purpose-${index}`);
+  const parentCategory = formNode.querySelector(`#new-parent-category-${index}`);
+  const newNameAttribute = `form_payments_balance_collection[payments_balances_attributes][${index}][purpose_id]`;
+  
+  console.log(parentCategory)
+
+  // 選択フォームを繰り返し表示
+  const selectChildElement = (selectForm) => { 
+    if (document.getElementById(selectForm) !== null) {
+      console.log(selectForm)
+      document.getElementById(selectForm).remove()
+    }
+  }
+
+  // Ajax通信
+  const XHR = new XMLHttpRequest();
+  
+  const categoryXHR = (id) => {
+    XHR.open("GET", `/purpose/${id}`, true);
+    XHR.responseType = "json";
+    XHR.send();
+  }
+
+  // 子カテゴリーの値取得
+  const getChildCategoryData = () => {
+    const parentValue = parentCategory.value;
+    categoryXHR(parentValue);
+
+    XHR.onload = () => {
+      const purposes = XHR.response.purpose;
+      console.log(purposes);
+
+      // 既存の孫カテゴリーのプルダウンを削除
+      const grandchildWrap = formNode.querySelector(`#new-grand-child-select-wrap-${index}`);
+      if (grandchildWrap) {
+        grandchildWrap.remove();
+      }
+      
+      appendChildSelect(purposes);
+      
+      const childCategory = formNode.querySelector(`#new-child-select-${index}`);
+
+      childCategory.addEventListener('change', () => {
+        selectChildElement(`new-grand-child-select-wrap-${index}`);
+        getGrandchildCategoryData(childCategory);
+      });
+    }
+  }
+  
+  //子カテゴリーのプルダウン
+  const appendChildSelect = (purposes) => {
+    const childWrap = document.createElement('td');
+    const childSelect = document.createElement('select');
+    console.log(selectWrap)
+
+    childWrap.setAttribute('id', `new-child-select-wrap-${index}`);
+    childWrap.setAttribute('class', 'c_select_w');
+
+    childSelect.setAttribute('id', `new-child-select-${index}`);
+    childSelect.setAttribute('class', 'c_select');
+    childSelect.setAttribute('name', newNameAttribute);
+
+    purposes.forEach(purpose => {
+      const childOption = document.createElement('option');
+      childOption.innerHTML = purpose.name;
+      childOption.setAttribute('value', purpose.id);
+      childSelect.appendChild(childOption);
+    });
+
+    childWrap.appendChild(childSelect);
+    selectWrap.appendChild(childWrap);
+  }
+
+  // 孫カテゴリーの値取得
+  const getGrandchildCategoryData = (grandchildCategory) => {
+    const grandchildValue = grandchildCategory.value;
+    categoryXHR(grandchildValue);
+
+    XHR.onload = () => {
+    const GrandChildItems = XHR.response.purpose;
+    console.log(GrandChildItems.length);
+    if (GrandChildItems.length != 0) {
+      appendGrandChildSelect(GrandChildItems);
+    }
+  }
 }
 
-// // formAreaにフォームを追加する例
-// const addButton = document.getElementById("add-form-button");
-// const formArea = document.getElementById("form_area");
-// let formIndex = 0;
+  //孫カテゴリーのプルダウン
+  const appendGrandChildSelect = (purposes) => {
 
-// addButton.addEventListener("click", () => {
-//   formArea.appendChild(buildForm(formIndex));
-//   formIndex++;
-// });
+    const childWrap = formNode.querySelector(`#new-child-select-wrap-${index}`)
+    const grandchildWrap = document.createElement('td')
+    const grandchildSelect = document.createElement('select')
+    
 
+    console.log(selectWrap)
+
+    grandchildWrap.setAttribute('id', `new-grand-child-select-wrap-${index}`);
+    grandchildWrap.setAttribute('class', 'c_select_w');
+
+    grandchildSelect.setAttribute('id', `new-grand-child-select-${index}`)
+    grandchildSelect.setAttribute('class', 'c_select');
+    grandchildSelect.setAttribute('name', newNameAttribute);
+
+    purposes.forEach(purpose => {
+      const grandchildOption = document.createElement('option');
+      grandchildOption.innerHTML = purpose.name;
+      grandchildOption.setAttribute('value', purpose.id);
+      grandchildSelect.appendChild(grandchildOption);
+    });
+
+    grandchildWrap.appendChild(grandchildSelect)
+    childWrap.appendChild(grandchildWrap)
+  }
+
+  parentCategory.addEventListener("change", () => {
+    
+    // 以前に設定した子カテゴリーの処理を一旦削除
+    selectChildElement(`new-child-select-wrap-${index}`);
+    getChildCategoryData();
+  });
+  // 
+  
+
+  return formNode;
+}
 
 window.addEventListener("load", form_option);
