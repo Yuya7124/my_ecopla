@@ -3,7 +3,6 @@ class CreatePaymentsBalances < ActiveRecord::Migration[6.0]
     create_table :payments_balances do |t|  
       t.date        :date,          null: false
       t.integer     :amount,        null: false
-      # t.references  :purpose,       null: false, foreign_key: true
       t.integer     :payment_id,    null: false
       t.references  :user,          null: false, foreign_key: true
       t.timestamps

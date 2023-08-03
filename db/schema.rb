@@ -23,8 +23,10 @@ ActiveRecord::Schema.define(version: 2023_07_22_131311) do
 
   create_table "money", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "cash", null: false
+    t.integer "cash_over_short", null: false
     t.integer "debt", null: false
     t.integer "savings", null: false
+    t.integer "annual_income", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
