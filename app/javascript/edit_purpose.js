@@ -9,7 +9,6 @@ function edit_purpose() {
 
   for (let i = 0; i < lastIndex - 1; i++) {
     formIndex.push(i);
-    console.log(i)
 
     const selectWrap = document.getElementById(`edit-select-purpose-${formIndex[i]}`);
     const parentCategory = document.getElementById(`edit-parent-category-${formIndex[i]}`);
@@ -33,9 +32,6 @@ function edit_purpose() {
         grandchildIds.push(purpose_ids[i][2]);
         break;
     }
-    console.log(parentIds);
-    console.log(childIds);
-    console.log(grandchildIds);
 
     // 選択フォームを繰り返し表示
     const selectChildElement = (selectForm) => { 
@@ -60,7 +56,6 @@ function edit_purpose() {
 
       XHR.onload = () => {
         const purposes = XHR.response.purpose;
-        console.log(purposes);
 
         // 既存の孫カテゴリーのプルダウンを削除
         const grandchildWrap = document.getElementById(`edit-grand-child-select-wrap-${formIndex[i]}`);
@@ -83,7 +78,6 @@ function edit_purpose() {
     const appendChildSelect = (purposes) => {
       const childWrap = document.createElement('td');
       const childSelect = document.createElement('select');
-      console.log(selectWrap)
 
       childWrap.setAttribute('id', `edit-child-select-wrap-${formIndex[i]}`);
       childWrap.setAttribute('class', 'c_select_w');
@@ -113,7 +107,6 @@ function edit_purpose() {
 
       XHR.onload = () => {
         const GrandChildItems = XHR.response.purpose;
-        console.log(GrandChildItems.length);
         if (GrandChildItems.length != 0) {
           appendGrandChildSelect(GrandChildItems);
         }
@@ -145,7 +138,6 @@ function edit_purpose() {
       grandchildWrap.appendChild(grandchildSelect);
       childWrap.appendChild(grandchildWrap);
     }
-    console.log(parentCategory);
     parentCategory.addEventListener('change', function () {
       selectChildElement(`edit-child-select-wrap-${formIndex[i]}`);
       getChildCategoryData();
@@ -174,7 +166,6 @@ function edit_purpose() {
     
           XHR.onload = () => {
             const GrandChildItems = XHR.response.purpose;
-            console.log(GrandChildItems.length);
             if (GrandChildItems.length != 0) {
               appendGrandChildSelect(GrandChildItems);
             }
@@ -216,66 +207,6 @@ function edit_purpose() {
     }
     ExistingCategoryData();
   }
-}
-
-function existing_purpose(index, parentCategoryId, childCategoryId, grandchildCategoryId) {
-  const parentCategory = document.getElementById(`edit-parent-category-${index}`);
-  
-  // 親カテゴリーの初期値を設定
-  parentCategory.value = parentCategoryId;
-  
-  // 子カテゴリーの初期値を設定
-  if (childCategoryId) {
-    // selectChildElement(`edit-child-select-wrap-${index}`);
-    const childCategory = document.getElementById(`edit-child-select-${index}`);
-    childCategory.value = childCategoryId;
-    // 子カテゴリーの値取得
-    const getChildCategoryData = () => {
-      const parentValue = parentCategory.value;
-      categoryXHR(parentValue);
-
-      XHR.onload = () => {
-        const purposes = XHR.response.purpose;
-        console.log(purposes);
-
-        // 既存の孫カテゴリーのプルダウンを削除
-        const grandchildWrap = document.getElementById(`edit-grand-child-select-wrap-${index}`);
-        if (grandchildWrap) {
-          grandchildWrap.remove();
-        }
-        
-        appendChildSelect(purposes);
-        
-        const childCategory = document.getElementById(`edit-child-select-${index}`);
-
-        childCategory.addEventListener('change', () => {
-          selectChildElement(`edit-grand-child-select-wrap-${index}`);
-          getGrandchildCategoryData(childCategory);
-        });
-      }
-    }
-    getChildCategoryData();
-  }
-  
-  // 孫カテゴリーの初期値を設定
-  if (grandchildCategoryId) {
-    const getGrandchildCategoryData = (grandchildCategory) => {
-      const grandchildValue = grandchildCategory.value;
-      categoryXHR(grandchildValue);
-
-      XHR.onload = () => {
-        const GrandChildItems = XHR.response.purpose;
-        console.log(GrandChildItems.length);
-        if (GrandChildItems.length != 0) {
-          appendGrandChildSelect(GrandChildItems);
-        }
-      }
-    }
-    getGrandchildCategoryData();
-    const grandchildCategory = document.getElementById(`edit-grand-child-select-${index}`);
-    grandchildCategory.value = grandchildCategoryId;
-  }
-  
 }
 
 window.addEventListener('load', edit_purpose); 
