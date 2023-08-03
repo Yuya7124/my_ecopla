@@ -10,7 +10,19 @@ class Form::PaymentsBalanceCollection < Form::Base
   end
 
   def payments_balances_attributes=(attributes)
-    self.payments_balances = attributes.map { |_key, value| PaymentsBalance.new(value) }
+    binding.pry
+    self.payments_balances = attributes.map do |_key, value|
+      purpose_id = value.fetch("purpose_id")
+      purpose = Purpose.find(purpose_id).path_ids
+      parent_id = Purpose.find(purpose_id).root_id
+      ancestry = Purpose.find(purpose_id).ancestry
+      balance = if purpose
+        PaymentsBalance.new(value.merge(ancestry: ancestry, parent_id: parent_id, purpose_id: purpose_id))  # Purposeが存在する場合は、PaymentsBalanceにpurposeを紐付ける
+      else
+        PaymentsBalance.new(value)
+      end
+      balance
+    end
   end
 
   def payments_balances

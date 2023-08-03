@@ -1,32 +1,29 @@
 <h1>Budget List</h1>
-<%= form_with model: @form, url: payments_balances_path, local: true do |form| %>
+<%= form_with model: @form, url: payments_balances_path, id: "pb_form", local: true do |form| %>
 <%= render 'devise/shared/error_messages', model: @form %>
   <button type="button" id="add-form-button">追加</button>
-    <table>
+  <table>
       <thead>
         <tr>
           <th> date </th>
           <th> purpose </th>
           <th> amount </th>
           <th> payment </th>
-          <th> times </th>
         </tr>
       </thead>
     <tbody>
     <%= form.fields_for :payments_balances do |balance| %>
-      <tr> 
+      <tr class="balance_forms">
         <td class="balance_form"><%= balance.date_field :date, type: "date", id:"inputform_date" %></td>
-        <td class="balance_form"><%= balance.text_field :purpose, placeholder: "まだ未実装", type: "text", id:"inputform_purpose" %></td>
+        <td class="balance_form" id="new-select-purpose-0"><%= balance.collection_select :purpose_id, Purpose.roots, :id, :name, { include_blank: "---" }, { id: "new-parent-category-0" } %></td>
         <td class="balance_form"><%= balance.text_field :amount, placeholder: "0", type: "number", id:"inputform_amount" %></td>
         <td class="balance_form"><%= balance.collection_select(:payment_id, Payment.all, :id, :name, {}, {class:"select-box", id:"item-category"}) %></td>
-        <td class="balance_form"><%= balance.text_field :payment_times, placeholder: "1", type: "number", id:"inputform_payment_times" %></td>
-        <td class="balance_form"><button type="button" class="delete-form" id="form_area_0" data-form_id="form_0">削除</button></td>
+        <td class="balance_form"><button type="button" class="delete-form" id="deleted_form_ids" data-form_id="form_0">削除</button></td>
       </tr>
     <% end %>
     </tbody>
   </table>
   <div class="balance_forms" id="form_area"></div>
-  <%= form.submit "登録" %>
+  <%= form.submit "登録", class: "save_btn", id: "save-button" %>
   <%= link_to "戻る", root_path %>
 <% end %>
-

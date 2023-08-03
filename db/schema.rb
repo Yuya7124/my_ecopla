@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_20_135113) do
+ActiveRecord::Schema.define(version: 2023_07_22_131311) do
 
   create_table "budgets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -34,13 +34,23 @@ ActiveRecord::Schema.define(version: 2023_06_20_135113) do
   create_table "payments_balances", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.date "date", null: false
     t.integer "amount", null: false
-    t.string "purpose", null: false
     t.integer "payment_id", null: false
-    t.integer "payment_times", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "ancestry"
+    t.integer "parent_id"
+    t.bigint "purpose_id", null: false
+    t.index ["ancestry"], name: "index_payments_balances_on_ancestry"
+    t.index ["purpose_id"], name: "index_payments_balances_on_purpose_id"
     t.index ["user_id"], name: "index_payments_balances_on_user_id"
+  end
+
+  create_table "purposes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.string "ancestry"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -59,5 +69,6 @@ ActiveRecord::Schema.define(version: 2023_06_20_135113) do
   add_foreign_key "budgets", "payments_balances"
   add_foreign_key "budgets", "users"
   add_foreign_key "money", "users"
+  add_foreign_key "payments_balances", "purposes"
   add_foreign_key "payments_balances", "users"
 end
