@@ -20,8 +20,14 @@
     <% count_amount = PaymentsBalance.where(date: date, user_id: current_user.id).count %>
     <% unless count_amount.zero? %>
       <%= link_to date.day, payments_balances_path(date: date) %><br/>
-      <% total_amount = PaymentsBalance.where(date: date, user_id: current_user.id).sum(:amount) %>
-      <%= total_amount %>
+      <% total_income = PaymentsBalance.where(date: date, user_id: current_user.id, parent_id: purpose_id = 1).sum(:amount) %>
+      <% total_expend = PaymentsBalance.where(date: date, user_id: current_user.id, parent_id: purpose_id = 2).sum(:amount) %>
+      <% total_amount = total_expend - total_income %>
+      <div id="amount_num_<%= date.day %>"> 
+        <%= total_amount %>
+      </div>
+      <% count_amount = PaymentsBalance.where(date: date, user_id: current_user.id).count(:amount) %>
+      👛<%= count_amount %>
     <% else %>
       <%= date.day %>
     <% end %>

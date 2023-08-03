@@ -9,14 +9,10 @@ function new_purpose() {
     const selectWrap = document.getElementById(`new-select-purpose-${formIndex[i]}`);
     const parentCategory = document.getElementById(`new-parent-category-${formIndex[i]}`);
     const newNameAttribute = `form_payments_balance_collection[payments_balances_attributes][${formIndex[i]}][purpose_id]`;
-
-    console.log(formIndex)
-    console.log(parentCategory)
-
+    
     // 選択フォームを繰り返し表示
     const selectChildElement = (selectForm) => { 
       if (document.getElementById(selectForm) !== null) {
-        console.log(selectForm)
         document.getElementById(selectForm).remove()
       }
     }
@@ -37,7 +33,6 @@ function new_purpose() {
 
       XHR.onload = () => {
         const purposes = XHR.response.purpose;
-        console.log(purposes);
 
         // 既存の孫カテゴリーのプルダウンを削除
         const grandchildWrap = document.getElementById(`new-grand-child-select-wrap-${formIndex[i]}`);
@@ -60,7 +55,6 @@ function new_purpose() {
     const appendChildSelect = (purposes) => {
       const childWrap = document.createElement('td');
       const childSelect = document.createElement('select');
-      console.log(selectWrap)
 
       childWrap.setAttribute('id', `new-child-select-wrap-${formIndex[i]}`);
       childWrap.setAttribute('class', 'c_select_w');
@@ -100,9 +94,6 @@ function new_purpose() {
       const childWrap = document.getElementById(`new-child-select-wrap-${formIndex[i]}`)
       const grandchildWrap = document.createElement('td')
       const grandchildSelect = document.createElement('select')
-      
-
-      console.log(selectWrap)
 
       grandchildWrap.setAttribute('id', `new-grand-child-select-wrap-${formIndex[i]}`);
       grandchildWrap.setAttribute('class', 'c_select_w');
@@ -122,7 +113,6 @@ function new_purpose() {
       childWrap.appendChild(grandchildWrap)
     }
   
-
     parentCategory.addEventListener('change', function () {
       selectChildElement(`new-child-select-wrap-${formIndex[i]}`);
       getChildCategoryData();

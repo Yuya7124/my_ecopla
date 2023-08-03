@@ -21,11 +21,13 @@
         <div id="payments-balance-data" data-payment-count="<%= @payments_balances.count %>">
           <tr class="balance_forms">
             <td class="balance_form"><%= pb.date_field :date, type: "date", value: @selected_date, id:"inputform_date" %></td>
-            <td class="balance_form" id="edit-select-purpose-<%= index %>" >
-            <%= pb.collection_select :purpose_id, Purpose.roots, :id, :name, { include_blank: "---" }, { id: "edit-parent-category-#{index}" } %>
-            </td>
+              <td class="balance_form" id="edit-select-purpose-<%= index %>">
+                <%= collection_select :payments_balance, :purpose_id, Purpose.roots, :id, :name,
+                 { include_blank: "---", selected: @selected_purpose_ids[index] }, { id: "edit-parent-category-#{index}" } %>
+              </td>
             <td class="balance_form"><%= pb.text_field :amount, placeholder: "0", type: "number", id:"inputform_amount" %></td>
-            <td class="balance_form"><%= pb.collection_select(:payment_id, Payment.all, :id, :name, {}, {class:"select-box", id:"item-category"}) %></td>
+            <td class="balance_form"><%= pb.collection_select(:payment_id, Payment.all, :id, :name, {}, 
+            {class:"select-box", id:"item-category"}) %></td>
             <td class="balance_form"><button type="button" class="delete-form", id="deleted_form_ids">
             <%= link_to "", payments_balance_path(balance.id), method: :delete %>削除</button></td>
             <%= pb.hidden_field :id %>
@@ -35,6 +37,9 @@
     <% end %>
     </tbody>
   </table>
+  <script>
+    let purpose_ids = <%= @selected_purpose_ids %>;
+  </script>
   <div class="balance_forms" id="form_area"></div>
   <%= form.submit "更新", class: "save_btn", id: "save-button" %>
   <%= link_to "戻る", payments_balance_path(date: @selected_date) %>

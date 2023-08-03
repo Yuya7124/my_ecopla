@@ -83,4 +83,8 @@ class PaymentsBalancesController < ApplicationController
       redirect_to root_path
     end
   end
+
+  def get_amount
+    @amount = PaymentsBalance.where(amount: amount).all.to_json
+  end
 end
