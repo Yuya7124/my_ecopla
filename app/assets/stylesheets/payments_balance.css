@@ -1,3 +1,123 @@
 .save_btn {
   color: darkcyan;
 }
+
+/* カレンダー */
+
+/* 曜日 */
+tr.calendar_top>*:first-child {
+  color: crimson;
+}
+
+tr.calendar_top>*:last-child {
+  color: mediumblue
+}
+
+
+/* 日にち */
+
+.day-wday-0-past-prev-month,
+.day-wday-1-past-prev-month,
+.day-wday-2-past-prev-month,
+.day-wday-3-past-prev-month,
+.day-wday-4-past-prev-month,
+.day-wday-5-past-prev-month,
+.day-wday-6-past-prev-month
+{
+  color: gray;
+  border: 1px solid #000000;
+}
+
+.day-wday-0-past-current-month,
+.day-wday-1-past-current-month,
+.day-wday-2-past-current-month,
+.day-wday-3-past-current-month,
+.day-wday-4-past-current-month,
+.day-wday-5-past-current-month,
+.day-wday-6-past-current-month
+{
+  
+  border: 1px solid #000000;
+}
+
+.day-wday-0-today-current-month,
+.day-wday-0-today-start-date-current-month,
+.day-wday-1-today-current-month,
+.day-wday-1-today-start-date-current-month,
+.day-wday-2-today-current-month,
+.day-wday-2-today-start-date-current-month,
+.day-wday-3-today-current-month,
+.day-wday-3-today-start-date-current-month,
+.day-wday-4-today-current-month,
+.day-wday-4-today-start-date-current-month,
+.day-wday-5-today-current-month,
+.day-wday-5-today-start-date-current-month,
+.day-wday-6-today-current-month,
+.day-wday-6-today-start-date-current-month
+{
+  color: chocolate;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.day-wday-0-future-current-month,
+.day-wday-1-future-current-month,
+.day-wday-2-future-current-month,
+.day-wday-3-future-current-month,
+.day-wday-4-future-current-month,
+.day-wday-5-future-current-month,
+.day-wday-6-future-current-month
+{
+  border: 1px solid #000000;
+}
+
+.day-wday-0-future-next-month,
+.day-wday-1-future-next-month,
+.day-wday-2-future-next-month,
+.day-wday-3-future-next-month,
+.day-wday-4-future-next-month,
+.day-wday-5-future-next-month,
+.day-wday-6-future-next-month
+{
+  color: gray;
+}
+
+.day-wday-0-past-current-month,
+.day-wday-0-past-start-date-current-month,
+.day-wday-0-future-current-month,
+.day-wday-0-future-start-date-current-month
+{
+  color: crimson;
+}
+
+.day-wday-6-past-current-month,
+.day-wday-6-past-start-date-current-month,
+.day-wday-6-future-current-month,
+.day-wday-6-future-start-date-current-month
+{
+  color: mediumblue;
+}
+
+.day-wday-0-past-prev-month,
+.day-wday-0-past-next-month,
+.day-wday-0-future-prev-month,
+.day-wday-0-future-next-month
+{
+  color: lightcoral;
+}
+
+.day-wday-6-past-prev-month,
+.day-wday-6-past-next-month,
+.day-wday-6-future-prev-month,
+.day-wday-6-future-next-month
+{
+  color: lightsteelblue;
+}
+
+.date_info {
+  text-decoration: none;
+}
+
+.count_amount_num {
+  color: black;
+}

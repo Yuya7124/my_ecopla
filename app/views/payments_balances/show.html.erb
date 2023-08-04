@@ -1,6 +1,8 @@
+<%= render "devise/shared/header" %>
+
 <h1>Payments Balance List</h1>
 
-<%= @selected_date %>
+<h2><%= @selected_date %></h2>
 
 <% if @payments_balance.any? %>
   <table>

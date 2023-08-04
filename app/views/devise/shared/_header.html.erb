@@ -1,16 +1,13 @@
 <header>
-<h1>MyEcopla</h1>
-  <div class="login_nav">
-    <% if user_signed_in? %>
-      <div class="user_nav grid-6">
-        <%= link_to "新規登録", new_payments_balance_path, class: "post" %>
-        <div class="setting_nav">
-          <%= link_to "借金管理", "#", class: "post" %>
-          <%= link_to "グラフ", "#", class: "post" %>
-          <%= link_to "設定", "#", class: "post" %>
-          <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-        <div>
-      </div>
-    <% end %>
+  <div class="header">
+  <h1>MyEcopla</h1>
+    <div class="login_nav">
+      <% if user_signed_in? %>
+        <div class="user_nav">
+          <div class="user-nickname"><%= current_user.nickname %></div>
+          <div class="logout" id="exit-btn"><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></div>
+        </div>
+      <% end %>
+    </div>
   </div>
 </header>

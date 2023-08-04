@@ -11,4 +11,6 @@ Rails.application.routes.draw do
   end
   resources :purposes, only:[:new, :edit], shallow: true
   get 'purpose/:id', to: 'purposes#search'
+  resources :moneys, only:[:index, :new, :create, :edit, :update]
+  get 'moneys/index'
 end

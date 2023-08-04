@@ -1,36 +1,38 @@
 function number_setting(){
   const NumberCounter = (target) => {
-    let targetNum = parseInt(target.getAttribute('data-num'));
-    const conditon_num = Math.floor(Math.random() * 99999);
-    targetNum = conditon_num;
-  
-    if (!conditon_num) {
-      return;
-    }
-
-    let data_num = null;
-    let init_num = 0;
-    let canvas = document.getElementById("canvas_2");
-    let max_width = 200;
-    let canvas_width = 0;
-
-    const count_up = () => {
-      target.innerText = `${zero_padding(init_num)}`;
-      for (let i = 0; i <= count_len(targetNum); i++){
-        canvas.style.width = canvas_width + 'px';
-        canvas_width += max_width / canvas_num(targetNum) * Math.pow(10, count_len(targetNum) - 2);
-        init_num += Math.pow(10, count_len(targetNum) - 2);
+    for (let i = 1; i <= 3; i++){
+      let targetNum = parseInt(target.getAttribute(`data_num`));
+    
+      if (!targetNum) {
+        return;
       }
-      if (init_num > targetNum){
-        target.innerText = targetNum;
-        clearInterval(data_num);
+
+      let data_num = null;
+      let init_num = 0;
+      let canvas = document.getElementById("canvas_2");
+      let max_width = 200;
+      let canvas_width = 0;
+
+      const count_up = () => {
+        target.innerText = `${zero_padding(init_num)}`;
+        for (let i = 0; i <= count_len(targetNum); i++){
+          canvas.style.width = canvas_width + 'px';
+          canvas_width += max_width / canvas_num(targetNum) * Math.pow(10, count_len(targetNum) - 2);
+          init_num += Math.pow(10, count_len(targetNum) - 2);
+        }
+        if (init_num > targetNum){
+          target.innerText = targetNum;
+          clearInterval(data_num);
+        }
       }
+      data_num = setInterval(count_up, 1);
     }
-    data_num = setInterval(count_up, 1);
   }
-  let target = document.getElementById("num");
+  let target = document.getElementById("current_num");
   NumberCounter(target);
+  paymentSel();
 }
+
 
 function color_change(red, green, blue) {
   return "rgb(" + red + "," + green + "," + blue + ")";
@@ -49,13 +51,10 @@ function count_len(max_num) {
   return len;
 }
 
-// function count_speed(count) {
-//   let len = parseInt(Math.log10(count));
-//   for (let i = 0; i < len; i++) {
-//     count++;
-//   }
-//   return count;
-// }
+function paymentSel() {
+  let element = document.getElementById('payments');
+  console.log(element.value);
+}
 
 function canvas_num(max_num) {
   let len = parseInt(Math.log10(max_num)) + 1;

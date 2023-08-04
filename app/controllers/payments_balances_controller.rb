@@ -3,7 +3,6 @@ class PaymentsBalancesController < ApplicationController
   before_action :set_payments_balance, only: [:edit, :show, :update]
   before_action :new_form_ids, only: :update
   before_action :no_found_page, only: :show
-  # before_action :render_child_categories, only: :edit
 
   def index
     @payments_balances = PaymentsBalance.where(user_id: current_user.id)
