@@ -4,18 +4,27 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  
+  attr_accessor :skip_password_validation
 
   VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
   
   with_options presence: true do
     validates :nickname
-    validates :password,        format: { with: VALID_PASSWORD_REGEX, allow_blank: true }
-    validates :cash,            numericality: {less_than: 0}
+    validates :cash, numericality: { greater_than_or_equal_to: 0, message: "は0未満にできません" }
     validates :cash_over_short
-    validates :debt,            numericality: {less_than: 0}
+    validates :debt, numericality: { greater_than_or_equal_to: 0, message: "は0未満にできません" }
     validates :savings
-    validates :annual_income,   numericality: {less_than: 0}
+    validates :annual_income, numericality: { greater_than_or_equal_to: 0, message: "は0未満にできません" }
   end
+
+  # パスワード変更のバリデーション
+  validates :password, presence: true, format: { with: VALID_PASSWORD_REGEX, allow_blank: true }, length: { minimum: 6 }, unless: :skip_password_validation
+  validates :password_confirmation, presence: true, format: { with: VALID_PASSWORD_REGEX, allow_blank: true }, unless: :skip_password_validation
+
+  # その他のバリデーションや関連するコード
+
+  validates :reset_password_token, uniqueness: true, allow_nil: true
   
   has_many :payments_balances, through: :budgets
 

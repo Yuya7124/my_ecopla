@@ -3,6 +3,7 @@ class PaymentsBalancesController < ApplicationController
   before_action :set_payments_balance, only: [:edit, :show, :update]
   before_action :new_form_ids, only: :update
   before_action :no_found_page, only: :show
+  before_action :amount_calculation, only: :index
 
   def index
     @payments_balances = PaymentsBalance.where(user_id: current_user.id)
@@ -85,5 +86,17 @@ class PaymentsBalancesController < ApplicationController
 
   def get_amount
     @amount = PaymentsBalance.where(amount: amount).all.to_json
+  end
+
+  def amount_calculation
+    @user = current_user
+    @cash_plus = PaymentsBalance.where("date <= ? AND user_id = ? AND payment_id = ? AND parent_id = ?", Time.zone.now, current_user.id, 1, 1).sum(:amount) 
+    @cash_minus = PaymentsBalance.where("date <= ? AND user_id = ? AND payment_id = ? AND parent_id = ?", Time.zone.now, current_user.id, 1, 2).sum(:amount) 
+    @debt_num_past = PaymentsBalance.where("date <= ? AND user_id = ? AND payment_id = ? AND parent_id = ?", Time.zone.now, current_user.id, 2, 2).sum(:amount) 
+    @debt_num_future = PaymentsBalance.where("date > ? AND user_id = ? AND payment_id = ? AND parent_id = ?", Time.zone.now, current_user.id, 2, 2).sum(:amount) 
+    @atm_plus = PaymentsBalance.where("date <= ? AND user_id = ? AND payment_id = ? AND parent_id = ?", Time.zone.now, current_user.id, 3, 1).sum(:amount) 
+    @atm_minus = PaymentsBalance.where("date <= ? AND user_id = ? AND payment_id = ? AND parent_id = ?", Time.zone.now, current_user.id, 3, 2).sum(:amount) 
+    @sum_cash = @cash_minus - @cash_plus
+    @sum_atm = (@atm_minus + @debt_num_past) - @atm_plus
   end
 end

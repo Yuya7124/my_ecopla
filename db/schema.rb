@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_07_22_131311) do
+ActiveRecord::Schema.define(version: 2023_08_05_050303) do
 
   create_table "budgets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -47,11 +47,11 @@ ActiveRecord::Schema.define(version: 2023_07_22_131311) do
     t.string "nickname", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
-    t.integer "cash", null: false
-    t.integer "cash_over_short", null: false
-    t.integer "debt", null: false
-    t.integer "savings", null: false
-    t.integer "annual_income", null: false
+    t.integer "cash", default: 0, null: false
+    t.integer "cash_over_short", default: 0, null: false
+    t.integer "debt", default: 0, null: false
+    t.integer "savings", default: 0, null: false
+    t.integer "annual_income", default: 0, null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
