@@ -5,13 +5,13 @@
 
 # Purpose
 # 親カテゴリー
-income, expenditure = Purpose.create([{name: "収入"}, {name: "支出"}])
+income, expenditure = Purpose.create([{name: "収入"}, {name: "支出"}, {name: "預入・引出"}, {name: "チャージ"}])
 
 # # 子カテゴリー
 # 収入
 no_select_in, salary, allowance, other = income.children.create([{name: "---" },{name: "給料"}, {name: "支給"}, {name: "その他"}])
 # 支出
-no_select_out, food_expenses, public_fees, transportation_expenses, study_expenses, inside_entertainment_expenses, clothing_expenses, beauty_expenses, medical_bills, daily_necessities, trip, outside_entertainment_expenses, charge, others = expenditure.children.create([{name: "---" },{name: "食費"}, {name: "公共料金"}, {name: "交通費"}, {name: "学習費"}, {name: "娯楽費"}, {name: "衣服費"}, {name: "美容費"}, {name: "医療費"}, {name: "日用品"}, {name: "旅行"}, {name: "交際費"}, {name: "チャージ"}, {name: "その他"}])
+no_select_out, food_expenses, public_fees, transportation_expenses, study_expenses, inside_entertainment_expenses, clothing_expenses, beauty_expenses, medical_bills, daily_necessities, trip, outside_entertainment_expenses, charge, others = expenditure.children.create([{name: "---" },{name: "食費"}, {name: "公共料金"}, {name: "交通費"}, {name: "学習費"}, {name: "娯楽費"}, {name: "衣服費"}, {name: "美容費"}, {name: "医療費"}, {name: "日用品"}, {name: "旅行"}, {name: "交際費"}, {name: "その他"}])
 
 # # 孫カテゴリー
 # 選択していない

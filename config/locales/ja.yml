@@ -1,5 +1,26 @@
 ja:
   activerecord:
+    attributes:
+      user:
+        nickname: ユーザー名
+        email: "メールアドレス"
+        password: "パスワード"
+        password_confirmation: "確認用パスワード"
+        cash: "所持金(現金)"
+        cash_over_short: "誤差(現金)"
+        debt: "借金状況"
+        savings: "貯金額"
+        annual_income: "年収"
+
+      payments_balance:
+        text: テキスト
+        image: 画像
+        date: "日付"
+        amount: "金額"
+        purpose_id: "使用目的"
+        payment_id: "決済方法"
+        user: "ユーザー"
+
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'

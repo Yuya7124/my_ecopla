@@ -8,7 +8,6 @@ class PaymentsBalance < ApplicationRecord
   end
   
   has_many   :users, through: :budgets
-  has_many   :budgets
   belongs_to :purpose
   belongs_to :payment
 

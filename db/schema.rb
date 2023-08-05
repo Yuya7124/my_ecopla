@@ -21,18 +21,6 @@ ActiveRecord::Schema.define(version: 2023_07_22_131311) do
     t.index ["user_id"], name: "index_budgets_on_user_id"
   end
 
-  create_table "money", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "cash", null: false
-    t.integer "cash_over_short", null: false
-    t.integer "debt", null: false
-    t.integer "savings", null: false
-    t.integer "annual_income", null: false
-    t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_money_on_user_id"
-  end
-
   create_table "payments_balances", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.date "date", null: false
     t.integer "amount", null: false
@@ -59,6 +47,11 @@ ActiveRecord::Schema.define(version: 2023_07_22_131311) do
     t.string "nickname", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
+    t.integer "cash", null: false
+    t.integer "cash_over_short", null: false
+    t.integer "debt", null: false
+    t.integer "savings", null: false
+    t.integer "annual_income", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -70,7 +63,6 @@ ActiveRecord::Schema.define(version: 2023_07_22_131311) do
 
   add_foreign_key "budgets", "payments_balances"
   add_foreign_key "budgets", "users"
-  add_foreign_key "money", "users"
   add_foreign_key "payments_balances", "purposes"
   add_foreign_key "payments_balances", "users"
 end

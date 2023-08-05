@@ -9,11 +9,14 @@ class User < ApplicationRecord
   
   with_options presence: true do
     validates :nickname
-    validates :password, format: { with: VALID_PASSWORD_REGEX, allow_blank: true }
+    validates :password,        format: { with: VALID_PASSWORD_REGEX, allow_blank: true }
+    validates :cash,            numericality: {less_than: 0}
+    validates :cash_over_short
+    validates :debt,            numericality: {less_than: 0}
+    validates :savings
+    validates :annual_income,   numericality: {less_than: 0}
   end
   
-  has_one  :money
-  has_many :budgets
   has_many :payments_balances, through: :budgets
 
   #バリデーションの重複撤去
