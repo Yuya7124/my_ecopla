@@ -29,6 +29,9 @@
       <% end %>
     </tbody>
   </table>
+  <%= total_income = PaymentsBalance.where(date: @selected_date, user_id: current_user.id, parent_id: purpose_id = 1).sum(:amount) %>
+  <%= total_expend = PaymentsBalance.where(date: @selected_date, user_id: current_user.id, parent_id: purpose_id = 2).sum(:amount) %>
+  <%= total_amount = total_expend - total_income %>
 <% else %>
   <p>No data found.</p>
 <% end %>

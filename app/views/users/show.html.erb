@@ -6,23 +6,23 @@
       <h2 class="page-heading">
         <%= "#{@nickname}さんの金銭状況"%>
       </h2>
-      <table class="table">
+      <table class="money_info_table">
         <tbody>
           <tr>
-            <th class="table__col1">現所持金(現金)</th>
-            <td class="table__col2"><%= @cash %></td>
+            <th class="table_col1">現金</th>
+            <td class="table_col2"><%= @cash %></td>
           </tr>
           <tr>
-            <th class="table__col1">借金状況</th>
-            <td class="table__col2"><%= @debt %></td>
+            <th class="table_col1">借金状況</th>
+            <td class="table_col2"><%= @debt %></td>
           </tr>
           <tr>
-            <th class="table__col1">貯金額</th>
-            <td class="table__col2"><%= @savings %></td>
+            <th class="table_col1">貯金額</th>
+            <td class="table_col2"><%= @savings %></td>
           </tr>
           <tr>
-            <th class="table__col1">年収</th>
-            <td class="table__col2"><%= @annual_income %></td>
+            <th class="table_col1">年収</th>
+            <td class="table_col2"><%= @annual_income %></td>
           </tr>
         </tbody>
       </table>

@@ -1,15 +1,10 @@
 class UsersController < ApplicationController
-  before_action :amount_calculation, only: :index
+  before_action :amount_calculation, only: [:show, :edit]
   before_action :set_user, only: [:edit, :update]
+  before_action :user_info, only: [:show, :edit]
   # before_action :password_required? only: [:update]
   def show
-    user = User.find(params[:id])
-    @nickname = user.nickname
-    @cash = user.cash
-    @cash_over_short = user.cash_over_short
-    @debt = user.debt
-    @savings = user.savings
-    @annual_income = user.annual_income
+
   end
 
   def edit
@@ -44,6 +39,16 @@ class UsersController < ApplicationController
 
   def set_user
     @user = current_user
+  end
+
+  def user_info
+    user = User.find(params[:id])
+    @nickname = user.nickname
+    @cash = user.cash
+    @cash_over_short = user.cash_over_short
+    @debt = user.debt
+    @savings = user.savings
+    @annual_income = user.annual_income
   end
 
   def password_required?

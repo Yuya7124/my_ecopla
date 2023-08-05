@@ -5,13 +5,19 @@
 
 # Purpose
 # 親カテゴリー
-income, expenditure = Purpose.create([{name: "収入"}, {name: "支出"}, {name: "預入・引出"}, {name: "チャージ"}])
+income, expenditure, deposit_withdrawal, charge, missing_data = Purpose.create([{name: "収入"}, {name: "支出"}, {name: "預入・預入"}, {name: "チャージ"}, {name: "過不足"}])
 
 # # 子カテゴリー
 # 収入
 no_select_in, salary, allowance, other = income.children.create([{name: "---" },{name: "給料"}, {name: "支給"}, {name: "その他"}])
 # 支出
-no_select_out, food_expenses, public_fees, transportation_expenses, study_expenses, inside_entertainment_expenses, clothing_expenses, beauty_expenses, medical_bills, daily_necessities, trip, outside_entertainment_expenses, charge, others = expenditure.children.create([{name: "---" },{name: "食費"}, {name: "公共料金"}, {name: "交通費"}, {name: "学習費"}, {name: "娯楽費"}, {name: "衣服費"}, {name: "美容費"}, {name: "医療費"}, {name: "日用品"}, {name: "旅行"}, {name: "交際費"}, {name: "その他"}])
+no_select_out, food_expenses, public_fees, transportation_expenses, study_expenses, inside_entertainment_expenses, clothing_expenses, beauty_expenses, medical_bills, daily_necessities, trip, outside_entertainment_expenses, others = expenditure.children.create([{name: "---" },{name: "食費"}, {name: "公共料金"}, {name: "交通費"}, {name: "学習費"}, {name: "娯楽費"}, {name: "衣服費"}, {name: "美容費"}, {name: "医療費"}, {name: "日用品"}, {name: "旅行"}, {name: "交際費"}, {name: "その他"}])
+# 預入・引出
+no_select_dep_wit, deposit, withdrawal = deposit_withdrawal.children.create([{name: "---" },{name: "預入"}, {name: "預入"}])
+# チャージ
+no_select_charge, ic_card, qr_code = charge.children.create([{name: "---" }, {name: "ICカード"}, {name: "QRコード"}])
+# 過不足
+no_select_missing, high, low = missing_data.children.create([{name: "---" }, {name: "過剰"}, {name: "不足"}])
 
 # # 孫カテゴリー
 # 選択していない
