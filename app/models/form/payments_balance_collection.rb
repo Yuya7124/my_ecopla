@@ -10,7 +10,6 @@ class Form::PaymentsBalanceCollection < Form::Base
   end
 
   def payments_balances_attributes=(attributes)
-    binding.pry
     self.payments_balances = attributes.map do |_key, value|
       purpose_id = value.fetch("purpose_id")
       purpose = Purpose.find(purpose_id).path_ids

@@ -1,0 +1,30 @@
+<%= render "devise/shared/header" %>
+<%= form_with model: @user, url: user_path(current_user.id), id: "pb_form", local: true do |f| %>
+<%= render "devise/shared/error_messages", model: f.object %> 
+  <div class="money_info">
+    <div class="field">
+      <%= f.label :cash, "所持金(現金)" %><br />
+      <%= f.text_field :cash, class: "form_text", type: "number", placeholder: "0", id:"user_cash" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :debt, "借金状況" %><br />
+      <%= f.text_field :debt, class: "form_text", placeholder: "0", id:"user_debt" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :savings, "貯金額" %><br />
+      <%= f.text_field :savings, class: "form_text", type: "number", placeholder: "0", id:"user_savings" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :annual_income, "年収(大体でOK)" %><br />
+      <%= f.text_field :annual_income, class: "form_text", type: "number", placeholder: "0", id:"user_annual_income" %>万円
+    </div>  
+  </div>
+
+  <div class="actions">
+    <%= f.submit "更新" %>
+    <%= link_to "戻る", user_path(current_user.id) %>
+  </div>
+<% end %>

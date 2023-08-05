@@ -5,13 +5,19 @@
 
 # Purpose
 # 親カテゴリー
-income, expenditure = Purpose.create([{name: "収入"}, {name: "支出"}])
+income, expenditure, deposit_withdrawal, charge, missing_data = Purpose.create([{name: "収入"}, {name: "支出"}, {name: "預入・預入"}, {name: "チャージ"}, {name: "過不足"}])
 
 # # 子カテゴリー
 # 収入
 no_select_in, salary, allowance, other = income.children.create([{name: "---" },{name: "給料"}, {name: "支給"}, {name: "その他"}])
 # 支出
-no_select_out, food_expenses, public_fees, transportation_expenses, study_expenses, entertainment_expenses, clothing_expenses, beauty_expenses, medical_bills, daily_necessities, trip, entertainment_expenses, others = expenditure.children.create([{name: "---" },{name: "食費"}, {name: "公共料金"}, {name: "交通費"}, {name: "学習費"}, {name: "娯楽費"}, {name: "衣服費"}, {name: "美容費"}, {name: "医療費"}, {name: "日用品"}, {name: "旅行"}, {name: "交際費"}, {name: "その他"}])
+no_select_out, food_expenses, public_fees, transportation_expenses, study_expenses, inside_entertainment_expenses, clothing_expenses, beauty_expenses, medical_bills, daily_necessities, trip, outside_entertainment_expenses, others = expenditure.children.create([{name: "---" },{name: "食費"}, {name: "公共料金"}, {name: "交通費"}, {name: "学習費"}, {name: "娯楽費"}, {name: "衣服費"}, {name: "美容費"}, {name: "医療費"}, {name: "日用品"}, {name: "旅行"}, {name: "交際費"}, {name: "その他"}])
+# 預入・引出
+no_select_dep_wit, deposit, withdrawal = deposit_withdrawal.children.create([{name: "---" },{name: "預入"}, {name: "預入"}])
+# チャージ
+no_select_charge, ic_card, qr_code = charge.children.create([{name: "---" }, {name: "ICカード"}, {name: "QRコード"}])
+# 過不足
+no_select_missing, high, low = missing_data.children.create([{name: "---" }, {name: "過剰"}, {name: "不足"}])
 
 # # 孫カテゴリー
 # 選択していない
@@ -25,7 +31,7 @@ transportation_expenses.children.create([{name: "---" },{name: "電車"},{name: 
 # 学習費
 study_expenses.children.create([{name: "---" },{name: "学費"},{name: "受講料"},{name: "参考書"},{name: "受験料"}])
 # 娯楽費
-entertainment_expenses.children.create([{name: "---" },{name: "映画"},{name: "CD・DVD"},{name: "書籍・雑誌・マンガ"},{name: "ゲーム"},{name: "課金"},{name: "プラモデル"},{name: "ジグソーパズル"},{name: "おもちゃ"}])
+inside_entertainment_expenses.children.create([{name: "---" },{name: "映画"},{name: "CD・DVD"},{name: "書籍・雑誌・マンガ"},{name: "ゲーム"},{name: "課金"},{name: "プラモデル"},{name: "ジグソーパズル"},{name: "おもちゃ"}])
 # 衣服費
 clothing_expenses.children.create([{name: "---" },{name: "服"},{name: "靴"},{name: "鞄"},{name: "装飾品"},{name: "クリーニング"},{name: "上着"},{name: "下着"}])
 # 美容費
@@ -37,4 +43,4 @@ daily_necessities.children.create([{name: "---" },{name: "家具"},{name: "文�
 # 旅行
 trip.children.create([{name: "---" },{name: "宿泊費"},{name: "温泉"},{name: "キャンプ"}])
 # 交際費
-entertainment_expenses.children.create([{name: "---" },{name: "宴会"},{name: "プレゼント"},{name: "お土産"}])
+outside_entertainment_expenses.children.create([{name: "---" },{name: "宴会"},{name: "プレゼント"},{name: "お土産"}])

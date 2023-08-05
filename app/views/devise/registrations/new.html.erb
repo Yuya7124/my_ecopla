@@ -1,29 +1,53 @@
 <h2>Sign up</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+<%= form_with model: @user, url: user_registration_path, class: 'registration-main', local: true do |f| %>
   <%= render "devise/shared/error_messages", model: f.object %>
 
-  <div class="field">
-    <%= f.label :nickname %><br />
-    <%= f.text_field :nickname, autofocus: true %>
+  <div class="user_info">
+    <div class="field">
+      <%= f.label :nickname, "ユーザー名" %><br />
+      <%= f.text_field :nickname, autofocus: true %>
+    </div>
+
+    <div class="field">
+      <%= f.label :email, "メールアドレス"  %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :password, "パスワード" %>
+      <% if @minimum_password_length %>
+        (<%= @minimum_password_length %> 文字以上)
+      <% end %><br />
+      <%= f.password_field :password, autocomplete: "new-password" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :password_confirmation, "パスワード(再入力)" %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+  <div class="money_info">
+    <div class="field">
+      <%= f.label :cash, "所持金(現金)" %><br />
+      <%= f.text_field :cash, class: "form_text", type: "number", placeholder: "0", id:"user_cash" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
+    <div class="field">
+      <%= f.label :debt, "借金状況" %><br />
+      <%= f.text_field :debt, class: "form_text", placeholder: "0", id:"user_debt" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <div class="field">
+      <%= f.label :savings, "貯金額" %><br />
+      <%= f.text_field :savings, class: "form_text", type: "number", placeholder: "0", id:"user_savings" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :annual_income, "年収(大体でOK)" %><br />
+      <%= f.text_field :annual_income, class: "form_text", type: "number", placeholder: "0", id:"user_annual_income" %>万円
+    </div>  
   </div>
 
   <div class="actions">
