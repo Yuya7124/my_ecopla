@@ -132,7 +132,7 @@ class PaymentsBalancesController < ApplicationController
     @cash_output = PaymentsBalance.where("date = ? AND user_id = ? AND payment_id = ? AND parent_id = ?", @selected_date, current_user.id, 3, 3).sum(:amount)
     @atm_charge = PaymentsBalance.where("date = ? AND user_id = ? AND payment_id = ? AND parent_id = ?", @selected_date, current_user.id, 3, 4).sum(:amount) 
     # 合計値を表示
-    @total_income = @cash_minus + @cash_input + @cashless_charge - @cash_plus - @cash_output
-    @total_expend = @atm_minus + @debt_num_past + @cash_output + @atm_charge - @atm_plus - @cash_input
+    @total_income = @cash_plus + @atm_plus
+    @total_expend = @cash_minus + @atm_minus + @debt_num_past + @atm_charge + @cashless_charge
   end
 end

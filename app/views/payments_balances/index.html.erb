@@ -6,8 +6,6 @@
   <option value="3">🏧</option>
 </select>
 
-
-
 <div class="setting_nav">
   <div><%= link_to "新規登録", new_payments_balance_path, class: "post" %></div>
   <%# <%= link_to "グラフ", "#", class: "post" %> <%# 追加実装フェイズで実装 %>
@@ -18,6 +16,8 @@
   </ul>
 <div>
 
+<% day_number = 0 %>
+
 <%= month_calendar event: @payments_balances do |date, _| %>
   <div id="payments-balance-data" data-payment-count="<%= @payments_balances.count %>">
     <% count_amount = PaymentsBalance.where(date: date, user_id: current_user.id).count %>
@@ -26,17 +26,16 @@
       <% total_income = PaymentsBalance.where(date: date, user_id: current_user.id, parent_id: purpose_id = 1).sum(:amount) %>
       <% total_expend = PaymentsBalance.where(date: date, user_id: current_user.id, parent_id: purpose_id = 2).sum(:amount) %>
       <% total_amount = total_expend - total_income %>
-      <div id="amount-num-<%= date.day %>">
-        <%= total_amount %>
+      <div class="sum_amount_num" id="amount-num-<%= day_number %>">
+        <%= total_amount.to_s(:delimited, delimiter: ',') %>
       </div>
-      
       <% count_amount = PaymentsBalance.where(date: date, user_id: current_user.id).count(:amount) %>
       <div class="count_amount_num">
-      👛<%= count_amount.to_s(:delimited, delimiter: ',') %>
+      👛<%= count_amount %>
       </div>
     <% else %>
-
       <%= date.day %>
     <% end %>
   </div>
+  <% day_number += 1 %>
 <% end %>

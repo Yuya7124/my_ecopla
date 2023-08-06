@@ -46,32 +46,35 @@ function form_option() {
 // buildForm関数を変更し、selectedValueを受け取るようにする
 function buildForm(index) {
   const formHtml = `
-    <tr class="balance_forms">
-      <td class="balance_form">
+    <tr class="balance_forms_plus">
+      <td class="balance_form_date">
         <input type="date" name="form_payments_balance_collection[payments_balances_attributes][${index}][date]" />
       </td>
-      <td class="balance_form" id="new-select-purpose-${index}">
+      <td class="balance_form_propuse" id="new-select-purpose-${index}">
         <select id="new-parent-category-${index}" name="form_payments_balance_collection[payments_balances_attributes][${index}][purpose_id]">
           <option value="">---</option>
           <option value="1">収入</option>
           <option value="2">支出</option>
         </select>
       </td>
-      <td class="balance_form">
-        <input type="number" name="form_payments_balance_collection[payments_balances_attributes][${index}][amount]" placeholder="0" />
+      <td class="balance_form_amount">
+        <input type="number" class="form_amount" id="inputform-amount-${index}" style="text-align:right" name="form_payments_balance_collection[payments_balances_attributes][${index}][amount]" placeholder="0" />
       </td>
-      <select class="select_box" id="item-category" name="form_payments_balance_collection[payments_balances_attributes][${index}][payment_id]">
-        <option value="1">現金</option>
-        <option value="2">クレジット決済</option>
-        <option value="3">口座振込</option>
-      </select>
-      <td class="balance_form">
+      <td class="balance_form_payment">
+        <select class="select_box" id="item-category" name="form_payments_balance_collection[payments_balances_attributes][${index}][payment_id]">
+          <option value="1">現金</option>
+          <option value="2">クレジット決済</option>
+          <option value="3">口座振込</option>
+        </select>
+      </td>
+      <td class="balance_form_delete">
         <button type="button" class="delete_form" id="payments_balance_deleted_form_ids" data-form-id="form_${index}">削除</button>
       </td>
     </tr>
     <input type="hidden" name="payments_balance[${index}]" id="payments-balance-${index}">
   `;
   const formNode = document.createElement("tr");
+  formNode.setAttribute('class', 'balance_forms_plus');
   formNode.innerHTML = formHtml;
   
   const selectWrap = formNode.querySelector(`#new-select-purpose-${index}`);

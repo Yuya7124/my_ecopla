@@ -13,7 +13,6 @@ tr.calendar_top>*:last-child {
   color: mediumblue
 }
 
-
 /* 日にち */
 
 .day-wday-0-past-prev-month,
@@ -120,4 +119,68 @@ tr.calendar_top>*:last-child {
 
 .count_amount_num {
   color: black;
+}
+
+.calender_days {
+  height: 100px;
+}
+
+tr.calendar_top {
+  text-align: center;
+}
+
+
+
+/* 数値表示 */
+
+.sum_amount_num,
+.blance_amount,
+.income,
+.expend,
+.total_amount {
+  font-size: 20px;
+  color: white;
+  font-weight: 600;
+  -webkit-text-stroke: 0.75px black;
+}
+
+/* 入力フォーム */
+
+.form_amount {
+  width: 120px;
+  font-size: 16px;
+  background-color: lightblue;
+  color: white;
+  font-weight: 600;
+  -webkit-text-stroke: 0.5px black;
+  margin: 0 5px;
+}
+
+.balance_form_date {
+  width: 120px;
+  padding: 0 5px;
+}
+
+.balance_form_purpose {
+  width: 150px;
+  padding: 0 5px;
+}
+
+.balance_form_amount {
+  width: 120px;
+  padding: 0 5px;
+}
+
+.balance_form_payment {
+  width: 120px;
+  padding: 0 5px;
+}
+
+.balance_form_delete {
+  width: 45px;
+  padding: 0 5px;
+}
+
+.c_select_w {
+  width: 150px;
 }

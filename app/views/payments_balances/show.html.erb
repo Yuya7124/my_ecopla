@@ -4,6 +4,8 @@
 
 <h2><%= @selected_date %></h2>
 
+<% pb_num = 0 %>
+
 <% if @payments_balance.any? %>
   <table>
     <thead>
@@ -23,9 +25,16 @@
             <% end %>
             <span><%= balance.purpose.name %></span>
           </td>
-          <td><%= balance.amount.to_s(:delimited, delimiter: ',') %></td>
+          <td class="blance_amount">
+          <% if balance.parent_id == 2 || balance.parent_id == 4 %>
+            <span id="pb-amount-num-<%= pb_num %>"><%= balance.amount.to_s(:delimited, delimiter: ',') %></span>
+          <% else %>
+            <span><%= balance.amount.to_s(:delimited, delimiter: ',') %></span>
+          <% end %>
+          </td>
           <td><%= balance.payment.name %></td>
         </tr>
+        <% pb_num += 1 %>
       <% end %>
     </tbody>
   </table>
@@ -40,13 +49,13 @@
     </thead>
     <tbody>
       <tr>
-        <td>
+        <td class="income" id="income-num">
           <%= @total_income.to_s(:delimited, delimiter: ',') %>
         </td>
-        <td>
+        <td class="expend" id="expend-num">
           <%= @total_expend.to_s(:delimited, delimiter: ',') %> 
         </td>
-        <td>
+        <td class="total_amount" id="total-amount-num">
            <%= total_amount = (@total_expend.to_i - @total_income.to_i).to_s(:delimited, delimiter: ',') %>
         </td>
       </tr>
