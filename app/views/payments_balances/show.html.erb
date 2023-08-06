@@ -8,9 +8,9 @@
   <table>
     <thead>
       <tr>
-        <th> purpose </th>
-        <th> amount </th>
-        <th> payment </th>
+        <th> 使用目的 </th>
+        <th> 金額     </th>
+        <th> 決済方法 </th>
       </tr>
     </thead>
     <tbody>
@@ -23,15 +23,35 @@
             <% end %>
             <span><%= balance.purpose.name %></span>
           </td>
-          <td><%= balance.amount %></td>
+          <td><%= balance.amount.to_s(:delimited, delimiter: ',') %></td>
           <td><%= balance.payment.name %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
-  <%= total_income = PaymentsBalance.where(date: @selected_date, user_id: current_user.id, parent_id: purpose_id = 1).sum(:amount) %>
-  <%= total_expend = PaymentsBalance.where(date: @selected_date, user_id: current_user.id, parent_id: purpose_id = 2).sum(:amount) %>
-  <%= total_amount = total_expend - total_income %>
+
+  <table>
+    <thead>
+      <tr>
+        <th> 収入 </th>
+        <th> 支出 </th>
+        <th> 合計 </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <%= @total_income.to_s(:delimited, delimiter: ',') %>
+        </td>
+        <td>
+          <%= @total_expend.to_s(:delimited, delimiter: ',') %> 
+        </td>
+        <td>
+           <%= total_amount = (@total_expend.to_i - @total_income.to_i).to_s(:delimited, delimiter: ',') %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 <% else %>
   <p>No data found.</p>
 <% end %>

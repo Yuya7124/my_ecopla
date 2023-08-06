@@ -16,19 +16,13 @@ function money_setting() {
 
   function updateDebt() {
     const DebtFuture = document.getElementById("debt_future");
-    console.log(user_debt_future)
     const debt = parseInt(UserDebt.value) + parseInt(user_debt_future);
-    console.log(debt)
     DebtFuture.innerHTML = `${debt.toLocaleString()}`;
   }
 
   function updateSavings() {
     const CurrentSavings = document.getElementById("current_savings");
-    console.log(CurrentSavings)
-    console.log(user_sum_atm)
-    console.log(UserSavings.value)
     const atm = parseInt(UserSavings.value) - parseInt(user_sum_atm);
-    console.log(atm)
     CurrentSavings.innerHTML = `${atm.toLocaleString()}`;
   }
 

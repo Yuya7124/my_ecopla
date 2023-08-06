@@ -10,19 +10,19 @@
         <tbody>
           <tr>
             <th class="table_col1">現金</th>
-            <td class="table_col2"><%= @cash - @cash_over_short %></td>
+            <td class="table_col2"><%= (@cash - @cash_over_short).to_s(:delimited, delimiter: ',') %></td>
           </tr>
           <tr>
             <th class="table_col1">借金状況</th>
-            <td class="table_col2"><%= @debt + @debt_num_future.to_i %></td>
+            <td class="table_col2"><%= (@debt + @debt_num_future.to_i).to_s(:delimited, delimiter: ',') %></td>
           </tr>
           <tr>
             <th class="table_col1">貯金額</th>
-            <td class="table_col2"><%= @savings - @sum_atm %></td>
+            <td class="table_col2"><%= (@savings - @sum_atm).to_s(:delimited, delimiter: ',') %></td>
           </tr>
           <tr>
             <th class="table_col1">年収</th>
-            <td class="table_col2"><%= @annual_income %></td>
+            <td class="table_col2"><%= (@annual_income).to_s(:delimited, delimiter: ',') %>万</td>
           </tr>
         </tbody>
       </table>
