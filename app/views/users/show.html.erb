@@ -10,15 +10,15 @@
         <tbody>
           <tr>
             <th class="table_col1">現金</th>
-            <td class="table_col2"><%= @cash %></td>
+            <td class="table_col2"><%= @cash - @cash_over_short %></td>
           </tr>
           <tr>
             <th class="table_col1">借金状況</th>
-            <td class="table_col2"><%= @debt %></td>
+            <td class="table_col2"><%= @debt + @debt_num_future.to_i %></td>
           </tr>
           <tr>
             <th class="table_col1">貯金額</th>
-            <td class="table_col2"><%= @savings %></td>
+            <td class="table_col2"><%= @savings - @sum_atm %></td>
           </tr>
           <tr>
             <th class="table_col1">年収</th>

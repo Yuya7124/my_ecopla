@@ -1,12 +1,10 @@
-// import number_setting from 'number_setting'
-
-// let parcent_num = document.getElementById("num");
+// let parcent_num = document.getElementById("current-num");
 // let max_num = parcent_num;
 // // let conditon_num = Math.floor(Math.random() * 99);
 // let speed = 1;
 
 // function canvas_2() {
-//   let canvas = document.getElementById("canvas_2");
+//   let canvas = document.getElementById("canvas-2");
   
 //   //parcent_num = parseInt(parcent_num.innerHTML);
 //   //

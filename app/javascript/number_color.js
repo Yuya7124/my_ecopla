@@ -1,4 +1,4 @@
-function num_color() {
+function number_color() {
   month_calendar_amount();
 }
 
@@ -11,7 +11,7 @@ function month_calendar_amount() {
   let OutPut_Lv_4 = 7500;
   let OutPut_Lv_5 = 10000;
   for (let day = 1; day <= 31; day++){
-    const DayNum = document.getElementById(`amount_num_${day}`);
+    const DayNum = document.getElementById(`amount-num-${day}`);
     if (DayNum != null){
       const day_value = DayNum.innerText;
       let value_parcent = Math.abs(day_value) / 255;
@@ -26,4 +26,4 @@ function color_change(red, green, blue) {
 }
 
 
-window.addEventListener('load', num_color); 
+window.addEventListener('load', number_color); 

@@ -7,19 +7,19 @@
 </select>
 
 <div class="cash_num">
-  <div class="canvas_views" id="num_counter">
+  <div class="canvas_views" id="num-counter">
     <div class="canvas_view">
-      <div class="parcent_num" data_num ="<%= @user.cash - @sum_cash %>" id="current_num">0</div>
+      <div class="parcent_num" data_num ="<%= @user.cash - @sum_cash %>" id="current-num">0</div>
       <div class="bar_view">
-        <div id="canvas_frame_2">
-          <div id="canvas_2"></div>
+        <div id="canvas-frame-2">
+          <div id="canvas-2"></div>
         </div>
       </div>
     </div>
   </div>
 </div>
-<div class="debt_num" data_num ="<%= @user.debt + @debt_num_future %>" id="current_num">0</div>
-<div class="savings_num" data_num ="<%= @user.savings - @sum_atm %>" id="current_num">0</div>
+<div class="debt_num" data_num ="<%= @user.debt + @debt_num_future %>" id="current-num">0</div>
+<div class="savings_num" data_num ="<%= @user.savings - @sum_atm %>" id="current-num">0</div>
 
 <div class="setting_nav">
   <div><%= link_to "新規登録", new_payments_balance_path, class: "post" %></div>
@@ -39,7 +39,7 @@
       <% total_income = PaymentsBalance.where(date: date, user_id: current_user.id, parent_id: purpose_id = 1).sum(:amount) %>
       <% total_expend = PaymentsBalance.where(date: date, user_id: current_user.id, parent_id: purpose_id = 2).sum(:amount) %>
       <% total_amount = total_expend - total_income %>
-      <div id="amount_num_<%= date.day %>">
+      <div id="amount-num-<%= date.day %>">
         <%= total_amount %>
       </div>
       

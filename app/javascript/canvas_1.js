@@ -1,5 +1,5 @@
 function canvas_1() {
-  let canvas = document.getElementById("canvas_1");
+  let canvas = document.getElementById("canvas-1");
   let ctx = canvas.getContext("2d");
   
   const size = 50;  // 描画範囲の横幅

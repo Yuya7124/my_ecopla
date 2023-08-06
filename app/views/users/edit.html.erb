@@ -1,30 +1,61 @@
 <%= render "devise/shared/header" %>
-<%= form_with model: @user, url: user_path(current_user.id), id: "pb_form", local: true do |f| %>
+<%= form_with model: @user, url: user_path(current_user.id), id: "pb-form", local: true do |f| %>
 <%= render "devise/shared/error_messages", model: f.object %> 
-  <div class="money_info">
-    <div class="field">
-      <%= f.label :cash, "所持金(現金)" %><br />
-      <%= f.text_field :cash, class: "form_text", type: "number", placeholder: "0", id:"user_cash" %>
-    </div>
 
-    <div class="field">
-      <%= f.label :debt, "借金状況" %><br />
-      <%= f.text_field :debt, class: "form_text", placeholder: "0", id:"user_debt" %>
-    </div>
+<table class="money_info_table">
+    <thead>
+      <tr>
+        <th> 初期 </th>
+        <th> 現在 </th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <th class="money_info_table_col1">
+        <%= f.label :cash, "所持金(現金)" %>:
+        <%= f.text_field :cash, class: "form_text", type: "number", placeholder: "0", style: "text-align:right", id:"user-cash" %>
+      </th>
+      <td class="money_info_table_col2">
+        <span id="total-current-amount"></span> -
+          <%= f.label :cash_over_short, "過不足" %>:
+          <%= f.text_field :cash_over_short, class: "form_text", type: "number", placeholder: "0", style: "text-align:right", id:"user-over-short" %> =
+        <span id="total-exact-amount"></span>
+      </td>
+    </tr>
+    <tr>
+      <th class="money_info_table_col1">
+        <%= f.label :debt, "借金状況" %>:
+        <%= f.text_field :debt, class: "form_text", type: "number", placeholder: "0", style: "text-align:right", id:"user-debt" %>
+      </th>
+      <td class="money_info_table_col2">
+        <span id="debt_future"></span>
+      </td>
+    </tr>
+    <tr>
+      <th class="money_info_table_col1">
+        <%= f.label :savings, "貯金額" %>:
+        <%= f.text_field :savings, class: "form_text", type: "number", placeholder: "0", style: "text-align:right", id:"user-savings" %>
+      </th>
+      <td class="money_info_table_col2">
+        <span id="current_savings"></span>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-    <div class="field">
-      <%= f.label :savings, "貯金額" %><br />
-      <%= f.text_field :savings, class: "form_text", type: "number", placeholder: "0", id:"user_savings" %>
-    </div>
-
-    <div class="field">
-      <%= f.label :annual_income, "年収(大体でOK)" %><br />
-      <%= f.text_field :annual_income, class: "form_text", type: "number", placeholder: "0", id:"user_annual_income" %>万円
-    </div>  
+  <div class="money_info_annual_income">
+    <%= f.label :annual_income, "年収(大体でOK)" %>:
+    <%= f.text_field :annual_income, class: "form_text", type: "number", placeholder: "0", style: "text-align:right", id:"user-annual-income" %>万円
   </div>
 
   <div class="actions">
     <%= f.submit "更新" %>
     <%= link_to "戻る", user_path(current_user.id) %>
   </div>
+
+  <script>
+    let user_sum_cash = <%= @sum_cash.to_i %>;
+    let user_debt_future = <%= @debt_num_future.to_i %>
+    let user_sum_atm = <%= @sum_atm.to_i %>
+  </script>
 <% end %>

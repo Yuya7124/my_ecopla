@@ -1,7 +1,7 @@
 function form_option() {
   let formIndex = [];
   const addButton = document.getElementById("add-form-button");
-  const formArea = document.getElementById("form_area");
+  const formArea = document.getElementById("form-area");
   let forms = document.querySelectorAll(".balance_forms");
   let lastIndex = forms.length;
 
@@ -36,7 +36,7 @@ function form_option() {
           hiddenDestroyInput.parentNode.removeChild(hiddenDestroyInput);
         }
         // 非表示のフィールドから削除したフォームIDをカンマで区切って追加
-        const deletedFormIdsInput = document.getElementById("deleted_form_ids");
+        const deletedFormIdsInput = document.getElementById("deleted-form-ids");
         deletedFormIdsInput.value += "," + formId;
       }
     }
@@ -60,16 +60,16 @@ function buildForm(index) {
       <td class="balance_form">
         <input type="number" name="form_payments_balance_collection[payments_balances_attributes][${index}][amount]" placeholder="0" />
       </td>
-      <select class="select-box" id="item-category" name="form_payments_balance_collection[payments_balances_attributes][${index}][payment_id]">
+      <select class="select_box" id="item-category" name="form_payments_balance_collection[payments_balances_attributes][${index}][payment_id]">
         <option value="1">現金</option>
         <option value="2">クレジット決済</option>
         <option value="3">口座振込</option>
       </select>
       <td class="balance_form">
-        <button type="button" class="delete-form" id="payments_balance_deleted_form_ids" data-form-id="form_${index}">削除</button>
+        <button type="button" class="delete_form" id="payments_balance_deleted_form_ids" data-form-id="form_${index}">削除</button>
       </td>
     </tr>
-    <input type="hidden" name="payments_balance[${index}]" id="payments_balance_${index}">
+    <input type="hidden" name="payments_balance[${index}]" id="payments-balance-${index}">
   `;
   const formNode = document.createElement("tr");
   formNode.innerHTML = formHtml;
