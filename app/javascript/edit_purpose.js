@@ -80,10 +80,10 @@ function edit_purpose() {
       const childSelect = document.createElement('select');
 
       childWrap.setAttribute('id', `edit-child-select-wrap-${formIndex[i]}`);
-      childWrap.setAttribute('class', 'c_select_w');
+      childWrap.setAttribute('class', 'form_purpose');
 
       childSelect.setAttribute('id', `edit-child-select-${formIndex[i]}`);
-      childSelect.setAttribute('class', 'c_select');
+      childSelect.setAttribute('class', 'form_purpose');
       childSelect.setAttribute('name', editNameAttribute);
 
       purposes.forEach(purpose => {
@@ -121,11 +121,11 @@ function edit_purpose() {
       const grandchildSelect = document.createElement('select')
 
       grandchildWrap.setAttribute('id', `edit-grand-child-select-wrap-${formIndex[i]}`);
-      grandchildWrap.setAttribute('class', 'c_select_w');
+      grandchildWrap.setAttribute('class', 'form_purpose');
 
 
       grandchildSelect.setAttribute('id', `edit-grand-child-select-${formIndex[i]}`);
-      grandchildSelect.setAttribute('class', 'c_select');
+      grandchildSelect.setAttribute('class', 'form_purpose');
       grandchildSelect.setAttribute('name', editNameAttribute);
     
       purposes.forEach(purpose => {
@@ -184,11 +184,11 @@ function edit_purpose() {
           const grandchildSelect = document.createElement('select')
     
           grandchildWrap.setAttribute('id', `edit-grand-child-select-wrap-${formIndex[i]}`);
-          grandchildWrap.setAttribute('class', 'c_select_w');
+          grandchildWrap.setAttribute('class', 'form_purpose');
     
     
           grandchildSelect.setAttribute('id', `edit-grand-child-select-${formIndex[i]}`);
-          grandchildSelect.setAttribute('class', 'c_select');
+          grandchildSelect.setAttribute('class', 'form_purpose');
           grandchildSelect.setAttribute('name', editNameAttribute);
         
           purposes.forEach(purpose => {

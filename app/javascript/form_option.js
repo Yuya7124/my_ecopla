@@ -15,7 +15,7 @@ function form_option() {
     formIndex.push(lastIndex);
     lastIndex++;  
     // 新しいフォームのindexを非表示のフィールドに設定
-    const deletedFormIdsInput = document.getElementById("deleted_form_ids");
+    const deletedFormIdsInput = document.getElementById("deleted-form-ids");
     deletedFormIdsInput.value += "," + formIndex[lastIndex - 2];
   });
 
@@ -46,12 +46,13 @@ function form_option() {
 // buildForm関数を変更し、selectedValueを受け取るようにする
 function buildForm(index) {
   const formHtml = `
-    <tr class="balance_forms_plus">
+  <table class="payments_balance_table">
+    <tr class="balance_forms">
       <td class="balance_form_date">
         <input type="date" name="form_payments_balance_collection[payments_balances_attributes][${index}][date]" />
       </td>
-      <td class="balance_form_propuse" id="new-select-purpose-${index}">
-        <select id="new-parent-category-${index}" name="form_payments_balance_collection[payments_balances_attributes][${index}][purpose_id]">
+      <td class="balance_form_purpose" id="new-select-purpose-${index}">
+        <select id="new-parent-category-${index}" class="form_purpose" name="form_payments_balance_collection[payments_balances_attributes][${index}][purpose_id]">
           <option value="">---</option>
           <option value="1">収入</option>
           <option value="2">支出</option>
@@ -68,13 +69,14 @@ function buildForm(index) {
         </select>
       </td>
       <td class="balance_form_delete">
-        <button type="button" class="delete_form" id="payments_balance_deleted_form_ids" data-form-id="form_${index}">削除</button>
+        <button type="button" class="delete-form" id="payments_balance_deleted_form_ids" data-form-id="form_${index}">削除</button>
       </td>
     </tr>
     <input type="hidden" name="payments_balance[${index}]" id="payments-balance-${index}">
+  </table>
   `;
-  const formNode = document.createElement("tr");
-  formNode.setAttribute('class', 'balance_forms_plus');
+  const formNode = document.createElement("table");
+  formNode.setAttribute('class', 'payments_balance_table');
   formNode.innerHTML = formHtml;
   
   const selectWrap = formNode.querySelector(`#new-select-purpose-${index}`);
@@ -133,10 +135,10 @@ function buildForm(index) {
     console.log(selectWrap)
 
     childWrap.setAttribute('id', `new-child-select-wrap-${index}`);
-    childWrap.setAttribute('class', 'c_select_w');
+    childWrap.setAttribute('class', 'form_purpose');
 
     childSelect.setAttribute('id', `new-child-select-${index}`);
-    childSelect.setAttribute('class', 'c_select');
+    childSelect.setAttribute('class', 'form_purpose');
     childSelect.setAttribute('name', newNameAttribute);
 
     purposes.forEach(purpose => {
@@ -175,10 +177,10 @@ function buildForm(index) {
     console.log(selectWrap)
 
     grandchildWrap.setAttribute('id', `new-grand-child-select-wrap-${index}`);
-    grandchildWrap.setAttribute('class', 'c_select_w');
+    grandchildWrap.setAttribute('class', 'form_purpose');
 
     grandchildSelect.setAttribute('id', `new-grand-child-select-${index}`)
-    grandchildSelect.setAttribute('class', 'c_select');
+    grandchildSelect.setAttribute('class', 'form_purpose');
     grandchildSelect.setAttribute('name', newNameAttribute);
 
     purposes.forEach(purpose => {

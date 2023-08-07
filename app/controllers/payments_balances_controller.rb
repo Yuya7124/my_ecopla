@@ -7,6 +7,7 @@ class PaymentsBalancesController < ApplicationController
   before_action :day_amount_calculation, only: :show
 
   def index
+    @user = current_user
     @payments_balances = PaymentsBalance.where(user_id: current_user.id)
     payments_balance_id = params[:payments_balance_id]
     date = params[:date]
@@ -32,7 +33,6 @@ class PaymentsBalancesController < ApplicationController
   end
 
   def update
-    binding.pry
     ids = params[:id].split(',').map(&:to_i)
     if params[:payments_balance] && params[:payments_balance][:payments_balances]
       attributes = params[:payments_balance][:payments_balances].values
@@ -44,7 +44,6 @@ class PaymentsBalancesController < ApplicationController
           purpose_id = value["purpose_id"]
           parent_id = Purpose.find(purpose_id).root_id
           ancestry = Purpose.find(purpose_id).ancestry
-        
           # valueハッシュに更新したデータを格納
           value["parent_id"] = parent_id
           value["ancestry"] = ancestry

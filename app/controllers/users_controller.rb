@@ -25,6 +25,7 @@ class UsersController < ApplicationController
     @user.skip_password_validation = false
   end
 
+  private
 
   def amount_calculation
     # 現金

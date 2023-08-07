@@ -1,10 +1,33 @@
 <%= render "devise/shared/header" %>
 
-<select class="payment_select_box" id="payments" change="paymentSel()">
-  <option value="1">💴</option>
-  <option value="2">💳</option>
-  <option value="3">🏧</option>
-</select>
+<% current_money_mode = 1 %>
+<div class="current_mode">
+  <select class="payment_select_box" id="payments_mode" change="paymentSel()">
+    <option value="1">💴</option>
+    <option value="2">💳</option>
+    <option value="3">🏧</option>
+  </select>
+</div>
+
+<% case current_money_mode %>
+  <% when 1 %>
+  <div class="cash_num">
+    <div class="canvas_views" id="num-counter">
+      <div class="canvas_view">
+        <div class="parcent_num" data_num ="<%= @user.cash - @sum_cash %>" id="current-num">0</div> 
+        <div class="bar_view">
+          <div id="canvas-frame-2">
+            <div id="canvas-2"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% when 2 %>
+  <div class="debt_num" data_num ="<%= @user.debt + @debt_num_future %> " id="current-num">0</div> 
+  <% when 3 %>
+  <div class="savings_num" data_num ="<%= @user.savings - @sum_atm %> " id="current-num">0</div> 
+<% end %>
 
 <div class="setting_nav">
   <div><%= link_to "新規登録", new_payments_balance_path, class: "post" %></div>
@@ -34,7 +57,7 @@
       👛<%= count_amount %>
       </div>
     <% else %>
-      <%= date.day %>
+      <span class="date_no_info"><%= date.day %></span>
     <% end %>
   </div>
   <% day_number += 1 %>

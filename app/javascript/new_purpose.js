@@ -57,10 +57,10 @@ function new_purpose() {
       const childSelect = document.createElement('select');
 
       childWrap.setAttribute('id', `new-child-select-wrap-${formIndex[i]}`);
-      childWrap.setAttribute('class', 'c_select_w');
+      childWrap.setAttribute('class', 'form_purpose');
 
       childSelect.setAttribute('id', `new-child-select-${formIndex[i]}`);
-      childSelect.setAttribute('class', 'c_select');
+      childSelect.setAttribute('class', 'form_purpose');
       childSelect.setAttribute('name', newNameAttribute);
 
       purposes.forEach(purpose => {
@@ -96,10 +96,10 @@ function new_purpose() {
       const grandchildSelect = document.createElement('select')
 
       grandchildWrap.setAttribute('id', `new-grand-child-select-wrap-${formIndex[i]}`);
-      grandchildWrap.setAttribute('class', 'c_select_w');
+      grandchildWrap.setAttribute('class', 'form_purpose');
 
       grandchildSelect.setAttribute('id', `new-grand-child-select-${formIndex[i]}`)
-      grandchildSelect.setAttribute('class', 'c_select');
+      grandchildSelect.setAttribute('class', 'form_purpose');
       grandchildSelect.setAttribute('name', newNameAttribute);
   
       purposes.forEach(purpose => {

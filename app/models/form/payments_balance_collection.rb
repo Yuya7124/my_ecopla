@@ -12,17 +12,30 @@ class Form::PaymentsBalanceCollection < Form::Base
   def payments_balances_attributes=(attributes)
     self.payments_balances = attributes.map do |_key, value|
       purpose_id = value.fetch("purpose_id")
-      purpose = Purpose.find(purpose_id).path_ids
-      parent_id = Purpose.find(purpose_id).root_id
-      ancestry = Purpose.find(purpose_id).ancestry
-      balance = if purpose
-        PaymentsBalance.new(value.merge(ancestry: ancestry, parent_id: parent_id, purpose_id: purpose_id))  # Purposeが存在する場合は、PaymentsBalanceにpurposeを紐付ける
+      unless purpose_id.blank?
+        purpose = Purpose.find(purpose_id).path_ids
+        parent_id = Purpose.find(purpose_id).root_id
+        ancestry = Purpose.find(purpose_id).ancestry
+        balance = if purpose
+          PaymentsBalance.new(value.merge(ancestry: ancestry, parent_id: parent_id, purpose_id: purpose_id))  # Purposeが存在する場合は、PaymentsBalanceにpurposeを紐付ける
+        else
+          PaymentsBalance.new(value)
+        end
+  
+        if balance.valid?
+          balance
+        else
+          # エラーメッセージを設定して新規登録画面にリダイレクト
+          errors.add(:base, "#{balance.errors.full_messages.join(', ')}")
+          return false
+        end
       else
-        PaymentsBalance.new(value)
+        # エラーメッセージを設定して新規登録画面にリダイレクト
+        errors.add(:base, "使用目的を入力してください")
+        return false
       end
-      balance
-    end
-  end
+    end.compact
+  end  
 
   def payments_balances
     @payments_balances ||= []

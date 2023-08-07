@@ -2,33 +2,33 @@
 
 <h1>Budget List</h1>
 <%= form_with model: @payments_balance, url: payments_balance_path(date: @selected_date), method: :patch, id: "pb-form", local: true do |form| %>
-<%# <%= render 'devise/shared/error_messages', model: @payments_balance %> 
   <div class="field">
     <%= form.label :date, 'Date' %>
     <%= @selected_date %>
   </div>
-  <button type="button" id="add-form-button">追加</button>
+  <button type="button" class="add-form" id="add-form-button">追加</button>
   <table class="payments_balance_table">
     <thead>
       <tr>
-        <th> 日付     </th>
-        <th> 使用目的 </th>
-        <th> 金額     </th>
-        <th> 決済方法 </th>
+        <th class="tb_date">    日付     </th>
+        <th class="tb_purpose"> 使用目的 </th>
+        <th class="tb_amount">  金額     </th>
+        <th class="tb_payment"> 決済方法 </th>
+        <th class="tb_delete"></th>
       </tr>
     </thead>
   <tbody>
     <% @payments_balance.each_with_index do |balance, index| %>
       <%= form.fields_for :payments_balances, balance, index: index do |pb| %>
+      <%= render 'devise/shared/error_messages', model: balance %> 
         <div id="payments-balance-data" data-payment-count="<%= @payments_balances.count %>">
           <tr class="balance_forms">
             <td class="balance_form_date"><%= pb.date_field :date, type: "date", value: @selected_date, id:"inputform-date" %></td>
               <td class="balance_form_purpose" id="edit-select-purpose-<%= index %>">
-                <%= collection_select :payments_balance, :purpose_id, Purpose.roots, :id, :name, { include_blank: "---", selected: @selected_purpose_ids[index] }, { id: "edit-parent-category-#{index}", class: "p_select_w"  } %>
+                <%= collection_select :payments_balance, :purpose_id, Purpose.roots, :id, :name, { include_blank: "---", selected: @selected_purpose_ids[index].try(:[], index) }, { id: "edit-parent-category-#{index}", class: "form_purpose" } %>
               </td>
             <td class="balance_form_amount"><%= pb.text_field :amount, class: "form_amount", placeholder: "0", type: "number", style: "text-align:right", id:"inputform-amount-#{index}" %></td>
-            <td class="balance_form_payment"><%= pb.collection_select(:payment_id, Payment.all, :id, :name, {}, 
-            {class:"select-box", id:"item-category"}) %></td>
+            <td class="balance_form_payment"><%= pb.collection_select(:payment_id, Payment.all, :id, :name, {}, {class:"select-box", id:"item-category"}) %></td>
             <td class="balance_form_delete"><button type="button" class="delete-form", id="deleted-form-ids">
             <%= link_to "", payments_balance_path(balance.id), method: :delete %>削除</button></td>
             <%= pb.hidden_field :id %>

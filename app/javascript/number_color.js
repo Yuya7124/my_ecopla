@@ -1,6 +1,7 @@
 function number_color() {
   month_calendar_amount();
   balance_setting();
+  form_amount();
 }
 
 // メイン画面
@@ -15,6 +16,7 @@ function month_calendar_amount() {
   } 
 }
 
+// 詳細画面
 function balance_setting() {
   for (let pb = 0; pb < 100; pb++){
     const PbNum = document.getElementById(`pb-amount-num-${pb}`);
@@ -36,11 +38,13 @@ function balance_setting() {
   TotalAmount.style.color = color_label(total_amount_num);
 }
 
+
 function form_amount() {
   for (let pblist = 0; pblist < 100; pblist++){
     const PbListNum = document.getElementById(`inputform-amount-${pblist}`);
     if (PbListNum != null){
-      const pbl_value = PbListNum.innerText;
+      const pbl_value = PbListNum.value;
+      console.log(pbl_value)
       const pbl_num = removeComma(pbl_value);
       PbListNum.style.color = color_label(pbl_num);
     }  
