@@ -17,10 +17,10 @@
     <tbody>
     <%= form.fields_for :payments_balances do |balance| %>
       <tr class="balance_forms">
-        <td class="balance_form_date"><%= balance.date_field :date, type: "date", class: "form_date", id:"inputform-date" %></td>
+        <td class="balance_form_date"><%= balance.date_field :date, type: "date", class: "form_date", id:"inputform-date-0" %></td>
         <td class="balance_form_purpose" id="new-select-purpose-0"><%= balance.collection_select :purpose_id, Purpose.roots, :id, :name, { include_blank: "---" }, { id: "new-parent-category-0", class: "form_purpose" } %></td>
         <td class="balance_form_amount"><%= balance.text_field :amount, class: "form_amount", placeholder: "0", type: "number", style: "text-align:right", id:"inputform-amount-0" %></td>
-        <td class="balance_form_payment"><%= balance.collection_select(:payment_id, Payment.all, :id, :name, {}, {class:"select-box", id:"item-category"}) %></td>
+        <td class="balance_form_payment"><%= balance.collection_select(:payment_id, Payment.all, :id, :name, {}, {class: "form_payment", id:"payment-category-0"}) %></td>
         <td class="balance_form_delete"><button type="button" class="delete-form" id="deleted-form-ids" data-form_id="form-0">削除</button></td>
       </tr>
     <% end %>

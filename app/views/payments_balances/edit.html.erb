@@ -23,12 +23,12 @@
       <%= render 'devise/shared/error_messages', model: balance %> 
         <div id="payments-balance-data" data-payment-count="<%= @payments_balances.count %>">
           <tr class="balance_forms">
-            <td class="balance_form_date"><%= pb.date_field :date, type: "date", value: @selected_date, id:"inputform-date" %></td>
+            <td class="balance_form_date"><%= pb.date_field :date, type: "date", value: @selected_date, class: "form_date", id:"inputform-date-#{index}" %></td>
               <td class="balance_form_purpose" id="edit-select-purpose-<%= index %>">
-                <%= collection_select :payments_balance, :purpose_id, Purpose.roots, :id, :name, { include_blank: "---", selected: @selected_purpose_ids[index].try(:[], index) }, { id: "edit-parent-category-#{index}", class: "form_purpose" } %>
+                <%= collection_select :payments_balance, :purpose_id, Purpose.roots, :id, :name, { include_blank: "---", selected: @selected_purpose_ids[index] }, { id: "edit-parent-category-#{index}", class: "form_purpose" } %>
               </td>
             <td class="balance_form_amount"><%= pb.text_field :amount, class: "form_amount", placeholder: "0", type: "number", style: "text-align:right", id:"inputform-amount-#{index}" %></td>
-            <td class="balance_form_payment"><%= pb.collection_select(:payment_id, Payment.all, :id, :name, {}, {class:"select-box", id:"item-category"}) %></td>
+            <td class="balance_form_payment"><%= pb.collection_select(:payment_id, Payment.all, :id, :name, {}, {class: "form_payment", id:"payment-category-#{index}"}) %></td>
             <td class="balance_form_delete"><button type="button" class="delete-form", id="deleted-form-ids">
             <%= link_to "", payments_balance_path(balance.id), method: :delete %>削除</button></td>
             <%= pb.hidden_field :id %>

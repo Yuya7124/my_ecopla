@@ -2,8 +2,16 @@ function form_option() {
   let formIndex = [];
   const addButton = document.getElementById("add-form-button");
   const formArea = document.getElementById("form-area");
+  const formInputs = document.querySelectorAll('.form_date, .form_purpose, .form_amount, .form_payment');
+  console.log(formInputs)
   let forms = document.querySelectorAll(".balance_forms");
   let lastIndex = forms.length;
+
+
+  const submitButton = document.getElementById("save-button");
+  let allInputsFilled = true;
+
+  
 
   for (let i = 1; i < lastIndex; i++) {
     formIndex.push(i);
@@ -17,7 +25,37 @@ function form_option() {
     // 新しいフォームのindexを非表示のフィールドに設定
     const deletedFormIdsInput = document.getElementById("deleted-form-ids");
     deletedFormIdsInput.value += "," + formIndex[lastIndex - 2];
+    allInputsFilled = false;
+
+    // 登録ボタンの表示を更新する関数
+    const updateSubmitButtonDisplay = () => {
+      if (allInputsFilled) {
+        submitButton.style.display = "block";
+      } else {
+        submitButton.style.display = "none";
+      }
+    };
+    
+    document.addEventListener('input', event => {
+      const target = event.target;
+      if (target.matches('.form_date, .form_purpose, .form_amount, .form_payment')) {
+        const newformInputs = document.querySelectorAll('.form_date, .form_purpose, .form_amount, .form_payment');
+        allInputsFilled = true;
+        
+        newformInputs.forEach(input => {
+          console.log(input.value)
+          if (input.value === '') {
+            allInputsFilled = false;
+          }
+        });
+        updateSubmitButtonDisplay();
+      }
+    });
+
+    // 追加ボタンを押した際にも登録ボタンの表示を更新
+    updateSubmitButtonDisplay();
   });
+  
 
   //フォーム削除
   document.addEventListener('click', function(event) {
@@ -49,7 +87,7 @@ function buildForm(index) {
   <table class="payments_balance_table">
     <tr class="balance_forms">
       <td class="balance_form_date">
-        <input type="date" name="form_payments_balance_collection[payments_balances_attributes][${index}][date]" />
+        <input type="date" name="form_payments_balance_collection[payments_balances_attributes][${index}][date]" class="form_date" id="inputform-date-${index}" />
       </td>
       <td class="balance_form_purpose" id="new-select-purpose-${index}">
         <select id="new-parent-category-${index}" class="form_purpose" name="form_payments_balance_collection[payments_balances_attributes][${index}][purpose_id]">
@@ -62,7 +100,7 @@ function buildForm(index) {
         <input type="number" class="form_amount" id="inputform-amount-${index}" style="text-align:right" name="form_payments_balance_collection[payments_balances_attributes][${index}][amount]" placeholder="0" />
       </td>
       <td class="balance_form_payment">
-        <select class="select_box" id="item-category" name="form_payments_balance_collection[payments_balances_attributes][${index}][payment_id]">
+        <select class="form_payment" id="payment-category-${index}" name="form_payments_balance_collection[payments_balances_attributes][${index}][payment_id]">
           <option value="1">現金</option>
           <option value="2">クレジット決済</option>
           <option value="3">口座振込</option>
@@ -82,8 +120,6 @@ function buildForm(index) {
   const selectWrap = formNode.querySelector(`#new-select-purpose-${index}`);
   const parentCategory = formNode.querySelector(`#new-parent-category-${index}`);
   const newNameAttribute = `form_payments_balance_collection[payments_balances_attributes][${index}][purpose_id]`;
-  
-  console.log(parentCategory)
 
   // 選択フォームを繰り返し表示
   const selectChildElement = (selectForm) => { 
@@ -199,11 +235,13 @@ function buildForm(index) {
     // 以前に設定した子カテゴリーの処理を一旦削除
     selectChildElement(`new-child-select-wrap-${index}`);
     getChildCategoryData();
-  });
-  // 
-  
+  }); 
 
   return formNode;
+}
+
+function submit_btn_display() {
+  
 }
 
 window.addEventListener("load", form_option);

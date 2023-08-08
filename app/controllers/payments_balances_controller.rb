@@ -38,16 +38,16 @@ class PaymentsBalancesController < ApplicationController
       attributes = params[:payments_balance][:payments_balances].values
       existing_form_ids = attributes.map { |nested_hash| nested_hash["id"].to_i }
       deleted_form_ids = ids - existing_form_ids
+      attributes.each do |value|
+        purpose_id = value["purpose_id"]
+        parent_id = Purpose.find(purpose_id).root_id
+        ancestry = Purpose.find(purpose_id).ancestry
+        # valueハッシュに更新したデータを格納
+        value["parent_id"] = parent_id
+        value["ancestry"] = ancestry
+      end
       # 既存フォーム更新
       if @payments_balance.update(existing_form_ids, attributes)
-        attributes.each do |value|
-          purpose_id = value["purpose_id"]
-          parent_id = Purpose.find(purpose_id).root_id
-          ancestry = Purpose.find(purpose_id).ancestry
-          # valueハッシュに更新したデータを格納
-          value["parent_id"] = parent_id
-          value["ancestry"] = ancestry
-        end
         # 既存フォーム削除
         PaymentsBalance.where(id: deleted_form_ids).destroy_all
         redirect_to payments_balances_path(date: @selected_date)
