@@ -49,8 +49,8 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "更新" %>
-    <%= link_to "戻る", user_path(current_user.id) %>
+    <%= f.submit "更新", class: "save_btn", id: "save-button" %>
+    <%= link_to "戻る", user_path(current_user.id), class: "back_btn" %>
   </div>
 
   <script>

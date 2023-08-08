@@ -42,6 +42,8 @@
     let purpose_ids = <%= @selected_purpose_ids %>;
   </script>
   <div class="balance_forms" id="form-area"></div>
-  <%= form.submit "更新", class: "save_btn", id: "save-button" %>
-  <%= link_to "戻る", payments_balance_path(date: @selected_date) %>
+  <div class="setting_menu">
+    <%= form.submit "更新", class: "save_btn", id: "save-button" %>
+    <%= link_to "戻る", payments_balance_path(date: @selected_date), class: "back_btn" %>
+  </div>
 <% end %>

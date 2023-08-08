@@ -6,12 +6,8 @@ function form_option() {
   console.log(formInputs)
   let forms = document.querySelectorAll(".balance_forms");
   let lastIndex = forms.length;
-
-
   const submitButton = document.getElementById("save-button");
   let allInputsFilled = true;
-
-  
 
   for (let i = 1; i < lastIndex; i++) {
     formIndex.push(i);
@@ -43,7 +39,6 @@ function form_option() {
         allInputsFilled = true;
         
         newformInputs.forEach(input => {
-          console.log(input.value)
           if (input.value === '') {
             allInputsFilled = false;
           }

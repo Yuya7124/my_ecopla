@@ -66,10 +66,24 @@
   width: 120px;
 }
 
+.tb_income  {
+  border:1px solid #333;
+  width: 120px;
+}
+
+.tb_expend  {
+  border:1px solid #333;
+  width: 120px;
+}
+
 .tb_delete {
   width: 45px;
 }
 
+.show_payments,
+.total_payments {
+  text-align: center;
+}
 
 .balance_form_date {
   width: 140px;
