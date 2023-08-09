@@ -19,18 +19,16 @@ function form_value_color() {
 }
 
 
-
 function color_change(red, green, blue) {
   return "rgb(" + red + "," + green + "," + blue + ")";
 }
 
 function color_label(color) {
   //出費額段階
-  const OutPut_Lv_1 = 500;
-  const OutPut_Lv_2 = 1000;
-  const OutPut_Lv_3 = 5000;
-  const OutPut_Lv_4 = 7500;
-  const OutPut_Lv_5 = 10000;
+  const OutPut_Lv_1 = 1000;
+  const OutPut_Lv_2 = 5000;
+  const OutPut_Lv_3 = 7500;
+  const OutPut_Lv_4 = 10000;
   
   //表示色
   let r = 255;
@@ -38,35 +36,28 @@ function color_label(color) {
   let b = 255;
 
   if (color < OutPut_Lv_1)
-  {   //白
-      r = 255;
-      g = 255;
-      b = 255;
-      
-  }
-  else if (color >= OutPut_Lv_1 && color < OutPut_Lv_2)
   {   //白→黄
       r = 255;
       g = 255;
-      b = 255 - (color - 0) * 255 / (OutPut_Lv_2 - 0);
+      b = 255 - (color - 0) * 255 / (OutPut_Lv_1 - 0);
   }
-  else if (color >= OutPut_Lv_2 && color < OutPut_Lv_3)
+  else if (color >= OutPut_Lv_1 && color < OutPut_Lv_2)
   {   //黄→赤
       r = 255;
-      g = 255 - (color - OutPut_Lv_2) * 255 / (OutPut_Lv_3 - OutPut_Lv_2);
+      g = 255 - (color - OutPut_Lv_1) * 255 / (OutPut_Lv_2 - OutPut_Lv_1);
       b = 0;
   }
-  else if (color >= OutPut_Lv_3 && color < OutPut_Lv_4)
+  else if (color >= OutPut_Lv_2 && color < OutPut_Lv_3)
   {   //赤→紫
-      r = 255 - (color - OutPut_Lv_3) * 255 / (OutPut_Lv_5 - OutPut_Lv_3);
+      r = 255 - (color - OutPut_Lv_2) * 255 / (OutPut_Lv_4 - OutPut_Lv_2);
       g = 0;
-      b = (color - OutPut_Lv_3) * 255 / (OutPut_Lv_5 - OutPut_Lv_3);
+      b = (color - OutPut_Lv_2) * 255 / (OutPut_Lv_4 - OutPut_Lv_2);
   }
-  else if (color >= OutPut_Lv_4 && color < OutPut_Lv_5)
+  else if (color >= OutPut_Lv_3 && color < OutPut_Lv_4)
   {   //紫→黒
-      r = 255 - (color - OutPut_Lv_3) * 255 / (OutPut_Lv_5 - OutPut_Lv_3);
+      r = 255 - (color - OutPut_Lv_2) * 255 / (OutPut_Lv_4 - OutPut_Lv_2);
       g = 0;
-      b = 255 - (color - OutPut_Lv_3) * 255 / (OutPut_Lv_5 - OutPut_Lv_3);
+      b = 255 - (color - OutPut_Lv_2) * 255 / (OutPut_Lv_4 - OutPut_Lv_2);
   }
   else
   {   //黒

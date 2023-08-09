@@ -2,8 +2,6 @@ function form_option() {
   let formIndex = [];
   const addButton = document.getElementById("add-form-button");
   const formArea = document.getElementById("form-area");
-  const formInputs = document.querySelectorAll('.form_date, .form_purpose, .form_amount, .form_payment');
-  console.log(formInputs)
   let forms = document.querySelectorAll(".balance_forms");
   let lastIndex = forms.length;
   const submitButton = document.getElementById("save-button");
@@ -89,6 +87,8 @@ function buildForm(index) {
           <option value="">---</option>
           <option value="1">収入</option>
           <option value="2">支出</option>
+          <option value="3">貯金</option>
+          <option value="4">チャージ</option>
         </select>
       </td>
       <td class="balance_form_amount">
@@ -110,6 +110,7 @@ function buildForm(index) {
   `;
   const formNode = document.createElement("table");
   formNode.setAttribute('class', 'payments_balance_table');
+  formNode.setAttribute('cellspacing', '0');
   formNode.innerHTML = formHtml;
   
   const selectWrap = formNode.querySelector(`#new-select-purpose-${index}`);
@@ -166,7 +167,7 @@ function buildForm(index) {
     console.log(selectWrap)
 
     childWrap.setAttribute('id', `new-child-select-wrap-${index}`);
-    childWrap.setAttribute('class', 'form_purpose');
+    childWrap.setAttribute('class', 'ancestry_forms');
 
     childSelect.setAttribute('id', `new-child-select-${index}`);
     childSelect.setAttribute('class', 'form_purpose');
@@ -208,7 +209,7 @@ function buildForm(index) {
     console.log(selectWrap)
 
     grandchildWrap.setAttribute('id', `new-grand-child-select-wrap-${index}`);
-    grandchildWrap.setAttribute('class', 'form_purpose');
+    grandchildWrap.setAttribute('class', 'ancestry_forms');
 
     grandchildSelect.setAttribute('id', `new-grand-child-select-${index}`)
     grandchildSelect.setAttribute('class', 'form_purpose');
@@ -233,10 +234,6 @@ function buildForm(index) {
   }); 
 
   return formNode;
-}
-
-function submit_btn_display() {
-  
 }
 
 window.addEventListener("load", form_option);

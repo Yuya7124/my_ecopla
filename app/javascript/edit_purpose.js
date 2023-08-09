@@ -80,7 +80,7 @@ function edit_purpose() {
       const childSelect = document.createElement('select');
 
       childWrap.setAttribute('id', `edit-child-select-wrap-${formIndex[i]}`);
-      childWrap.setAttribute('class', 'form_purpose');
+      childWrap.setAttribute('class', 'ancestry_forms');
 
       childSelect.setAttribute('id', `edit-child-select-${formIndex[i]}`);
       childSelect.setAttribute('class', 'form_purpose');
@@ -121,7 +121,7 @@ function edit_purpose() {
       const grandchildSelect = document.createElement('select')
 
       grandchildWrap.setAttribute('id', `edit-grand-child-select-wrap-${formIndex[i]}`);
-      grandchildWrap.setAttribute('class', 'form_purpose');
+      grandchildWrap.setAttribute('class', 'ancestry_forms');
 
 
       grandchildSelect.setAttribute('id', `edit-grand-child-select-${formIndex[i]}`);

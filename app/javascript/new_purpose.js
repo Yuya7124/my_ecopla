@@ -2,6 +2,9 @@ function new_purpose() {
   let formIndex = [];
   let forms = document.querySelectorAll(".balance_forms");
   let lastIndex = forms.length;
+  const formInputs = document.querySelectorAll('.form_date, .form_purpose, .form_amount, .form_payment');
+  const submitButton = document.getElementById("save-button");
+  let allInputsFilled = true;
   
   for (let i = 0; i < lastIndex - 1; i++) {
     formIndex.push(i);
@@ -9,11 +12,11 @@ function new_purpose() {
     const selectWrap = document.getElementById(`new-select-purpose-${formIndex[i]}`);
     const parentCategory = document.getElementById(`new-parent-category-${formIndex[i]}`);
     const newNameAttribute = `form_payments_balance_collection[payments_balances_attributes][${formIndex[i]}][purpose_id]`;
-    
+   
     // 選択フォームを繰り返し表示
     const selectChildElement = (selectForm) => { 
       if (document.getElementById(selectForm) !== null) {
-        document.getElementById(selectForm).remove()
+        document.getElementById(selectForm).remove();
       }
     }
 
@@ -57,7 +60,7 @@ function new_purpose() {
       const childSelect = document.createElement('select');
 
       childWrap.setAttribute('id', `new-child-select-wrap-${formIndex[i]}`);
-      childWrap.setAttribute('class', 'form_purpose');
+      childWrap.setAttribute('class', 'ancestry_forms');
 
       childSelect.setAttribute('id', `new-child-select-${formIndex[i]}`);
       childSelect.setAttribute('class', 'form_purpose');
@@ -96,7 +99,7 @@ function new_purpose() {
       const grandchildSelect = document.createElement('select')
 
       grandchildWrap.setAttribute('id', `new-grand-child-select-wrap-${formIndex[i]}`);
-      grandchildWrap.setAttribute('class', 'form_purpose');
+      grandchildWrap.setAttribute('class', 'ancestry_forms');
 
       grandchildSelect.setAttribute('id', `new-grand-child-select-${formIndex[i]}`)
       grandchildSelect.setAttribute('class', 'form_purpose');
@@ -109,8 +112,8 @@ function new_purpose() {
         grandchildSelect.appendChild(grandchildOption);
       });
   
-      grandchildWrap.appendChild(grandchildSelect)
-      childWrap.appendChild(grandchildWrap)
+      grandchildWrap.appendChild(grandchildSelect);
+      childWrap.appendChild(grandchildWrap);
     }
   
     parentCategory.addEventListener('change', function () {

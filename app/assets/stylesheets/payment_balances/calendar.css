@@ -4,6 +4,10 @@
   color: black;
 }
 
+.calendar-title {
+  font-size: 32px;
+}
+
 
 /* 曜日 */
 tr.calendar_top>*:first-child {

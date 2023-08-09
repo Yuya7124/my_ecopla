@@ -4,9 +4,9 @@
 <%= form_with model: @form, url: payments_balances_path, id: "pb-form", local: true do |form| %>
 <%= render 'devise/shared/error_messages', model: @form %>
   <button type="button" class="add-form" id="add-form-button">追加</button>
-  <table class="payments_balance_table">
+  <table class="payments_balance_table" cellspacing="0">
       <thead>
-        <tr>
+        <tr class="tb_column">
           <th class="tb_date">    日付     </th>
           <th class="tb_purpose"> 使用目的 </th>
           <th class="tb_amount">  金額     </th>
@@ -28,8 +28,8 @@
   </table>
   <div class="balance_forms" id="form-area"></div>
   <div class="setting_menu">
-  <%= form.submit "登録", class: "save_btn", id: "save-button" %>
-  <%= link_to "戻る", root_path, class: "back_btn" %>
+    <%= form.submit "登録", class: "save_btn", id: "save-button" %>
+    <%= link_to "戻る", root_path, class: "back_btn" %>
   </div>
 <% end %>
 
