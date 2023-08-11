@@ -60,7 +60,7 @@ tr.calendar_top>*:last-child {
 .day-wday-6-today-start-date-current-month
 {
   color: orange;
-  font-size: 24px;
+  font-size: 32px;
   font-weight: 600;
   background-color: lemonchiffon
 }
@@ -137,6 +137,7 @@ tr.calendar_top {
 
 .date_info {
   color: navy;
+  font-size: 24px;
   font-weight: 600;
 }
 

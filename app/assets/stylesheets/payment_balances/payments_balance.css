@@ -1,5 +1,11 @@
 body {
   background-color: aliceblue;
+  font-family: 'League Spartan', sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: navy;
 }
 
 
@@ -18,7 +24,6 @@ body {
 }
 
 .count_amount_num {
-  font-family: 'League Spartan', sans-serif;
   font-size: 16px;
   color: black;
 }
@@ -31,28 +36,33 @@ body {
 /* 入力フォーム */
 
 .form_date {
-  width: 120px;
-  background-color: aliceblue;
+  width: 15vw;
+  font-size: 24px;
   justify-content: center;
+  font-family: 'League Spartan', sans-serif;
+  background-color: aliceblue;
+  border: none;
 }
 
 .form_purpose {
-  width: 150px;
+  width: 15vw;
+  font-size: 18px;
   padding: auto;
   background-color: aliceblue;
+  border: none;
 }
 
 .ancestry_forms {
-  width: 150px;
-  margin-right: 15px;
+  font-size: 20px;
   background-color: aliceblue;
+  border: none;
 }
 
 .form_amount {
+  width: 15vw;
   justify-content: left;
-  font-family: 'League Spartan', sans-serif;
-  width: 140px;
   font-size: 32px;
+  font-family: 'League Spartan', sans-serif;
   color: white;
   background-color: aliceblue;
   font-weight: 600;
@@ -62,77 +72,66 @@ body {
 }
 
 .form_payment {
+  width: 12vw;
+  font-size: 18px;
   background-color: aliceblue;
+  border: none;
 }
 
 /* 新規・編集画面 */
 
-.payments_balance_table {
+.payments_balance_table,
+.tb_columns,
+.balances_list {
   table-layout: fixed;
-  margin: 0 150px;
+  margin: 0 20vw;
 }
 
-.tb_date {
-  border: 1px solid #333;
-  width: 150px;
-}
-
-.tb_purpose {
-  border: 1px solid #333;
-  width: 160px;
-}
-
-.tb_amount {
-  border: 1px solid #333;
-  width: 160px;
-}
-
-.tb_payment {
-  border: 1px solid #333;
-  width: 120px;
-}
-
-.tb_delete {
-  width: 50px;
-}
-
+.tb_date,
 .balance_form_date {
-  width: 150px;
-  height: 80px;
-  border-collapse: collapse;
-  border-spacing: 0;
   border: 1px solid #333;
+  width: 15vw;
+  padding: 5px;
 }
 
+.tb_purpose,
 .balance_form_purpose {
-  width: 160px;
-  height: 80px;
-  border-collapse: collapse;
-  border-spacing: 0;
-  border-spacing: 0;
   border: 1px solid #333;
+  width: 15vw;
+  padding: 5px;
 }
-
+.tb_amount,
 .balance_form_amount {
-  width: 160px;
-  height: 80px;
-  border-collapse: collapse;
-  border-spacing: 0;
   border: 1px solid #333;
+  width: 15vw;
+  padding: 5px;
 }
 
+.tb_payment,
 .balance_form_payment {
-  width: 120px;
-  height: 80px;
+  border: 1px solid #333;
+  width: 12vw;
+  padding: 5px;
+}
+
+.tb_delete,
+.balance_form_delete {
+  width: 10vw;
+  padding: 5px;
+}
+
+.balance_form_date,
+.balance_form_purpose,
+.balance_form_amount,
+.balance_form_payment {
+  height: 100px;
   border-collapse: collapse;
   border-spacing: 0;
-  border: 1px solid #333;
 }
 
 .balance_form_delete {
-  width: 50px;
-  height: 80px;
-  padding: 0 5px;
+  height: 100px;
+  padding: 0 20px;
 }
 
 /* 詳細画面 */
@@ -203,33 +202,96 @@ body {
 }
 
 .total_payments {
-  margin: 50px 0 50px 40vw;
+  margin: 60px 0 50px 40vw;
 }
 
 /* コントロールボタン */
 
 .setting_menu {
-  margin: 20px 0 0 70vw;
+  margin: 20px 0 0 60vw;
   display: flex;
+  text-align: center;
 }
 
 .add-form {
   color: white;
   background-color:darkcyan;
-  
+  font-size: 32px;
+  font-weight: bold;
+  border-radius: 5px;
+  margin: 20px 82vw 0 82vw;
+  width: 40px;
+  height: 40px;
 }
 
 .delete-form {
   color: white;
   background-color: red;
+  font-size: 32px;
+  font-weight: bold;
+  border-radius: 5px;
+  width: 40px;
+  height: 40px;
 }
 
 .save_btn {
   color: white;
   background-color: green;
   margin-right: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  border-radius: 5px;
+  width: 120px;
+  height: 45px;
 }
 
-.back_btn {
+.deactive_btn {
+  background-color: rgb(40, 47, 40);
+  align-items: center;
+  padding-top: 5px;
+  font-size: 20px;
+  border-radius: 5px;
+  width: 120px;
+  height: 32px;
+}
+
+.edit,
+.back {
   margin: 0 10px;
+  color: white;
+  background-color: dodgerblue;
+  padding-top: 5px;
+  font-size: 20px;
+  text-decoration: none;
+  justify-content: center;
+  border: 1px solid #333;
+  border-radius: 5px;
+  width: 120px;
+  height: 30px;
+  align-items: center;
+}
+
+.new_list {
+  text-align: center;
+  margin: 0 10px;
+  color: white;
+  background-color: dodgerblue;
+  padding: 5px;
+  font-size: 18px;
+  text-decoration: none;
+  justify-content: center;
+  border: 1px solid #333;
+  border-radius: 5px;
+  width: 100px;
+  height: 20px;
+  align-items: center;
+}
+
+.current_mode {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.cash_num {
+  margin-left: 20px;
 }

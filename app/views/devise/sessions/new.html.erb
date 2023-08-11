@@ -1,20 +1,27 @@
+<%= render "devise/shared/login_header" %>
 <h2>Log in</h2>
 
-<%= form_with model: @user, url: user_session_path, class: 'registration-main', local: true do |f| %>
+<%= form_with model: @user, url: user_session_path, class: 'registration_main', local: true do |f| %>
 <%= render "devise/shared/error_messages", model: f.object %>
   <div class="field">
-    <%= f.label :email, "メールアドレス" %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.label :email, "メールアドレス", class: "label" %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "email_form" %>
   </div>
 
   <div class="field">
-    <%= f.label :password, "パスワード" %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
+    <%= f.label :password, "パスワード", class: "label"  %><br />
+    <%= f.password_field :password, autocomplete: "current-password", class: "password_form" %>
   </div>
 
   <div class="actions">
-    <%= link_to '新規登録', new_user_registration_path, class: "sign-up" %>
-    <%= f.submit "ログイン", class: "sign-up"%>
+    <div class="user_record">
+      <%= image_tag "登録アイコン.png", size: "30x30" %>
+      <%= link_to '新規登録', new_user_registration_path, class: "new_user" %>
+    </div>
+    <div class="login">
+      <%= image_tag "4396.png", size: "30x30" %>
+      <%= f.submit "ログイン", class: "sign_up" %>
+    <div>
   </div>
 <% end %>
 

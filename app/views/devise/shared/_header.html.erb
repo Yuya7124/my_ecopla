@@ -4,8 +4,15 @@
     <div class="login_nav">
       <% if user_signed_in? %>
         <div class="user_nav">
-          <div class="user-nickname"><%= current_user.nickname %></div>
-          <div class="logout" id="exit-btn"><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></div>
+          <div class="user-nickname">
+            <%= image_tag "人物アイコン.png", size: "20x20" %>
+            <%= current_user.nickname %>
+          </div>
+
+          <div class="logout" id="exit-btn">
+            <%= image_tag "4398.png", size: "20x20" %>
+            <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "logout_btn" %>
+          </div>
         </div>
       <% end %>
     </div>

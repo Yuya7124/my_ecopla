@@ -53,6 +53,7 @@ function form_option() {
   //フォーム削除
   document.addEventListener('click', function(event) {
     const targetElement = event.target;
+    console.log(targetElement.classList.contains('delete-form'))
     if (targetElement.classList.contains('delete-form')) {
       event.preventDefault();
       const formId = parseInt(targetElement.dataset.formid, 10);
@@ -78,34 +79,37 @@ function form_option() {
 function buildForm(index) {
   const formHtml = `
   <table class="payments_balance_table">
-    <tr class="balance_forms">
-      <td class="balance_form_date">
-        <input type="date" name="form_payments_balance_collection[payments_balances_attributes][${index}][date]" class="form_date" id="inputform-date-${index}" />
-      </td>
-      <td class="balance_form_purpose" id="new-select-purpose-${index}">
-        <select id="new-parent-category-${index}" class="form_purpose" name="form_payments_balance_collection[payments_balances_attributes][${index}][purpose_id]">
-          <option value="">---</option>
-          <option value="1">収入</option>
-          <option value="2">支出</option>
-          <option value="3">貯金</option>
-          <option value="4">チャージ</option>
-        </select>
-      </td>
-      <td class="balance_form_amount">
-        <input type="number" class="form_amount" id="inputform-amount-${index}" style="text-align:right" name="form_payments_balance_collection[payments_balances_attributes][${index}][amount]" placeholder="0" />
-      </td>
-      <td class="balance_form_payment">
-        <select class="form_payment" id="payment-category-${index}" name="form_payments_balance_collection[payments_balances_attributes][${index}][payment_id]">
-          <option value="1">現金</option>
-          <option value="2">クレジット決済</option>
-          <option value="3">口座振込</option>
-        </select>
-      </td>
-      <td class="balance_form_delete">
-        <button type="button" class="delete-form" id="payments_balance_deleted_form_ids" data-form-id="form_${index}">削除</button>
-      </td>
-    </tr>
-    <input type="hidden" name="payments_balance[${index}]" id="payments-balance-${index}">
+    <thead class="tb_columns"></thead>
+    <tbody class="balances_list">
+      <tr class="balance_forms">
+        <td class="balance_form_date">
+          <input type="date" name="form_payments_balance_collection[payments_balances_attributes][${index}][date]" class="form_date" id="inputform-date-${index}" />
+        </td>
+        <td class="balance_form_purpose" id="new-select-purpose-${index}">
+          <select id="new-parent-category-${index}" class="form_purpose" name="form_payments_balance_collection[payments_balances_attributes][${index}][purpose_id]">
+            <option value="">---</option>
+            <option value="1">収入</option>
+            <option value="2">支出</option>
+            <option value="3">貯金</option>
+            <option value="4">チャージ</option>
+          </select>
+        </td>
+        <td class="balance_form_amount">
+          <input type="number" class="form_amount" id="inputform-amount-${index}" style="text-align:right" name="form_payments_balance_collection[payments_balances_attributes][${index}][amount]" placeholder="0" />
+        </td>
+        <td class="balance_form_payment">
+          <select class="form_payment" id="payment-category-${index}" name="form_payments_balance_collection[payments_balances_attributes][${index}][payment_id]">
+            <option value="1">現金</option>
+            <option value="2">クレジット決済</option>
+            <option value="3">口座振込</option>
+          </select>
+        </td>
+        <td class="balance_form_delete">
+          <button type="button" class="delete-form" id="payments_balance_deleted_form_ids" data-form-id="form_${index}">×</button>
+        </td>
+      </tr>
+      <input type="hidden" name="payments_balance[${index}]" id="payments-balance-${index}">
+    </tbody>
   </table>
   `;
   const formNode = document.createElement("table");
@@ -234,6 +238,19 @@ function buildForm(index) {
   }); 
 
   return formNode;
+}
+
+function CanmaSeparated(inputAns){
+  console.log(inputAns);
+  let inputAnsValue = inputAns.value;
+  console.log(inputAnsValue);
+  let numberAns = inputAnsValue.replace(/[^0-9]/g, "");
+  CanmaAns = numberAns.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,');
+  console.log(CanmaAns);
+  if(CanmaAns.match(/[^0-9]/g)){
+    inputAns.value= CanmaAns;
+    return true;
+  }
 }
 
 window.addEventListener("load", form_option);

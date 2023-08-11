@@ -1,8 +1,6 @@
 <%= render "devise/shared/header" %>
 
-<h1>Payments Balance List</h1>
-
-<h2><%= @selected_date %></h2>
+<h2>Payments Balance List (<%= @selected_date %>)</h2>
 
 <% pb_num = 0 %>
 
@@ -67,7 +65,14 @@
   <p>No data found.</p>
 <% end %>
 <div class="setting_menu">
-  <%= link_to "編集", edit_payments_balance_path(date: @selected_date, id: @payments_balance.pluck(:id).join(',')), class: "edit_btn" %>
-  <%= link_to "戻る", root_path, class: "back_btn" %>
+  <div class="edit">
+    <%= image_tag "メモアイコン.png", size: "20x20" %>
+    <%= link_to "編集", edit_payments_balance_path(date: @selected_date, id: @payments_balance.pluck(:id).join(',')), class: "edit_btn" %>
+  </div>
+  <div class="back">
+    <%= image_tag "Uターン矢印 1.png", size: "20x20" %>
+    <%= link_to "戻る", root_path, class: "back_btn" %>
+  </div>
 </div>
 
+  
