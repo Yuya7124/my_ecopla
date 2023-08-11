@@ -1,0 +1,59 @@
+.money_info_table {
+  display: table;
+  table-layout: fixed;
+  width: 40%;
+  margin: 0 30vw;
+  font-size: 24px;
+}
+
+
+.user_info_amount {
+  width: 60%;
+  margin: 100px 20vw 0 20vw;
+  font-size: 24px;
+}
+
+.edit_money_info_table {
+  display: table;
+  table-layout: fixed;
+}
+
+.table_col1 {
+  width: 15vw;
+  font-size: 24px;
+  border: 1px solid #333;
+}
+
+.table_col2 {
+  width: 25vw;
+  font-size: 24px;
+  text-align: right;
+  border: 1px solid #333;
+}
+
+.money_info_table_col1 {
+  width: 30vw;
+  font-size: 20px;
+  border: 1px solid #333;
+}
+
+.form_text {
+  font-size: 20px;
+  width: 120px;
+  height: 20px;
+  font-family: 'League Spartan', sans-serif;
+}
+
+.money_info_table_col2 {
+  width: 40vw;
+  font-size: 20px;
+  text-align: right;
+  border: 1px solid #333;
+  margin-left: 5px;
+}
+
+.money_info_annual_income {
+  font-size: 24px;
+  text-align: right;
+}
+

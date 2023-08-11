@@ -1,31 +1,40 @@
 <%= render "devise/shared/header" %>
 
-<h1>Budget List</h1>
-<%= form_with model: @form, url: payments_balances_path, id: "pb_form", local: true do |form| %>
+<h2>List Registration</h2>
+<%= form_with model: @form, url: payments_balances_path, id: "pb-form", local: true do |form| %>
 <%= render 'devise/shared/error_messages', model: @form %>
-  <button type="button" id="add-form-button">追加</button>
-  <table>
-      <thead>
-        <tr>
-          <th> date </th>
-          <th> purpose </th>
-          <th> amount </th>
-          <th> payment </th>
+  <button type="button" class="add-form" id="add-form-button">+</button>
+  <table class="payments_balance_table" cellspacing="0">
+      <thead class="tb_columns">
+        <tr class="tb_column">
+          <th class="tb_date" style="text-align:left">    日付     </th>
+          <th class="tb_purpose" style="text-align:left"> 使用目的 </th>
+          <th class="tb_amount" style="text-align:left">  金額     </th>
+          <th class="tb_payment" style="text-align:left"> 決済方法 </th>
+          <th class="tb_delete" style="text-align:left"></th>
         </tr>
       </thead>
-    <tbody>
-    <%= form.fields_for :payments_balances do |balance| %>
-      <tr class="balance_forms">
-        <td class="balance_form"><%= balance.date_field :date, type: "date", id:"inputform_date" %></td>
-        <td class="balance_form" id="new-select-purpose-0"><%= balance.collection_select :purpose_id, Purpose.roots, :id, :name, { include_blank: "---" }, { id: "new-parent-category-0" } %></td>
-        <td class="balance_form"><%= balance.text_field :amount, placeholder: "0", type: "number", id:"inputform_amount" %></td>
-        <td class="balance_form"><%= balance.collection_select(:payment_id, Payment.all, :id, :name, {}, {class:"select-box", id:"item-category"}) %></td>
-        <td class="balance_form"><button type="button" class="delete-form" id="deleted_form_ids" data-form_id="form_0">削除</button></td>
-      </tr>
-    <% end %>
+    <tbody class="balances_list">
+      <%= form.fields_for :payments_balances do |balance| %>
+        <tr class="balance_forms">
+          <td class="balance_form_date"><%= balance.date_field :date, type: "date", class: "form_date", id:"inputform-date-0" %></td>
+          <td class="balance_form_purpose" id="new-select-purpose-0"><%= balance.collection_select :purpose_id, Purpose.roots, :id, :name, { include_blank: "---" }, { id: "new-parent-category-0", class: "form_purpose" } %></td>
+          <td class="balance_form_amount"><%= balance.text_field :amount, class: "form_amount", placeholder: "0", type: "number", style: "text-align:right", id: "inputform-amount-0" %></td>
+          <td class="balance_form_payment"><%= balance.collection_select(:payment_id, Payment.all, :id, :name, {}, {class: "form_payment", id:"payment-category-0"}) %></td>
+          <td class="balance_form_delete"><button type="button" class="delete-form" id="deleted-form-ids" data-form_id="form-0">×</button></td>
+        </tr>
+      <% end %>
     </tbody>
   </table>
-  <div class="balance_forms" id="form_area"></div>
-  <%= form.submit "登録", class: "save_btn", id: "save-button" %>
-  <%= link_to "戻る", root_path %>
+  <div class="balance_forms" id="form-area"></div>
+  <div class="setting_menu">
+    <%= image_tag "メモアイコン.png", size: "20x20" %>
+    <span class="deactive_btn" id="save-button-deactive">登録</span>
+    <%= form.submit "登録", class: "save_btn", id: "save-button" %>
+    <div class="back">
+      <%= image_tag "Uターン矢印 1.png", size: "20x20" %>
+      <%= link_to "戻る", root_path, class: "back_btn" %>
+    </div>
+  </div>
 <% end %>
+

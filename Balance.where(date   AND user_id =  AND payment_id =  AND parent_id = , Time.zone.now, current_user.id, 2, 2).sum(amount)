@@ -1,0 +1,23 @@
+
+[1mFrom:[0m /home/yuya7124/project/my_ecopla/app/controllers/users_controller.rb:32 UsersController#amount_calculation:
+
+    [1;34m30[0m: [32mdef[0m [1;34mamount_calculation[0m
+    [1;34m31[0m:   [1;34m# 現金[0m
+ => [1;34m32[0m:   binding.pry
+    [1;34m33[0m:   @cash_plus = [1;34;4mPaymentsBalance[0m.where([31m[1;31m"[0m[31mdate <= ? AND user_id = ? AND payment_id = ? AND parent_id = ?[1;31m"[0m[31m[0m, [1;34;4mTime[0m.zone.now, current_user.id, [1;34m1[0m, [1;34m1[0m).sum([33m:amount[0m) 
+    [1;34m34[0m:   @cash_minus = [1;34;4mPaymentsBalance[0m.where([31m[1;31m"[0m[31mdate <= ? AND user_id = ? AND payment_id = ? AND parent_id = ?[1;31m"[0m[31m[0m, [1;34;4mTime[0m.zone.now, current_user.id, [1;34m1[0m, [1;34m2[0m).sum([33m:amount[0m)
+    [1;34m35[0m:   @cash_input = [1;34;4mPaymentsBalance[0m.where([31m[1;31m"[0m[31mdate <= ? AND user_id = ? AND payment_id = ? AND parent_id = ?[1;31m"[0m[31m[0m, [1;34;4mTime[0m.zone.now, current_user.id, [1;34m1[0m, [1;34m3[0m).sum([33m:amount[0m)
+    [1;34m36[0m:   @cashless_charge = [1;34;4mPaymentsBalance[0m.where([31m[1;31m"[0m[31mdate <= ? AND user_id = ? AND payment_id = ? AND parent_id = ?[1;31m"[0m[31m[0m, [1;34;4mTime[0m.zone.now, current_user.id, [1;34m1[0m, [1;34m4[0m).sum([33m:amount[0m) 
+    [1;34m37[0m:   [1;34m# クレジット決済[0m
+    [1;34m38[0m:   @debt_num_past = [1;34;4mPaymentsBalance[0m.where([31m[1;31m"[0m[31mdate <= ? AND user_id = ? AND payment_id = ? AND parent_id = ?[1;31m"[0m[31m[0m, [1;34;4mTime[0m.zone.now, current_user.id, [1;34m2[0m, [1;34m2[0m).sum([33m:amount[0m) 
+    [1;34m39[0m:   @debt_num_future = [1;34;4mPaymentsBalance[0m.where([31m[1;31m"[0m[31mdate > ? AND user_id = ? AND payment_id = ? AND parent_id = ?[1;31m"[0m[31m[0m, [1;34;4mTime[0m.zone.now, current_user.id, [1;34m2[0m, [1;34m2[0m).sum([33m:amount[0m)
+    [1;34m40[0m:   [1;34m# 口座振込[0m
+    [1;34m41[0m:   @atm_plus = [1;34;4mPaymentsBalance[0m.where([31m[1;31m"[0m[31mdate <= ? AND user_id = ? AND payment_id = ? AND parent_id = ?[1;31m"[0m[31m[0m, [1;34;4mTime[0m.zone.now, current_user.id, [1;34m3[0m, [1;34m1[0m).sum([33m:amount[0m) 
+    [1;34m42[0m:   @atm_minus = [1;34;4mPaymentsBalance[0m.where([31m[1;31m"[0m[31mdate <= ? AND user_id = ? AND payment_id = ? AND parent_id = ?[1;31m"[0m[31m[0m, [1;34;4mTime[0m.zone.now, current_user.id, [1;34m3[0m, [1;34m2[0m).sum([33m:amount[0m)
+    [1;34m43[0m:   @cash_output = [1;34;4mPaymentsBalance[0m.where([31m[1;31m"[0m[31mdate <= ? AND user_id = ? AND payment_id = ? AND parent_id = ?[1;31m"[0m[31m[0m, [1;34;4mTime[0m.zone.now, current_user.id, [1;34m3[0m, [1;34m3[0m).sum([33m:amount[0m)
+    [1;34m44[0m:   @atm_charge = [1;34;4mPaymentsBalance[0m.where([31m[1;31m"[0m[31mdate <= ? AND user_id = ? AND payment_id = ? AND parent_id = ?[1;31m"[0m[31m[0m, [1;34;4mTime[0m.zone.now, current_user.id, [1;34m3[0m, [1;34m4[0m).sum([33m:amount[0m) 
+    [1;34m45[0m:   [1;34m# 合計値を表示[0m
+    [1;34m46[0m:   @sum_cash = @cash_minus + @cash_input + @cashless_charge - @cash_plus - @cash_output
+    [1;34m47[0m:   @sum_atm = @atm_minus + @debt_num_past + @cash_output + @atm_charge - @atm_plus - @cash_input
+    [1;34m48[0m: [32mend[0m
+

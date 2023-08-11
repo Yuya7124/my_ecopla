@@ -1,17 +1,19 @@
+<%= render "devise/shared/login_header" %>
+
 <h2>Edit <%= current_user %></h2>
 
-<%= form_with model: @user, url: edit_user_password_path(current_user), class: 'registration-main', local: true do |f| %>
+<%= form_with model: @user, url: edit_user_password_path(current_user), class: 'registration_main', local: true do |f| %>
   <%= render "devise/shared/error_messages", model: f.object %>
 
   <div class="user_info">
     <div class="field">
-      <%= f.label :nickname, "ユーザー名" %><br />
-      <%= f.text_field :nickname, id:"user_name" %>
+      <%= f.label :nickname, "ユーザー名", class: "label" %><br />
+      <%= f.text_field :nickname, id:"user_name", class: "user_form"%>
     </div>
 
     <div class="field">
-      <%= f.label :email, "メールアドレス" %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      <%= f.label :email, "メールアドレス", class: "label" %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "email_form" %>
     </div>
 
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -19,8 +21,8 @@
     <% end %>
 
     <div class="field">
-      <%= f.label :password, "パスワード" %> <i>(leave blank if you don't want to change it)</i><br />
-      <%= f.password_field :password, autocomplete: "new-password" %>
+      <%= f.label :password, "パスワード", class: "label" %> <i>(leave blank if you don't want to change it)</i><br />
+      <%= f.password_field :password, autocomplete: "new-password", class: "password_form" %>
       <% if @minimum_password_length %>
         <br />
         <em><%= @minimum_password_length %> characters minimum</em>
@@ -28,45 +30,18 @@
     </div>
 
     <div class="field">
-      <%= f.label :password_confirmation, "パスワード確認" %><br />
-      <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+      <%= f.label :password_confirmation, "パスワード確認", class: "label" %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "password_form" %>
     </div>
 
     <div class="field">
-      <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-      <%= f.password_field :current_password, autocomplete: "current-password" %>
-    </div>
-  </div>
-
- <div class="money_info">
-    <div class="field">
-      <%= f.label :cash, "現所持金(現金)" %><br />
-      <%= f.text_area :cash, class: :form__text, id:"user_cash" %>
-    </div>
-
-    <div class="field">
-      <%= f.label :cash_over_short, "誤差(現金)" %><br />
-      <%= f.text_area :cash_over_short, class: :form__text, id:"user_cash_over_short" %>
-    </div>
-
-    <div class="field">
-      <%= f.label :debt, "借金状況" %><br />
-      <%= f.text_area :debt, class: :form__text, id:"user_debt" %>
-    </div>
-
-    <div class="field">
-      <%= f.label :savings, "貯金額" %><br />
-      <%= f.text_area :savings, class: :form__text, id:"user_savings" %>
-    </div>
-
-    <div class="field">
-      <%= f.label :annual_income, "年収(大体でOK)" %><br />
-      <%= f.text_area :annual_income, class: :form__text, id:"user_annual_income" %>
+      <%= f.label :current_password, class: "label" %> <i>(we need your current password to confirm your changes)</i><br />
+      <%= f.password_field :current_password, autocomplete: "current-password", class: "password_form" %>
     </div>
   </div>
 
   <div class="actions">
-    <%= f.submit "Update" %>
+    <%= f.submit "Update" class: "sign_up" %>
   </div>
 <% end %>
 

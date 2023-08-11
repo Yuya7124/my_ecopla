@@ -25,16 +25,25 @@ class UsersController < ApplicationController
     @user.skip_password_validation = false
   end
 
+  private
 
   def amount_calculation
+    # 現金
     @cash_plus = PaymentsBalance.where("date <= ? AND user_id = ? AND payment_id = ? AND parent_id = ?", Time.zone.now, current_user.id, 1, 1).sum(:amount) 
-    @cash_minus = PaymentsBalance.where("date <= ? AND user_id = ? AND payment_id = ? AND parent_id = ?", Time.zone.now, current_user.id, 1, 2).sum(:amount) 
+    @cash_minus = PaymentsBalance.where("date <= ? AND user_id = ? AND payment_id = ? AND parent_id = ?", Time.zone.now, current_user.id, 1, 2).sum(:amount)
+    @cash_input = PaymentsBalance.where("date <= ? AND user_id = ? AND payment_id = ? AND parent_id = ?", Time.zone.now, current_user.id, 1, 3).sum(:amount)
+    @cashless_charge = PaymentsBalance.where("date <= ? AND user_id = ? AND payment_id = ? AND parent_id = ?", Time.zone.now, current_user.id, 1, 4).sum(:amount) 
+    # クレジット決済
     @debt_num_past = PaymentsBalance.where("date <= ? AND user_id = ? AND payment_id = ? AND parent_id = ?", Time.zone.now, current_user.id, 2, 2).sum(:amount) 
-    @debt_num_future = PaymentsBalance.where("date > ? AND user_id = ? AND payment_id = ? AND parent_id = ?", Time.zone.now, current_user.id, 2, 2).sum(:amount) 
+    @debt_num_future = PaymentsBalance.where("date > ? AND user_id = ? AND payment_id = ? AND parent_id = ?", Time.zone.now, current_user.id, 2, 2).sum(:amount)
+    # 口座振込
     @atm_plus = PaymentsBalance.where("date <= ? AND user_id = ? AND payment_id = ? AND parent_id = ?", Time.zone.now, current_user.id, 3, 1).sum(:amount) 
-    @atm_minus = PaymentsBalance.where("date <= ? AND user_id = ? AND payment_id = ? AND parent_id = ?", Time.zone.now, current_user.id, 3, 2).sum(:amount) 
-    @sum_cash = @cash_minus - @cash_plus
-    @sum_atm = (@atm_minus + @debt_num_past) - @atm_plus
+    @atm_minus = PaymentsBalance.where("date <= ? AND user_id = ? AND payment_id = ? AND parent_id = ?", Time.zone.now, current_user.id, 3, 2).sum(:amount)
+    @cash_output = PaymentsBalance.where("date <= ? AND user_id = ? AND payment_id = ? AND parent_id = ?", Time.zone.now, current_user.id, 3, 3).sum(:amount)
+    @atm_charge = PaymentsBalance.where("date <= ? AND user_id = ? AND payment_id = ? AND parent_id = ?", Time.zone.now, current_user.id, 3, 4).sum(:amount) 
+    # 合計値を表示
+    @sum_cash = @cash_minus + @cash_input + @cashless_charge - @cash_plus - @cash_output
+    @sum_atm = @atm_minus + @debt_num_past + @cash_output + @atm_charge - @atm_plus - @cash_input
   end
 
   def set_user
@@ -56,6 +65,6 @@ class UsersController < ApplicationController
   end
 
   def money_params
-    params.require(:user).permit(:cash, :debt, :savings, :annual_income)
+    params.require(:user).permit(:cash, :cash_over_short, :debt, :savings, :annual_income)
   end
 end

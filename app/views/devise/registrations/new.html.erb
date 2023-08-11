@@ -1,58 +1,61 @@
+<%= render "devise/shared/login_header" %>
+
 <h2>Sign up</h2>
 
-<%= form_with model: @user, url: user_registration_path, class: 'registration-main', local: true do |f| %>
+<%= form_with model: @user, url: user_registration_path, class: 'registration_main', local: true do |f| %>
   <%= render "devise/shared/error_messages", model: f.object %>
-
-  <div class="user_info">
-    <div class="field">
-      <%= f.label :nickname, "ユーザー名" %><br />
-      <%= f.text_field :nickname, autofocus: true %>
-    </div>
-
-    <div class="field">
-      <%= f.label :email, "メールアドレス"  %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-    </div>
-
-    <div class="field">
-      <%= f.label :password, "パスワード" %>
-      <% if @minimum_password_length %>
-        (<%= @minimum_password_length %> 文字以上)
-      <% end %><br />
-      <%= f.password_field :password, autocomplete: "new-password" %>
-    </div>
-
-    <div class="field">
-      <%= f.label :password_confirmation, "パスワード(再入力)" %><br />
-      <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-    </div>
+  <div class="field">
+    <%= f.label :nickname, "ユーザー名", class: "label" %><br />
+    <%= f.text_field :nickname, autofocus: true, class: "user_form"%>
   </div>
 
-  <div class="money_info">
-    <div class="field">
-      <%= f.label :cash, "所持金(現金)" %><br />
-      <%= f.text_field :cash, class: "form_text", type: "number", placeholder: "0", id:"user_cash" %>
-    </div>
-
-    <div class="field">
-      <%= f.label :debt, "借金状況" %><br />
-      <%= f.text_field :debt, class: "form_text", placeholder: "0", id:"user_debt" %>
-    </div>
-
-    <div class="field">
-      <%= f.label :savings, "貯金額" %><br />
-      <%= f.text_field :savings, class: "form_text", type: "number", placeholder: "0", id:"user_savings" %>
-    </div>
-
-    <div class="field">
-      <%= f.label :annual_income, "年収(大体でOK)" %><br />
-      <%= f.text_field :annual_income, class: "form_text", type: "number", placeholder: "0", id:"user_annual_income" %>万円
-    </div>  
+  <div class="field">
+    <%= f.label :email, "メールアドレス", class: "label" %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "email_form" %>
   </div>
+
+  <div class="field">
+    <%= f.label :password, "パスワード", class: "label" %>
+    <% if @minimum_password_length %>
+      (<%= @minimum_password_length %> 文字以上)
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "new-password", class: "password_form" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation, "パスワード(再入力)", class: "label" %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "password_form" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :cash, "所持金(現金)", class: "label" %><br />
+    <%= f.text_field :cash, class: "form_text", type: "number", placeholder: "0", id:"user_cash", class: "cash_form" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :debt, "借金状況", class: "label" %><br />
+    <%= f.text_field :debt, class: "form_text", type: "number", placeholder: "0", id:"user_debt", class: "debt_form" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :savings, "貯金額", class: "label" %><br />
+    <%= f.text_field :savings, class: "form_text", type: "number", placeholder: "0", id:"user_savings", class: "amount_form" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :annual_income, "年収(大体でOK)", class: "label" %><br />
+    <%= f.text_field :annual_income, class: "form_text", type: "number", placeholder: "0", id:"user_annual_income", class: "annual_income_form" %>万
+  </div>  
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <div class="login">
+      <%= image_tag "登録アイコン.png", size: "30x30" %>
+      <%= f.submit "登録", class: "sign_up" %>
+    </div>
+    <div class="back_login">
+      <%= image_tag "Uターン矢印 1.png", size: "20x20" %>
+      <%= link_to "戻る", new_session_path(resource_name), class: "back_btn_login" %>
+    </div>
   </div>
 <% end %>
-
-<%= render "devise/shared/links" %>
+    

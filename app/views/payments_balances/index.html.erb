@@ -1,35 +1,55 @@
 <%= render "devise/shared/header" %>
 
-<select class="payment_select_box" id="payments" change="paymentSel()">
-  <option value="1">💴</option>
-  <option value="2">💳</option>
-  <option value="3">🏧</option>
-</select>
+<% current_money_mode = 1 %>
 
-<div class="cash_num">
-  <div class="canvas_views" id="num_counter">
-    <div class="canvas_view">
-      <div class="parcent_num" data_num ="<%= @user.cash - @sum_cash %>" id="current_num">0</div>
-      <div class="bar_view">
-        <div id="canvas_frame_2">
-          <div id="canvas_2"></div>
+<div class="current_mode">
+  <select class="payment_select_box" id="payments_mode" change="paymentSel()">
+    <option value="1">💴</option>
+    <option value="2">💳</option>
+    <option value="3">🏧</option>
+  </select>
+
+
+  <% case current_money_mode %>
+    <% when 1 %>
+    <div class="cash_num">
+      <div class="canvas_views" id="num-counter">
+        <div class="canvas_view">
+          <div class="parcent_num" data_num ="<%= @user.cash - @sum_cash %>" id="current-num">0</div> 
+          <div class="bar_view">
+            <div id="canvas-frame-2">
+              <div id="canvas-2"></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+    <% when 2 %>
+    <div class="debt_num" data_num ="<%= @user.debt + @debt_num_future %> " id="current-num">0</div> 
+    <% when 3 %>
+    <div class="savings_num" data_num ="<%= @user.savings - @sum_atm %> " id="current-num">0</div> 
+  <% end %>
 </div>
-<div class="debt_num" data_num ="<%= @user.debt + @debt_num_future %>" id="current_num">0</div>
-<div class="savings_num" data_num ="<%= @user.savings - @sum_atm %>" id="current_num">0</div>
 
 <div class="setting_nav">
-  <div><%= link_to "新規登録", new_payments_balance_path, class: "post" %></div>
+  <div class="new_list">
+    <%= image_tag "鉛筆ボタン.png", size: "20x20" %>
+    <%= link_to "新規登録", new_payments_balance_path, class: "post" %>
+  </div>
   <%# <%= link_to "グラフ", "#", class: "post" %> <%# 追加実装フェイズで実装 %>
   <div class="option_menu_bar" id="option-menu">
+  
   <ul class="menu_elements">設定
-    <li class="pull-down-list"><%= link_to "ユーザー情報", "/users/#{current_user.id}" %></li>
+    
+    <li class="pull-down-list">
+      <%= image_tag "9736.png", size: "20x25" %>
+      <%= link_to "ユーザー情報", "/users/#{current_user.id}" %>
+    </li>
     <li class="pull-down-list"><%= link_to "オプション", "#" %></li>
   </ul>
 <div>
+
+<% day_number = 0 %>
 
 <%= month_calendar event: @payments_balances do |date, _| %>
   <div id="payments-balance-data" data-payment-count="<%= @payments_balances.count %>">
@@ -39,17 +59,16 @@
       <% total_income = PaymentsBalance.where(date: date, user_id: current_user.id, parent_id: purpose_id = 1).sum(:amount) %>
       <% total_expend = PaymentsBalance.where(date: date, user_id: current_user.id, parent_id: purpose_id = 2).sum(:amount) %>
       <% total_amount = total_expend - total_income %>
-      <div id="amount_num_<%= date.day %>">
-        <%= total_amount %>
+      <div class="sum_amount_num" id="amount-num-<%= day_number %>">
+        <%= total_amount.to_s(:delimited, delimiter: ',') %>
       </div>
-      
       <% count_amount = PaymentsBalance.where(date: date, user_id: current_user.id).count(:amount) %>
       <div class="count_amount_num">
-      👛<%= count_amount %>
+      <%= image_tag "キュートながま口財布アイコン.png", size: "20x20" %><%= count_amount %>
       </div>
     <% else %>
-
-      <%= date.day %>
+      <span class="date_no_info"><%= date.day %></span>
     <% end %>
   </div>
+  <% day_number += 1 %>
 <% end %>

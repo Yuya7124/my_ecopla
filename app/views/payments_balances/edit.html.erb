@@ -1,37 +1,36 @@
 <%= render "devise/shared/header" %>
 
-<h1>Budget List</h1>
-<%= form_with model: @payments_balance, url: payments_balance_path(date: @selected_date), method: :patch, id: "pb_form", local: true do |form| %>
-<%# <%= render 'devise/shared/error_messages', model: @payments_balance %> 
+<h2>List Update</h2>
+<%= form_with model: @payments_balance, url: payments_balance_path(date: @selected_date), method: :patch, id: "pb-form", local: true do |form| %>
   <div class="field">
     <%= form.label :date, 'Date' %>
     <%= @selected_date %>
   </div>
-  <button type="button" id="add-form-button">追加</button>
-  <table>
-    <thead>
-      <tr>
-        <th> date </th>
-        <th> purpose </th>
-        <th> amount </th>
-        <th> payment </th>
+  <button type="button" class="add-form" id="add-form-button">+</button>
+  <table class="payments_balance_table" cellspacing="0">
+    <thead class="tb_columns">
+      <tr class="tb_column">
+        <th class="tb_date">    日付     </th>
+        <th class="tb_purpose"> 使用目的 </th>
+        <th class="tb_amount">  金額     </th>
+        <th class="tb_payment"> 決済方法 </th>
+        <th class="tb_delete"></th>
       </tr>
     </thead>
-  <tbody>
+  <tbody class="balances_list">
     <% @payments_balance.each_with_index do |balance, index| %>
       <%= form.fields_for :payments_balances, balance, index: index do |pb| %>
+      <%= render 'devise/shared/error_messages', model: balance %> 
         <div id="payments-balance-data" data-payment-count="<%= @payments_balances.count %>">
           <tr class="balance_forms">
-            <td class="balance_form"><%= pb.date_field :date, type: "date", value: @selected_date, id:"inputform_date" %></td>
-              <td class="balance_form" id="edit-select-purpose-<%= index %>">
-                <%= collection_select :payments_balance, :purpose_id, Purpose.roots, :id, :name,
-                 { include_blank: "---", selected: @selected_purpose_ids[index] }, { id: "edit-parent-category-#{index}" } %>
+            <td class="balance_form_date"><%= pb.date_field :date, type: "date", value: @selected_date, class: "form_date", id:"inputform-date-#{index}" %></td>
+              <td class="balance_form_purpose" id="edit-select-purpose-<%= index %>">
+                <%= collection_select :payments_balance, :purpose_id, Purpose.roots, :id, :name, { include_blank: "---", selected: @selected_purpose_ids[index] }, { id: "edit-parent-category-#{index}", class: "form_purpose" } %>
               </td>
-            <td class="balance_form"><%= pb.text_field :amount, placeholder: "0", type: "number", id:"inputform_amount" %></td>
-            <td class="balance_form"><%= pb.collection_select(:payment_id, Payment.all, :id, :name, {}, 
-            {class:"select-box", id:"item-category"}) %></td>
-            <td class="balance_form"><button type="button" class="delete-form", id="deleted_form_ids">
-            <%= link_to "", payments_balance_path(balance.id), method: :delete %>削除</button></td>
+            <td class="balance_form_amount"><%= pb.text_field :amount, class: "form_amount", placeholder: "0", type: "number", style: "text-align:right", id:"inputform-amount-#{index}" %></td>
+            <td class="balance_form_payment"><%= pb.collection_select(:payment_id, Payment.all, :id, :name, {}, {class: "form_payment", id:"payment-category-#{index}"}) %></td>
+            <td class="balance_form_delete"><button type="button" class="delete-form", id="deleted-form-ids">
+            <%= link_to "", payments_balance_path(balance.id), method: :delete %>×</button></td>
             <%= pb.hidden_field :id %>
           </tr>
         </div>
@@ -42,7 +41,15 @@
   <script>
     let purpose_ids = <%= @selected_purpose_ids %>;
   </script>
-  <div class="balance_forms" id="form_area"></div>
-  <%= form.submit "更新", class: "save_btn", id: "save-button" %>
-  <%= link_to "戻る", payments_balance_path(date: @selected_date) %>
+  <div class="balance_forms" id="form-area"></div>
+  <div class="setting_menu">
+    <%= image_tag "メモアイコン.png", size: "20x20" %>
+    <span class="deactive_btn" id="save-button-deactive">登録</span>
+    <%= form.submit "更新", class: "save_btn", id: "save-button" %>
+    <div class="back">
+      <%= image_tag "Uターン矢印 1.png", size: "20x20" %>
+      <%= link_to "戻る", payments_balance_path(date: @selected_date), class: "back_btn" %>
+    </div>
+  </div>
+  
 <% end %>

@@ -4,8 +4,10 @@ class PaymentsBalancesController < ApplicationController
   before_action :new_form_ids, only: :update
   before_action :no_found_page, only: :show
   before_action :amount_calculation, only: :index
+  before_action :day_amount_calculation, only: :show
 
   def index
+    @user = current_user
     @payments_balances = PaymentsBalance.where(user_id: current_user.id)
     payments_balance_id = params[:payments_balance_id]
     date = params[:date]
@@ -36,6 +38,14 @@ class PaymentsBalancesController < ApplicationController
       attributes = params[:payments_balance][:payments_balances].values
       existing_form_ids = attributes.map { |nested_hash| nested_hash["id"].to_i }
       deleted_form_ids = ids - existing_form_ids
+      attributes.each do |value|
+        purpose_id = value["purpose_id"]
+        parent_id = Purpose.find(purpose_id).root_id
+        ancestry = Purpose.find(purpose_id).ancestry
+        # valueハッシュに更新したデータを格納
+        value["parent_id"] = parent_id
+        value["ancestry"] = ancestry
+      end
       # 既存フォーム更新
       if @payments_balance.update(existing_form_ids, attributes)
         # 既存フォーム削除
@@ -59,7 +69,7 @@ class PaymentsBalancesController < ApplicationController
   
   def payments_balance_params
     params.require(:form_payments_balance_collection)
-          .permit(:date, payments_balances_attributes: [:date, :purpose_id, :ancestry, :amount, :payment_id, :parent_id, :child_category, :grandchild_category])
+          .permit(:date, payments_balances_attributes: [:date, :amount, :payment_id, :ancestry, :parent_id, :purpose_id])
     .merge(user_id: current_user.id)
   end
 
@@ -89,13 +99,11 @@ class PaymentsBalancesController < ApplicationController
   end
 
   def amount_calculation
-    @user = current_user
     # 現金
     @cash_plus = PaymentsBalance.where("date <= ? AND user_id = ? AND payment_id = ? AND parent_id = ?", Time.zone.now, current_user.id, 1, 1).sum(:amount) 
     @cash_minus = PaymentsBalance.where("date <= ? AND user_id = ? AND payment_id = ? AND parent_id = ?", Time.zone.now, current_user.id, 1, 2).sum(:amount)
     @cash_input = PaymentsBalance.where("date <= ? AND user_id = ? AND payment_id = ? AND parent_id = ?", Time.zone.now, current_user.id, 1, 3).sum(:amount)
     @cashless_charge = PaymentsBalance.where("date <= ? AND user_id = ? AND payment_id = ? AND parent_id = ?", Time.zone.now, current_user.id, 1, 4).sum(:amount) 
-    @cash_over_short = PaymentsBalance.where("date <= ? AND user_id = ? AND payment_id = ? AND parent_id = ?", Time.zone.now, current_user.id, 1, 5).sum(:amount) 
     # クレジット決済
     @debt_num_past = PaymentsBalance.where("date <= ? AND user_id = ? AND payment_id = ? AND parent_id = ?", Time.zone.now, current_user.id, 2, 2).sum(:amount) 
     @debt_num_future = PaymentsBalance.where("date > ? AND user_id = ? AND payment_id = ? AND parent_id = ?", Time.zone.now, current_user.id, 2, 2).sum(:amount) 
@@ -105,7 +113,25 @@ class PaymentsBalancesController < ApplicationController
     @cash_output = PaymentsBalance.where("date <= ? AND user_id = ? AND payment_id = ? AND parent_id = ?", Time.zone.now, current_user.id, 3, 3).sum(:amount)
     @atm_charge = PaymentsBalance.where("date <= ? AND user_id = ? AND payment_id = ? AND parent_id = ?", Time.zone.now, current_user.id, 3, 4).sum(:amount) 
     # 合計値を表示
-    @sum_cash = (@cash_minus + @cash_input + @cashless_charge + @cash_over_short) - (@cash_plus + @cash_output)
-    @sum_atm = (@atm_minus + @debt_num_past + @cash_output + @atm_charge) - (@atm_plus + @cash_input) 
+    @sum_cash = @cash_minus + @cash_input + @cashless_charge - @cash_plus - @cash_output
+    @sum_atm = @atm_minus + @debt_num_past + @cash_output + @atm_charge - @atm_plus - @cash_input
+  end
+
+  def day_amount_calculation
+    # 現金
+    @cash_plus = PaymentsBalance.where("date = ? AND user_id = ? AND payment_id = ? AND parent_id = ?", @selected_date, current_user.id, 1, 1).sum(:amount) 
+    @cash_minus = PaymentsBalance.where("date = ? AND user_id = ? AND payment_id = ? AND parent_id = ?", @selected_date, current_user.id, 1, 2).sum(:amount)
+    @cash_input = PaymentsBalance.where("date = ? AND user_id = ? AND payment_id = ? AND parent_id = ?", @selected_date, current_user.id, 1, 3).sum(:amount)
+    @cashless_charge = PaymentsBalance.where("date = ? AND user_id = ? AND payment_id = ? AND parent_id = ?", @selected_date, current_user.id, 1, 4).sum(:amount) 
+    # クレジット決済
+    @debt_num_past = PaymentsBalance.where("date = ? AND user_id = ? AND payment_id = ? AND parent_id = ?", @selected_date, current_user.id, 2, 2).sum(:amount) 
+    # 口座振込
+    @atm_plus = PaymentsBalance.where("date = ? AND user_id = ? AND payment_id = ? AND parent_id = ?", @selected_date, current_user.id, 3, 1).sum(:amount) 
+    @atm_minus = PaymentsBalance.where("date = ? AND user_id = ? AND payment_id = ? AND parent_id = ?", @selected_date, current_user.id, 3, 2).sum(:amount)
+    @cash_output = PaymentsBalance.where("date = ? AND user_id = ? AND payment_id = ? AND parent_id = ?", @selected_date, current_user.id, 3, 3).sum(:amount)
+    @atm_charge = PaymentsBalance.where("date = ? AND user_id = ? AND payment_id = ? AND parent_id = ?", @selected_date, current_user.id, 3, 4).sum(:amount) 
+    # 合計値を表示
+    @total_income = @cash_plus + @atm_plus
+    @total_expend = @cash_minus + @atm_minus + @debt_num_past + @atm_charge + @cashless_charge
   end
 end

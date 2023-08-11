@@ -1,0 +1,116 @@
+.login_header {
+  margin: 100px 0 50px 0;
+  text-align: center;
+  font-size: 28px;
+}
+
+h2 {
+  text-align: center;
+  font-size: 32px;
+}
+
+h3 {
+  text-align: center;
+  font-size: 24px;
+}
+
+.registration_main {
+  width: 80%;
+  margin: 0 auto;
+  max-width: 310px;
+  font-size: 16px;
+}
+
+
+.actions {
+  display: flex;
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 10px;
+}
+
+.label {
+  text-align: left;
+}
+
+.field {
+  margin-bottom: 10px;
+}
+
+.user_form,
+.email_form,
+.password_form {
+  width: 300px;
+  height: 25px;
+  text-align: left;
+}
+
+.cash_form,
+.debt_form, 
+.amount_form,
+.annual_income_form {
+  text-align: right;
+  font-size: 24px;
+  font-family: 'League Spartan', sans-serif;
+}
+
+.cash_form,
+.debt_form, 
+.amount_form,
+.annual_income_form {
+  width: 300px;
+  height: 25px;
+}
+
+.annual_income_form {
+  width: 274.5px;
+  height: 25px;
+}
+
+.new_user, 
+.back_btn_login {
+  color: white;
+  background-color: dodgerblue;
+  padding: 5px;
+  font-size: 18px;
+  text-align: center;
+  justify-content: space-around;
+  border: 1px solid #333;
+  border-radius: 5px;
+  width: 80px;
+  height: 28.5px;
+  align-items: center;
+}
+
+.sign_up {
+  color: white;
+  background-color: dodgerblue;
+  font-size: 16px;
+  text-align: center;
+  border-radius: 5px;
+  justify-content: space-around;
+  width: 80px;
+  height: 30px;
+  margin-left: 20px;
+  margin: 0 10px;
+}
+
+.user_record {
+  margin-left: 10px;
+}
+
+.login,
+.back_login {
+  margin-left: 30px;
+}
+
+.user_info,
+.money_info {
+  display: block;
+  margin: 0 auto;
+  font-size: 24px;
+}
+
+.back_login {
+  margin-top: 9px;
+}

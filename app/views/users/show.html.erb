@@ -1,28 +1,30 @@
 <%= render "devise/shared/header" %>
 
+
+<h2>User Infomation</h2>
 <div class="main">
   <div class="inner">
     <div class="user__wrapper">
-      <h2 class="page-heading">
+      <h3 class="page-heading">
         <%= "#{@nickname}さんの金銭状況"%>
-      </h2>
-      <table class="money_info_table">
+      </h3>
+      <table class="money_info_table" cellspacing="0">
         <tbody>
           <tr>
             <th class="table_col1">現金</th>
-            <td class="table_col2"><%= @cash %></td>
+            <td class="table_col2"><%= (@cash - @sum_cash - @cash_over_short).to_s(:delimited, delimiter: ',') %></td>
           </tr>
           <tr>
             <th class="table_col1">借金状況</th>
-            <td class="table_col2"><%= @debt %></td>
+            <td class="table_col2"><%= (@debt_num_future.to_i).to_s(:delimited, delimiter: ',') %></td>
           </tr>
           <tr>
             <th class="table_col1">貯金額</th>
-            <td class="table_col2"><%= @savings %></td>
+            <td class="table_col2"><%= (@savings - @sum_atm).to_s(:delimited, delimiter: ',') %></td>
           </tr>
           <tr>
             <th class="table_col1">年収</th>
-            <td class="table_col2"><%= @annual_income %></td>
+            <td class="table_col2"><%= (@annual_income).to_s(:delimited, delimiter: ',') %>万</td>
           </tr>
         </tbody>
       </table>
@@ -30,5 +32,13 @@
   </div>
 </div>
 
-<%= link_to "編集", edit_user_path(current_user.id) %>
-<%= link_to "戻る", root_path %>
+<div class="setting_menu">
+  <div class="edit">
+    <%= image_tag "メモアイコン.png", size: "20x20" %>
+    <%= link_to "編集", edit_user_path(current_user.id), class: "edit_btn" %>
+  </div>
+  <div class="back">
+    <%= image_tag "Uターン矢印 1.png", size: "20x20" %>
+    <%= link_to "戻る", root_path, class: "back_btn" %>
+  </div>
+</div>

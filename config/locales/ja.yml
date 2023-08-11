@@ -20,6 +20,7 @@ ja:
         purpose_id: "使用目的"
         payment_id: "決済方法"
         user: "ユーザー"
+        payments balance collection: 新規登録情報
 
     errors:
       messages:

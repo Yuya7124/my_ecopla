@@ -1,8 +1,8 @@
 <div class="simple-calendar">
   <div class="calendar-heading">
-    <%= link_to t('simple_calendar.previous', default: 'Previous'), calendar.url_for_previous_view %>
+    <%= link_to image_tag("矢印アイコン　左5.png", size: "20x20" ), calendar.url_for_previous_view %>
     <span class="calendar-title"><%= start_date.year %>.  <%= t('date.month_names')[start_date.month] %></span>
-    <%= link_to t('simple_calendar.next', default: 'Next'), calendar.url_for_next_view %>
+    <%= link_to image_tag("矢印アイコン　右5.png", size: "20x20" ), calendar.url_for_next_view %>
   </div>
 
   <table class="table table-striped">

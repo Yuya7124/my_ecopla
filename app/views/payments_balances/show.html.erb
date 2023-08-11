@@ -1,41 +1,78 @@
 <%= render "devise/shared/header" %>
 
-<h1>Payments Balance List</h1>
+<h2>Payments Balance List (<%= @selected_date %>)</h2>
 
-<h2><%= @selected_date %></h2>
+<% pb_num = 0 %>
 
 <% if @payments_balance.any? %>
-  <table>
+  <table class="show_payments" cellspacing="0">
     <thead>
       <tr>
-        <th> purpose </th>
-        <th> amount </th>
-        <th> payment </th>
+          <th class="show_tb_purpose"> 使用目的 </th>
+          <th class="show_tb_amount">  金額     </th>
+          <th class="show_tb_payment"> 決済方法 </th>
       </tr>
     </thead>
     <tbody>
       <% @payments_balance.each do |balance| %>
         <tr>
-          <td>
+          <td class="blance_propuse" style="text-align:left">
             <% balance.purpose.ancestors.each do |category| %>
               <span><%= category.name %></span>
               <span>,</span>
             <% end %>
             <span><%= balance.purpose.name %></span>
           </td>
-          <td><%= balance.amount %></td>
-          <td><%= balance.payment.name %></td>
+          <td class="blance_amount" style="text-align:right">
+          <% if balance.parent_id == 2 || balance.parent_id == 4 %>
+            <span id="pb-amount-num-<%= pb_num %>"><%= balance.amount.to_s(:delimited, delimiter: ',') %></span>
+          <% else %>
+            <span><%= balance.amount.to_s(:delimited, delimiter: ',') %></span>
+          <% end %>
+          </td>
+          <td class="blance_payment">
+            <%= balance.payment.name %>
+          </td>
         </tr>
+        <% pb_num += 1 %>
       <% end %>
     </tbody>
   </table>
-  <%= total_income = PaymentsBalance.where(date: @selected_date, user_id: current_user.id, parent_id: purpose_id = 1).sum(:amount) %>
-  <%= total_expend = PaymentsBalance.where(date: @selected_date, user_id: current_user.id, parent_id: purpose_id = 2).sum(:amount) %>
-  <%= total_amount = total_expend - total_income %>
+
+  <table class="total_payments" cellspacing="0">
+    <thead>
+      <tr>
+        <th class="tb_income"> 収入 </th>
+        <th class="tb_expend"> 支出 </th>
+        <th class="tb_amount"> 合計 </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="income" id="income-num" style="text-align:right">
+          <%= @total_income.to_s(:delimited, delimiter: ',') %>
+        </td>
+        <td class="expend" id="expend-num" style="text-align:right">
+          <%= @total_expend.to_s(:delimited, delimiter: ',') %> 
+        </td>
+        <td class="total_amount" id="total-amount-num" style="text-align:right">
+           <%= total_amount = (@total_expend.to_i - @total_income.to_i).to_s(:delimited, delimiter: ',') %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 <% else %>
   <p>No data found.</p>
 <% end %>
+<div class="setting_menu">
+  <div class="edit">
+    <%= image_tag "メモアイコン.png", size: "20x20" %>
+    <%= link_to "編集", edit_payments_balance_path(date: @selected_date, id: @payments_balance.pluck(:id).join(',')), class: "edit_btn" %>
+  </div>
+  <div class="back">
+    <%= image_tag "Uターン矢印 1.png", size: "20x20" %>
+    <%= link_to "戻る", root_path, class: "back_btn" %>
+  </div>
+</div>
 
-<%= link_to "編集", edit_payments_balance_path(date: @selected_date, id: @payments_balance.pluck(:id).join(',')) %>
-<%= link_to "戻る", root_path %>
-
+  

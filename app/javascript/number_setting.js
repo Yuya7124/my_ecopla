@@ -9,7 +9,7 @@ function number_setting(){
 
       let data_num = null;
       let init_num = 0;
-      let canvas = document.getElementById("canvas_2");
+      let canvas = document.getElementById("canvas-2");
       let max_width = 200;
       let canvas_width = 0;
 
@@ -28,7 +28,7 @@ function number_setting(){
       data_num = setInterval(count_up, 1);
     }
   }
-  let target = document.getElementById("current_num");
+  let target = document.getElementById("current-num");
   NumberCounter(target);
   paymentSel();
 }

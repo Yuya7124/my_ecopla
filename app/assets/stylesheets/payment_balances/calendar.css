@@ -1,8 +1,13 @@
-.save_btn {
-  color: darkcyan;
+/* カレンダー */
+.simple-calendar {
+  font-family: 'League Spartan', sans-serif;
+  color: black;
 }
 
-/* カレンダー */
+.calendar-title {
+  font-size: 32px;
+}
+
 
 /* 曜日 */
 tr.calendar_top>*:first-child {
@@ -12,7 +17,6 @@ tr.calendar_top>*:first-child {
 tr.calendar_top>*:last-child {
   color: mediumblue
 }
-
 
 /* 日にち */
 
@@ -55,9 +59,10 @@ tr.calendar_top>*:last-child {
 .day-wday-6-today-current-month,
 .day-wday-6-today-start-date-current-month
 {
-  color: chocolate;
-  font-size: 20px;
+  color: orange;
+  font-size: 32px;
   font-weight: 600;
+  background-color: lemonchiffon
 }
 
 .day-wday-0-future-current-month,
@@ -121,3 +126,20 @@ tr.calendar_top>*:last-child {
 .count_amount_num {
   color: black;
 }
+
+.calender_days {
+  height: 100px;
+}
+
+tr.calendar_top {
+  text-align: center;
+}
+
+.date_info {
+  color: navy;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+
+
