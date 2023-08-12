@@ -1,34 +1,26 @@
 <%= render "devise/shared/header" %>
 
-<% current_money_mode = 1 %>
-
-<div class="current_mode">
+<div class="current_mode" id="mode_select">
   <select class="payment_select_box" id="payments_mode" change="paymentSel()">
     <option value="1">💴</option>
     <option value="2">💳</option>
     <option value="3">🏧</option>
   </select>
 
-
-  <% case current_money_mode %>
-    <% when 1 %>
-    <div class="cash_num">
-      <div class="canvas_views" id="num-counter">
-        <div class="canvas_view">
-          <div class="parcent_num" data_num ="<%= @user.cash - @sum_cash %>" id="current-num">0</div> 
-          <div class="bar_view">
-            <div id="canvas-frame-2">
-              <div id="canvas-2"></div>
-            </div>
+  <div class="cash_num">
+    <div class="canvas_views" id="num-counter">
+      <div class="canvas_view">
+        <div class="current_num" data_num ="<%= @user.cash - @sum_cash %>" id="cash-current-num">0</div>
+        <div class="current_num" data_num ="<%= @user.debt + @debt_num_future %>" id="debt-current-num">0</div> 
+        <div class="current_num" data_num ="<%= @user.savings - @sum_atm %>" id="savings-current-num">0</div> 
+        <div class="bar_view">
+          <div id="canvas-frame-2">
+            <div id="canvas-2"></div>
           </div>
         </div>
       </div>
     </div>
-    <% when 2 %>
-    <div class="debt_num" data_num ="<%= @user.debt + @debt_num_future %> " id="current-num">0</div> 
-    <% when 3 %>
-    <div class="savings_num" data_num ="<%= @user.savings - @sum_atm %> " id="current-num">0</div> 
-  <% end %>
+  </div>
 </div>
 
 <div class="setting_nav">
@@ -45,7 +37,7 @@
       <%= image_tag "9736.png", size: "20x25" %>
       <%= link_to "ユーザー情報", "/users/#{current_user.id}" %>
     </li>
-    <li class="pull-down-list"><%= link_to "オプション", "#" %></li>
+    <%# <li class="pull-down-list"><%= link_to "オプション", "#" </li> %><%# 追加実装フェイズで実装 %>
   </ul>
 <div>
 

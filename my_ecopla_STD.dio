@@ -1,10 +1,13 @@
 <mxfile host="65bd71144e">
     <diagram id="N0T002kfN4d9tCE9PkE3" name="ページ1">
-        <mxGraphModel dx="809" dy="642" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1169" pageHeight="827" background="#ffffff" math="0" shadow="1">
+        <mxGraphModel dx="753" dy="614" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1169" pageHeight="827" background="#ffffff" math="0" shadow="1">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
                 <mxCell id="8" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#000000;" parent="1" source="2" target="4" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="49" style="edgeStyle=none;html=1;strokeColor=#000000;" edge="1" parent="1" source="2" target="47">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="2" value="ユーザーログインページ" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;gradientColor=none;fontColor=#000000;strokeColor=#000000;" parent="1" vertex="1">
@@ -26,75 +29,48 @@
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="33" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#000000;" parent="1" source="4" target="32" edge="1">
-                    <mxGeometry relative="1" as="geometry">
-                        <Array as="points">
-                            <mxPoint x="370" y="105"/>
-                            <mxPoint x="371" y="204"/>
-                        </Array>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="36" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#000000;" parent="1" source="4" edge="1">
+                <mxCell id="36" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#000000;" parent="1" source="4" edge="1" target="37">
                     <mxGeometry relative="1" as="geometry">
                         <mxPoint x="400" y="255" as="targetPoint"/>
                         <Array as="points">
                             <mxPoint x="370" y="105"/>
-                            <mxPoint x="371" y="256"/>
+                            <mxPoint x="371" y="205"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="47" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#000000;fontColor=#000000;" edge="1" parent="1">
-                    <mxGeometry relative="1" as="geometry">
-                        <mxPoint x="340" y="105" as="sourcePoint"/>
-                        <mxPoint x="400" y="350" as="targetPoint"/>
-                        <Array as="points">
-                            <mxPoint x="370" y="105"/>
-                            <mxPoint x="371" y="350"/>
-                        </Array>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="4" value="支出状況ページ" style="rounded=1;html=1;strokeColor=#000000;gradientColor=default;fillColor=#FFFFFF;fontColor=#000000;" parent="1" vertex="1">
+                <mxCell id="4" value="カレンダーページ" style="rounded=1;html=1;strokeColor=#000000;gradientColor=default;fillColor=#FFFFFF;fontColor=#000000;" parent="1" vertex="1">
                     <mxGeometry x="230" y="90" width="110" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="5" value="支出新規登録ページ" style="rounded=1;html=1;strokeColor=#000000;gradientColor=default;fillColor=#FFFFFF;fontColor=#000000;" parent="1" vertex="1">
+                <mxCell id="5" value="収支新規登録ページ" style="rounded=1;html=1;strokeColor=#000000;gradientColor=default;fillColor=#FFFFFF;fontColor=#000000;" parent="1" vertex="1">
                     <mxGeometry x="400" y="90" width="130" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="16" value="支出編集ページ" style="rounded=1;html=1;strokeColor=#000000;gradientColor=default;fillColor=#FFFFFF;fontColor=#000000;" parent="1" vertex="1">
+                <mxCell id="16" value="収支編集ページ" style="rounded=1;html=1;strokeColor=#000000;gradientColor=default;fillColor=#FFFFFF;fontColor=#000000;" parent="1" vertex="1">
                     <mxGeometry x="570" y="140" width="110" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="30" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#000000;" parent="1" source="28" target="16" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="28" value="日付別支出詳細ページ" style="rounded=1;html=1;strokeColor=#000000;gradientColor=default;fillColor=#FFFFFF;fontColor=#000000;" parent="1" vertex="1">
+                <mxCell id="28" value="日付別収支詳細ページ" style="rounded=1;html=1;strokeColor=#000000;gradientColor=default;fillColor=#FFFFFF;fontColor=#000000;" parent="1" vertex="1">
                     <mxGeometry x="400" y="140" width="130" height="30" as="geometry"/>
-                </mxCell>
-                <mxCell id="32" value="支出グラフページ" style="rounded=1;html=1;strokeColor=#000000;gradientColor=default;fillColor=#FFFFFF;fontColor=#000000;" parent="1" vertex="1">
-                    <mxGeometry x="400" y="190" width="130" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="40" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#000000;" parent="1" source="37" target="39" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="44" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#000000;" parent="1" target="41" edge="1">
+                <mxCell id="37" value="ユーザーマイページ" style="rounded=1;html=1;strokeColor=#000000;gradientColor=default;fillColor=#FFFFFF;fontColor=#000000;" parent="1" vertex="1">
+                    <mxGeometry x="400" y="190" width="130" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="39" value="ユーザー情報編集ページ" style="rounded=1;html=1;strokeColor=#000000;gradientColor=default;fillColor=#FFFFFF;fontColor=#000000;" parent="1" vertex="1">
+                    <mxGeometry x="570" y="190" width="147" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="48" style="edgeStyle=none;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;strokeColor=#000000;" edge="1" parent="1" source="47" target="4">
                     <mxGeometry relative="1" as="geometry">
-                        <mxPoint x="537" y="255" as="sourcePoint"/>
-                        <mxPoint x="577" y="305" as="targetPoint"/>
                         <Array as="points">
-                            <mxPoint x="547" y="255"/>
-                            <mxPoint x="547" y="305"/>
+                            <mxPoint x="285" y="173"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="37" value="ユーザーマイページ" style="rounded=1;html=1;strokeColor=#000000;gradientColor=default;fillColor=#FFFFFF;fontColor=#000000;" parent="1" vertex="1">
-                    <mxGeometry x="400" y="240" width="130" height="30" as="geometry"/>
-                </mxCell>
-                <mxCell id="39" value="ユーザーログイン編集ページ" style="rounded=1;html=1;strokeColor=#000000;gradientColor=default;fillColor=#FFFFFF;fontColor=#000000;" parent="1" vertex="1">
-                    <mxGeometry x="570" y="240" width="170" height="30" as="geometry"/>
-                </mxCell>
-                <mxCell id="41" value="パスワード変更ページ" style="rounded=1;html=1;strokeColor=#000000;gradientColor=default;fillColor=#FFFFFF;fontColor=#000000;" parent="1" vertex="1">
-                    <mxGeometry x="570" y="290" width="130" height="30" as="geometry"/>
-                </mxCell>
-                <mxCell id="45" value="アプリ設定ページ" style="rounded=1;html=1;strokeColor=#000000;gradientColor=default;fillColor=#FFFFFF;fontColor=#000000;" vertex="1" parent="1">
-                    <mxGeometry x="400" y="335" width="130" height="30" as="geometry"/>
+                <mxCell id="47" value="ユーザー登録ページ" style="rounded=1;html=1;strokeColor=#000000;gradientColor=default;fillColor=#FFFFFF;fontColor=#000000;" vertex="1" parent="1">
+                    <mxGeometry x="50" y="157" width="130" height="30" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>

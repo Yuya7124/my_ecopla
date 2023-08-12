@@ -4,6 +4,12 @@ module PaymentsBalancesHelper
   end
 
   #   # ヘルパー
+
+  module AmountHelper
+    def number_to_currency(amount_num)
+      "#{amount_num.to_s(:delimited, delimiter: ',')}"
+    end
+  end
   # ヘルパーメソッドを修正
   def render_child_categories(parent_id, child_id, grandchild_id, index)
     # データベースから与えられた parent_id に対する子カテゴリーオブジェクトを取得

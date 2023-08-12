@@ -28,9 +28,48 @@ function number_setting(){
       data_num = setInterval(count_up, 1);
     }
   }
-  let target = document.getElementById("current-num");
-  NumberCounter(target);
-  paymentSel();
+  let cash_num = document.getElementById("cash-current-num");
+  let debt_num = document.getElementById("debt-current-num");
+  let savings_num = document.getElementById("savings-current-num");
+
+  const paymentsMode = document.getElementById("payments_mode");
+  const cashNum = document.getElementById("cash-current-num");
+  const debtNum = document.getElementById("debt-current-num");
+  const savingsNum = document.getElementById("savings-current-num");
+
+  cashNum.style.display = "block";
+  debtNum.style.display = "none";
+  savingsNum.style.display = "none";
+
+  NumberCounter(cash_num);
+  NumberCounter(debt_num);
+  NumberCounter(savings_num);
+
+  paymentsMode.addEventListener("change", function() {
+    const selectedValue = parseInt(paymentsMode.value);
+
+    cashNum.style.display = "none";
+    debtNum.style.display = "none";
+    savingsNum.style.display = "none";
+
+    switch (selectedValue) {
+      case 1:
+        cashNum.style.display = "block";
+        NumberCounter(cash_num);
+        break;
+      case 2:
+        debtNum.style.display = "block";
+        NumberCounter(debt_num);
+        break;
+      case 3:
+        savingsNum.style.display = "block";
+        NumberCounter(savings_num);
+        break;
+      default:
+        // デフォルトの表示
+        cashNum.style.display = "block";
+    }
+  });
 }
 
 
@@ -52,8 +91,8 @@ function count_len(max_num) {
 }
 
 function paymentSel() {
-  let element = document.getElementById('payments');
-  console.log(element.value);
+  let element = document.getElementById('payments_mode');
+  return element.value;
 }
 
 function canvas_num(max_num) {
