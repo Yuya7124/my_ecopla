@@ -26,6 +26,7 @@ function number_setting(){
         }
       }
       data_num = setInterval(count_up, 1);
+      AddCamma(targetNum);
     }
   }
   let cash_num = document.getElementById("cash-current-num");
@@ -36,33 +37,37 @@ function number_setting(){
   const cashNum = document.getElementById("cash-current-num");
   const debtNum = document.getElementById("debt-current-num");
   const savingsNum = document.getElementById("savings-current-num");
+  const moneyBar = document.getElementById("money-bar");
 
   cashNum.style.display = "block";
   debtNum.style.display = "none";
   savingsNum.style.display = "none";
+  moneyBar.style.display = "block";
 
   NumberCounter(cash_num);
-  NumberCounter(debt_num);
-  NumberCounter(savings_num);
 
   paymentsMode.addEventListener("change", function() {
     const selectedValue = parseInt(paymentsMode.value);
-
+  
     cashNum.style.display = "none";
     debtNum.style.display = "none";
     savingsNum.style.display = "none";
+    moneyBar.style.display = "none";
 
     switch (selectedValue) {
       case 1:
         cashNum.style.display = "block";
+        moneyBar.style.display = "block";
         NumberCounter(cash_num);
         break;
       case 2:
         debtNum.style.display = "block";
+        moneyBar.style.display = "none";
         NumberCounter(debt_num);
         break;
       case 3:
         savingsNum.style.display = "block";
+        moneyBar.style.display = "block";
         NumberCounter(savings_num);
         break;
       default:
@@ -90,14 +95,55 @@ function count_len(max_num) {
   return len;
 }
 
-function paymentSel() {
-  let element = document.getElementById('payments_mode');
-  return element.value;
-}
-
 function canvas_num(max_num) {
   let len = parseInt(Math.log10(max_num)) + 1;
   return Math.pow(10, len);
+}
+
+function AddCamma(num) {
+  return num.toLocaleString();
+}
+
+function Stock(cons_num) {
+  //数値表示処理
+  let pd = Math.Log10(cons_num);
+  if (pd <= 2)
+  {
+    pd = 2;
+  }
+  let pn = Math.Pow(10, pd);
+  let t = (cons_num / pn);
+  let dn = (cons_num % pn);
+  const stock = document.getElementById("tank");
+  //ストック処理
+  if (cons_num >= 1)
+  {
+    for (let i = 1; i < 10; i++)
+    {
+      if (max_num >= pn * i)
+      {
+        if (cons_num >= pn * i)
+        {
+          stock.innerHTML += "■"; // 健全
+        }
+        else
+        {
+          stock.innerHTML += "-"; // 消失
+        }
+      }
+      else
+      {
+        stock.innerHTML += " "; // 最初からない
+      }
+    }
+  }
+  else
+  {
+    for (let i = 1; i < 10; i++)
+    {
+      stock.innerHTML += "□";
+    }
+  }
 }
 
 window.addEventListener("load", number_setting);
