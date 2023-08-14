@@ -12,7 +12,7 @@
 
   <script>
     let annual_income = <%= @user.annual_income %>;
-    let cash_cons = <%= @user.cash - @sum_cash %>;
+    let cash_cons = <%= @user.cash - @sum_cash - @user.cash_over_short %>;
     let debt_future = <%= @debt_num_future %>;
     let atm_cons = <%= @user.savings - @sum_atm %>
   </script>
