@@ -14,21 +14,26 @@ function number_setting(){
       let low_num = document.getElementById("low_num");
       let max_width = 200;
       let canvas_width = 0;
+      let canvas_len = targetNum % Math.pow(10, count_len(targetNum))
 
-      low_num.innerText = `${zero_padding(targetNum % Math.pow(10, count_len(targetNum)))}`;
+      low_num.innerText = `${zero_padding(canvas_len, targetNum / 10)}`;
 
       const count_up = () => {
-        target.innerText = `${zero_padding(init_num)}`;
-        for (let i = 0; i <= count_len(targetNum); i++){
-          canvas.style.width = canvas_width + 'px';
-          canvas_width += max_width / canvas_num(targetNum) * Math.pow(10, count_len(targetNum) - 2);
-          init_num += Math.pow(10, count_len(targetNum) - 2);
-        }
-        if (init_num > targetNum){
+        target.innerText = `${zero_padding(init_num, targetNum)}`;
+        init_num += Math.pow(10, count_len(targetNum) - 1.5);
+        
+        canvas.style.width = canvas_width + 'px';
+        
+        canvas_width += max_width * (canvas_len / canvas_num(targetNum / 10)) / 100;
+        if (init_num > targetNum) {
           target.innerText = targetNum;
           clearInterval(data_num);
         }
+        if(canvas_width > (max_width * (canvas_len / canvas_num(targetNum / 10)))) {
+          canvas_width = max_width * (canvas_len / canvas_num(targetNum / 10));
+        }
       }
+      
       data_num = setInterval(count_up, 1);
       AddCamma(targetNum);
     }
@@ -85,17 +90,17 @@ function number_setting(){
   });
 }
 
-
 function color_change(red, green, blue) {
   return "rgb(" + red + "," + green + "," + blue + ")";
 }
 
-function zero_padding(num){
+function zero_padding(num, max_num){
   let len = parseInt(Math.log10(num)) + 1;
+  let max_len = parseInt(Math.log10(max_num)) + 1;
   if (len <= 2 || num <= 0) {
     len = 2;
   }
-  return (Array(len).join('0') + num).slice(-len);
+  return (Array(len).join('0') + num).slice(-max_len);
 }
 
 function count_len(max_num) {
