@@ -20,7 +20,7 @@ function number_setting(){
 
       const count_up = () => {
         target.innerText = `${zero_padding(init_num, targetNum)}`;
-        init_num += Math.pow(10, count_len(targetNum) - 1.5);
+        init_num += Math.pow(10, count_len(targetNum) - 2);
         
         canvas.style.width = canvas_width + 'px';
         
