@@ -8,6 +8,11 @@ a {
   color: navy;
 }
 
+/* 編集画面(日付) */
+.data_field {
+  font-size: 20px;
+  text-align: center;
+}
 
 /* 数値表示 */
 

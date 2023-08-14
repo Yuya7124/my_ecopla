@@ -2,8 +2,8 @@
 
 <h2>List Update</h2>
 <%= form_with model: @payments_balance, url: payments_balance_path(date: @selected_date), method: :patch, id: "pb-form", local: true do |form| %>
-  <div class="field">
-    <%= form.label :date, 'Date' %>
+  <div class="data_field">
+    <%= form.label :date, 'Date:' %>
     <%= @selected_date %>
   </div>
   

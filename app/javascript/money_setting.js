@@ -25,6 +25,10 @@ function money_setting() {
     const atm = parseInt(UserSavings.value) - parseInt(user_sum_atm);
     CurrentSavings.innerHTML = `${atm.toLocaleString()}`;
   }
+  
+  updateAmount();
+  updateDebt();
+  updateSavings();
 
   UserCash.addEventListener("click", updateAmount);
   UserOverShort.addEventListener("click", updateAmount);
