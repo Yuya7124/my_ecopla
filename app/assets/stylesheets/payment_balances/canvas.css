@@ -16,7 +16,7 @@
 }
 
 #canvas-frame-2 {
-  background-color: rgba(0, 200, 200, 0.25);
+  background-color: rgba(0, 150, 255, 0.1);
   display: flex;
 }
 
@@ -44,10 +44,16 @@
 .current_num {
   font-size: 30px;
   font-family: 'Kdam Thmor Pro', sans-serif;
+  color: rgb(0, 150, 255);
 }
 
 #low_num {
   font-size: 8px;
   font-weight: 600;
   font-family: 'Kdam Thmor Pro', sans-serif;
+  color: rgb(0, 150, 255);
+}
+
+#tank {
+  color: rgb(0, 150, 255);
 }
