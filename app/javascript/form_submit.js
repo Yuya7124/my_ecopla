@@ -3,6 +3,7 @@ function form_submit() {
   const NewsubmitButtonDeactive = document.getElementById("save-button-deactive");
   const UpdatesubmitButton = document.getElementById("update-button");
   const UpdatesubmitButtonDeactive = document.getElementById("update-button-deactive");
+  const formAmounts = document.querySelectorAll('.form_amount');
   const formInputs = document.querySelectorAll('.form_date, .form_purpose, .form_amount, .form_payment');
   let allInputsFilled = true;
 
@@ -33,6 +34,14 @@ function form_submit() {
       }
     }
     input.addEventListener('input', form_submit);
+  });
+
+  formAmounts.forEach(function(amount) {
+    amount.addEventListener("keydown", function(event) {
+      if (event.key === "Enter") {
+        event.preventDefault(); // Enterキーのデフォルトの挙動をキャンセル
+      }
+    });
   });
 }
 
