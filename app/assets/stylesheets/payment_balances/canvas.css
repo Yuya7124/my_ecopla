@@ -29,12 +29,25 @@
   padding-right: 7.5px;
 }
 
+.mode_select_menu {
+  display: block;
+  padding-top: 10px;
+}
+
 .payment_select_box {
+  display: block;
   width: 60px;
   height: 40px;
   font-size: 20px;
 }
 
 .current_num {
-  font-size: 32px;
+  font-size: 30px;
+  font-family: 'Kdam Thmor Pro', sans-serif;
+}
+
+#low_num {
+  font-size: 8px;
+  font-weight: 600;
+  font-family: 'Kdam Thmor Pro', sans-serif;
 }

@@ -1,35 +1,25 @@
 function main_page() {
   const paymentsMode = document.getElementById("payments_mode");
-  const cashNum = document.getElementById("cash-current-num");
-  const debtNum = document.getElementById("debt-current-num");
-  const savingsNum = document.getElementById("savings-current-num");
-
-  cashNum.style.display = "block";
-  debtNum.style.display = "none";
-  savingsNum.style.display = "none";
+  const Modename = document.getElementById("mode-name");
 
   paymentsMode.addEventListener("change", function() {
     const selectedValue = parseInt(paymentsMode.value);
 
-    cashNum.style.display = "none";
-    debtNum.style.display = "none";
-    savingsNum.style.display = "none";
-
     switch (selectedValue) {
       case 1:
-        cashNum.style.display = "block";
+        Modename.innerHTML = "現金残高";
         break;
       case 2:
-        debtNum.style.display = "block";
+        Modename.innerHTML = "借金残高";
         break;
       case 3:
-        savingsNum.style.display = "block";
+        Modename.innerHTML = "口座残高";
         break;
       default:
         // デフォルトの表示
-        cashNum.style.display = "block";
+        Modename.innerHTML = "現金";
     }
   });
 }
 
-// window.addEventListener('DOMContentLoaded', main_page); 
+window.addEventListener('load', main_page); 
