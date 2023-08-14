@@ -4,7 +4,10 @@ function form_option() {
   const formArea = document.getElementById("form-area");
   let forms = document.querySelectorAll(".balance_forms");
   let lastIndex = forms.length;
-  const submitButton = document.getElementById("save-button");
+  const NewsubmitButton = document.getElementById("save-button");
+  const NewsubmitButtonDeactive = document.getElementById("save-button-deactive");
+  const UpdatesubmitButton = document.getElementById("update-button");
+  const UpdatesubmitButtonDeactive = document.getElementById("update-button-deactive");
   let allInputsFilled = true;
 
   for (let i = 1; i < lastIndex; i++) {
@@ -17,16 +20,30 @@ function form_option() {
     formIndex.push(lastIndex);
     lastIndex++;  
     // 新しいフォームのindexを非表示のフィールドに設定
+    allInputsFilled = false;
     const deletedFormIdsInput = document.getElementById("deleted-form-ids");
     deletedFormIdsInput.value += "," + formIndex[lastIndex - 2];
-    allInputsFilled = false;
 
     // 登録ボタンの表示を更新する関数
     const updateSubmitButtonDisplay = () => {
       if (allInputsFilled) {
-        submitButton.style.display = "block";
+        if (NewsubmitButton != null){
+          NewsubmitButton.style.display = "block";
+          NewsubmitButtonDeactive.style.display = "none";
+        }
+        if (UpdatesubmitButton != null) {
+          UpdatesubmitButton.style.display = "block";
+          UpdatesubmitButtonDeactive.style.display = "none";
+        }
       } else {
-        submitButton.style.display = "none";
+        if (NewsubmitButton != null){
+          NewsubmitButton.style.display = "none";
+          NewsubmitButtonDeactive.style.display = "block";
+        }
+        if (UpdatesubmitButton != null) {
+          UpdatesubmitButton.style.display = "none";
+          UpdatesubmitButtonDeactive.style.display = "block";
+        }
       }
     };
     
@@ -35,6 +52,7 @@ function form_option() {
       if (target.matches('.form_date, .form_purpose, .form_amount, .form_payment')) {
         const newformInputs = document.querySelectorAll('.form_date, .form_purpose, .form_amount, .form_payment');
         allInputsFilled = true;
+        console.log(newformInputs)
         
         newformInputs.forEach(input => {
           if (input.value === '') {
@@ -53,11 +71,10 @@ function form_option() {
   //フォーム削除
   document.addEventListener('click', function(event) {
     const targetElement = event.target;
-    console.log(targetElement.classList.contains('delete-form'))
     if (targetElement.classList.contains('delete-form')) {
       event.preventDefault();
       const formId = parseInt(targetElement.dataset.formid, 10);
-      const formToRemove = targetElement.closest('.balance_forms');
+      const formToRemove = targetElement.closest('.payments_balance_table');
       if (formToRemove) {
         formToRemove.style.display = "none";
         formToRemove.parentNode.removeChild(formToRemove);
@@ -69,7 +86,15 @@ function form_option() {
         }
         // 非表示のフィールドから削除したフォームIDをカンマで区切って追加
         const deletedFormIdsInput = document.getElementById("deleted-form-ids");
-        deletedFormIdsInput.value += "," + formId;
+        if (deletedFormIdsInput != null){
+          deletedFormIdsInput.value += "," + formId;
+        }
+        else {
+          if (NewsubmitButton != null){
+            NewsubmitButton.style.display = "none";
+            NewsubmitButtonDeactive.style.display = "block";
+          }
+        }
       }
     }
   });
@@ -79,7 +104,15 @@ function form_option() {
 function buildForm(index) {
   const formHtml = `
   <table class="payments_balance_table">
-    <thead class="tb_columns"></thead>
+    <thead class="tb_columns">
+      <tr class="tb_column">
+        <th class="tb_date">    日付     </th>
+        <th class="tb_purpose"> 使用目的 </th>
+        <th class="tb_amount">  金額     </th>
+        <th class="tb_payment"> 決済方法 </th>
+        <th class="tb_delete"></th>
+      </tr>
+    </thead>
     <tbody class="balances_list">
       <tr class="balance_forms">
         <td class="balance_form_date">
@@ -105,7 +138,7 @@ function buildForm(index) {
           </select>
         </td>
         <td class="balance_form_delete">
-          <button type="button" class="delete-form" id="payments_balance_deleted_form_ids" data-form-id="form_${index}">×</button>
+          <button type="button" class="delete-form" id="deleted-form-ids" data-form-id="form_${index}">×</button>
         </td>
       </tr>
       <input type="hidden" name="payments_balance[${index}]" id="payments-balance-${index}">
@@ -145,7 +178,6 @@ function buildForm(index) {
 
     XHR.onload = () => {
       const purposes = XHR.response.purpose;
-      console.log(purposes);
 
       // 既存の孫カテゴリーのプルダウンを削除
       const grandchildWrap = formNode.querySelector(`#new-grand-child-select-wrap-${index}`);
@@ -174,7 +206,7 @@ function buildForm(index) {
     childWrap.setAttribute('class', 'ancestry_forms');
 
     childSelect.setAttribute('id', `new-child-select-${index}`);
-    childSelect.setAttribute('class', 'form_purpose');
+    childSelect.setAttribute('class', 'form_ancestry');
     childSelect.setAttribute('name', newNameAttribute);
 
     purposes.forEach(purpose => {
@@ -216,7 +248,7 @@ function buildForm(index) {
     grandchildWrap.setAttribute('class', 'ancestry_forms');
 
     grandchildSelect.setAttribute('id', `new-grand-child-select-${index}`)
-    grandchildSelect.setAttribute('class', 'form_purpose');
+    grandchildSelect.setAttribute('class', 'form_ancestry');
     grandchildSelect.setAttribute('name', newNameAttribute);
 
     purposes.forEach(purpose => {
@@ -241,12 +273,9 @@ function buildForm(index) {
 }
 
 function CanmaSeparated(inputAns){
-  console.log(inputAns);
   let inputAnsValue = inputAns.value;
-  console.log(inputAnsValue);
   let numberAns = inputAnsValue.replace(/[^0-9]/g, "");
   CanmaAns = numberAns.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,');
-  console.log(CanmaAns);
   if(CanmaAns.match(/[^0-9]/g)){
     inputAns.value= CanmaAns;
     return true;

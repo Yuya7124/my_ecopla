@@ -7,6 +7,10 @@
     <option value="3">🏧</option>
   </select>
 
+  <script>
+    let annual_income = <%= @user.annual_income %>;
+  </script>
+
   <div class="cash_num">
     <div class="canvas_views" id="num-counter">
       <div class="canvas_view">
@@ -24,6 +28,7 @@
     </div>
   </div>
 </div>
+
 
 <div class="setting_nav">
   <div class="new_list">
@@ -52,7 +57,8 @@
       <%= link_to date.day, payments_balances_path(date: date), class: "date_info" %><br/>
       <% total_income = PaymentsBalance.where(date: date, user_id: current_user.id, parent_id: purpose_id = 1).sum(:amount) %>
       <% total_expend = PaymentsBalance.where(date: date, user_id: current_user.id, parent_id: purpose_id = 2).sum(:amount) %>
-      <% total_amount = total_expend - total_income %>
+      <% total_charge = PaymentsBalance.where(date: date, user_id: current_user.id, parent_id: purpose_id = 4).sum(:amount) %>
+      <% total_amount = total_expend + total_charge - total_income %>
       <div class="sum_amount_num" id="amount-num-<%= day_number %>">
         <%= total_amount.to_s(:delimited, delimiter: ',') %>
       </div>

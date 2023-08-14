@@ -6,8 +6,11 @@
     <%= form.label :date, 'Date' %>
     <%= @selected_date %>
   </div>
+  
   <button type="button" class="add-form" id="add-form-button">+</button>
-  <table class="payments_balance_table" cellspacing="0">
+  <div class="balance_forms" id="form-area">
+  <% @payments_balance.each_with_index do |balance, index| %>
+    <table class="payments_balance_table" cellspacing="0">
     <thead class="tb_columns">
       <tr class="tb_column">
         <th class="tb_date">    日付     </th>
@@ -17,8 +20,7 @@
         <th class="tb_delete"></th>
       </tr>
     </thead>
-  <tbody class="balances_list">
-    <% @payments_balance.each_with_index do |balance, index| %>
+    <tbody class="balances_list">
       <%= form.fields_for :payments_balances, balance, index: index do |pb| %>
       <%= render 'devise/shared/error_messages', model: balance %> 
         <div id="payments-balance-data" data-payment-count="<%= @payments_balances.count %>">
@@ -41,11 +43,11 @@
   <script>
     let purpose_ids = <%= @selected_purpose_ids %>;
   </script>
-  <div class="balance_forms" id="form-area"></div>
+  </div>
   <div class="setting_menu">
     <%= image_tag "メモアイコン.png", size: "20x20" %>
-    <span class="deactive_btn" id="save-button-deactive">登録</span>
-    <%= form.submit "更新", class: "save_btn", id: "save-button" %>
+    <span class="deactive_btn" id="update-button-deactive">更新</span>
+    <%= form.submit "更新", class: "save_btn", id: "update-button" %>
     <div class="back">
       <%= image_tag "Uターン矢印 1.png", size: "20x20" %>
       <%= link_to "戻る", payments_balance_path(date: @selected_date), class: "back_btn" %>

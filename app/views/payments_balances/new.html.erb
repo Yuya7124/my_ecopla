@@ -5,15 +5,15 @@
 <%= render 'devise/shared/error_messages', model: @form %>
   <button type="button" class="add-form" id="add-form-button">+</button>
   <table class="payments_balance_table" cellspacing="0">
-      <thead class="tb_columns">
-        <tr class="tb_column">
-          <th class="tb_date" style="text-align:left">    日付     </th>
-          <th class="tb_purpose" style="text-align:left"> 使用目的 </th>
-          <th class="tb_amount" style="text-align:left">  金額     </th>
-          <th class="tb_payment" style="text-align:left"> 決済方法 </th>
-          <th class="tb_delete" style="text-align:left"></th>
-        </tr>
-      </thead>
+    <thead class="tb_columns">
+      <tr class="tb_column">
+        <th class="tb_date">    日付     </th>
+        <th class="tb_purpose"> 使用目的 </th>
+        <th class="tb_amount">  金額     </th>
+        <th class="tb_payment"> 決済方法 </th>
+        <th class="tb_delete"></th>
+      </tr>
+    </thead>
     <tbody class="balances_list">
       <%= form.fields_for :payments_balances do |balance| %>
         <tr class="balance_forms">

@@ -1,9 +1,18 @@
 function number_color() {
   month_calendar_amount();
   balance_setting();
+  // money_value_bar(annual_income);
 }
 
 // メイン画面
+// function money_value_bar(annual_income) {
+//   const cashNum = document.getElementById("cash-current-num");
+//   const debtNum = document.getElementById("debt-current-num");
+//   const savingsNum = document.getElementById("savings-current-num");
+//   color_bar(per_max, per_min)
+// }
+
+// カレンダー
 function month_calendar_amount() {
   for (let day = 0; day < 42; day++){
     const DayNum = document.getElementById(`amount-num-${day}`);

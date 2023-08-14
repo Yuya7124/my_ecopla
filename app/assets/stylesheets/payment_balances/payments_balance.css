@@ -37,7 +37,7 @@ a {
 
 .form_date {
   width: 15vw;
-  font-size: 24px;
+  font-size: 20px;
   justify-content: center;
   font-family: 'League Spartan', sans-serif;
   background-color: aliceblue;
@@ -46,14 +46,22 @@ a {
 
 .form_purpose {
   width: 15vw;
-  font-size: 18px;
-  padding: auto;
+  font-size: 16px;
   background-color: aliceblue;
   border: none;
 }
 
 .ancestry_forms {
-  font-size: 20px;
+  width: 15vw;
+  font-size: 14px;
+  background-color: aliceblue;
+  border: none;
+  text-align: right;
+}
+
+.form_ancestry {
+  width: 14vw;
+  font-size: 14px;
   background-color: aliceblue;
   border: none;
 }
@@ -61,7 +69,7 @@ a {
 .form_amount {
   width: 15vw;
   justify-content: left;
-  font-size: 32px;
+  font-size: 30px;
   font-family: 'League Spartan', sans-serif;
   color: white;
   background-color: aliceblue;
@@ -79,6 +87,13 @@ a {
 }
 
 /* 新規・編集画面 */
+.tb_columns {
+  height: 27px;
+}
+
+.balances_list {
+  height: 78px
+}
 
 .payments_balance_table,
 .tb_columns,
@@ -91,46 +106,90 @@ a {
 .balance_form_date {
   border: 1px solid #333;
   width: 15vw;
-  padding: 5px;
+  padding: 3px;
+}
+
+.tb_date {
+  border-bottom: none;
+}
+.balance_form_date {
+  border-top: none;
 }
 
 .tb_purpose,
 .balance_form_purpose {
   border: 1px solid #333;
   width: 15vw;
-  padding: 5px;
+  padding: 3px;
 }
+
+.tb_purpose {
+  border-bottom: none;
+}
+
+.balance_form_purpose {
+  border-top: none;
+}
+
 .tb_amount,
 .balance_form_amount {
   border: 1px solid #333;
   width: 15vw;
-  padding: 5px;
+  padding: 3px;
+}
+
+.tb_amount {
+  border-bottom: none;
+}
+
+.balance_form_amount {
+  border-top: none;
 }
 
 .tb_payment,
 .balance_form_payment {
   border: 1px solid #333;
   width: 12vw;
-  padding: 5px;
+  padding: 3px;
+}
+
+.tb_payment {
+  border-bottom: none;
+}
+
+.balance_form_payment {
+  border-top: none;
 }
 
 .tb_delete,
 .balance_form_delete {
   width: 10vw;
-  padding: 5px;
+  padding: 3px;
+}
+
+.tb_date,
+.tb_purpose,
+.tb_amount,
+.tb_payment {
+  font-size: 13px;
+  color: gray;
 }
 
 .balance_form_date,
 .balance_form_purpose,
 .balance_form_amount,
 .balance_form_payment {
-  height: 100px;
+  height: 60px;
   border-collapse: collapse;
   border-spacing: 0;
 }
 
+.tb_delete {
+  height: 10px;
+}
+
 .balance_form_delete {
-  height: 100px;
+  height: 50px;
   padding: 0 20px;
 }
 
@@ -175,6 +234,11 @@ a {
   width: 120px;
 }
 
+.tb_total_amount {
+  border: 1px solid #333;
+  width: 120px;
+}
+
 .income  {
   padding-right: 15px;
   border: 1px solid #333;
@@ -192,8 +256,7 @@ a {
 
 .show_payments,
 .total_payments,
-.balance_forms,
-.ancestry_forms {
+.balance_forms {
   text-align: center;
 }
 
@@ -237,12 +300,11 @@ a {
 .save_btn {
   color: white;
   background-color: green;
-  margin-right: 10px;
   font-size: 24px;
   font-weight: bold;
   border-radius: 5px;
   width: 120px;
-  height: 45px;
+  height: 37px;
 }
 
 .deactive_btn {

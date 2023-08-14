@@ -10,7 +10,6 @@ function main_page() {
 
   paymentsMode.addEventListener("change", function() {
     const selectedValue = parseInt(paymentsMode.value);
-    console.log(selectedValue)
 
     cashNum.style.display = "none";
     debtNum.style.display = "none";

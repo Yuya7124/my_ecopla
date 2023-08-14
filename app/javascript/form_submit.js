@@ -1,6 +1,8 @@
 function form_submit() {
-  const submitButton = document.getElementById("save-button");
-  const submitButtonDeactive = document.getElementById("save-button-deactive")
+  const NewsubmitButton = document.getElementById("save-button");
+  const NewsubmitButtonDeactive = document.getElementById("save-button-deactive");
+  const UpdatesubmitButton = document.getElementById("update-button");
+  const UpdatesubmitButtonDeactive = document.getElementById("update-button-deactive");
   const formInputs = document.querySelectorAll('.form_date, .form_purpose, .form_amount, .form_payment');
   let allInputsFilled = true;
 
@@ -12,11 +14,23 @@ function form_submit() {
     }
   
     if (allInputsFilled) {
-      submitButton.style.display = "block";
-      submitButtonDeactive.style.display = "none";
+      if (NewsubmitButton != null){
+        NewsubmitButton.style.display = "block";
+        NewsubmitButtonDeactive.style.display = "none";
+      }
+      if (UpdatesubmitButton != null) {
+        UpdatesubmitButton.style.display = "block";
+        UpdatesubmitButtonDeactive.style.display = "none";
+      }
     } else {
-      submitButton.style.display = "none";
-      submitButtonDeactive.style.display = "block";
+      if (NewsubmitButton != null){
+        NewsubmitButton.style.display = "none";
+        NewsubmitButtonDeactive.style.display = "block";
+      }
+      if (UpdatesubmitButton != null) {
+        UpdatesubmitButton.style.display = "none";
+        UpdatesubmitButtonDeactive.style.display = "block";
+      }
     }
     input.addEventListener('input', form_submit);
   });

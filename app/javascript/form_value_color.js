@@ -7,12 +7,26 @@ function form_value_color() {
     const PbListAmount = document.getElementById(`inputform-amount-${pblist}`);
     if (PbListAmount != null){
       const pbl_value = PbListAmount.value;
-      const pbl_num = removeComma(pbl_value);
-      if (PbListParent.item(pblist).value != 1 || PbListParent.item(pblist).value != 3) {
+      PbListAmount.addEventListener('change', () => {
+        console.log(PbListParent.item(pblist).value)
+        if (PbListParent.item(pblist).value == 2) {
+          PbListAmount.style.color = color_label(pbl_value);
+        }
+        else if (PbListParent.item(pblist).value == 4) {
+          PbListAmount.style.color = color_label(pbl_value);
+        }
+        else {
+          PbListAmount.style.color = color_label(0);
+        }
+      });
+      if (PbListParent.item(pblist).value == 2) {
         PbListAmount.style.color = color_label(pbl_value);
-        PbListAmount.addEventListener('change', () => {
-          PbListAmount.style.color = color_label(PbListAmount.value);
-        }); 
+      }
+      else if (PbListParent.item(pblist).value == 4) {
+        PbListAmount.style.color = color_label(pbl_value);
+      }
+      else {
+        PbListAmount.style.color = color_label(0);
       }
     }
   }
@@ -72,6 +86,7 @@ function removeComma(number) {
   var removed = number.replace(/,/g, '');
   return parseInt(removed, 10);
 }
+
 document.addEventListener('input', form_value_color);
 
 window.addEventListener('load', form_value_color); 

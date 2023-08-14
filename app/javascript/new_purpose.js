@@ -63,7 +63,7 @@ function new_purpose() {
       childWrap.setAttribute('class', 'ancestry_forms');
 
       childSelect.setAttribute('id', `new-child-select-${formIndex[i]}`);
-      childSelect.setAttribute('class', 'form_purpose');
+      childSelect.setAttribute('class', 'form_ancestry');
       childSelect.setAttribute('name', newNameAttribute);
 
       purposes.forEach(purpose => {
@@ -102,7 +102,7 @@ function new_purpose() {
       grandchildWrap.setAttribute('class', 'ancestry_forms');
 
       grandchildSelect.setAttribute('id', `new-grand-child-select-${formIndex[i]}`)
-      grandchildSelect.setAttribute('class', 'form_purpose');
+      grandchildSelect.setAttribute('class', 'form_ancestry');
       grandchildSelect.setAttribute('name', newNameAttribute);
   
       purposes.forEach(purpose => {

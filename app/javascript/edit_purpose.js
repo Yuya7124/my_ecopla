@@ -83,7 +83,7 @@ function edit_purpose() {
       childWrap.setAttribute('class', 'ancestry_forms');
 
       childSelect.setAttribute('id', `edit-child-select-${formIndex[i]}`);
-      childSelect.setAttribute('class', 'form_purpose');
+      childSelect.setAttribute('class', 'form_ancestry');
       childSelect.setAttribute('name', editNameAttribute);
 
       purposes.forEach(purpose => {
@@ -125,7 +125,7 @@ function edit_purpose() {
 
 
       grandchildSelect.setAttribute('id', `edit-grand-child-select-${formIndex[i]}`);
-      grandchildSelect.setAttribute('class', 'form_purpose');
+      grandchildSelect.setAttribute('class', 'form_ancestry');
       grandchildSelect.setAttribute('name', editNameAttribute);
     
       purposes.forEach(purpose => {
@@ -184,11 +184,11 @@ function edit_purpose() {
           const grandchildSelect = document.createElement('select')
     
           grandchildWrap.setAttribute('id', `edit-grand-child-select-wrap-${formIndex[i]}`);
-          grandchildWrap.setAttribute('class', 'form_purpose');
+          grandchildWrap.setAttribute('class', 'ancestry_forms');
     
     
           grandchildSelect.setAttribute('id', `edit-grand-child-select-${formIndex[i]}`);
-          grandchildSelect.setAttribute('class', 'form_purpose');
+          grandchildSelect.setAttribute('class', 'form_ancestry');
           grandchildSelect.setAttribute('name', editNameAttribute);
         
           purposes.forEach(purpose => {
