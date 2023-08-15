@@ -28,18 +28,16 @@ function number_color() {
 
 // メイン画面
 function cash_value_bar(annual_income) {
-  annual_income = annual_income / 12 / 7;
-  color_bar_view((cash_cons / annual_income) * 100);
+  color_bar_view((cash_cons / (annual_income / 12 / 7)) * 100);
 }
 
 function debt_value_bar(annual_income) {
   const debtNum = document.getElementById("debt-current-num");
-  annual_income = annual_income / 12 / 7;
-  debtNum.style.color = color_label(debt_future, annual_income);
+  debtNum.style.color = color_label(debt_future, (annual_income / 12 / 7));
 }
 
 function savings_value_bar(annual_income) {
-  color_bar_view((atm_cons / annual_income) * 100);
+  color_bar_view((atm_cons / (annual_income / 12)) * 100);
 }
 
 // カレンダー
