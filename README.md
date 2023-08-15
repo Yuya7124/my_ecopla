@@ -16,36 +16,40 @@ Pass: Vgib9780 </br>
 #### 要件定義をしたシート
 https://docs.google.com/spreadsheets/d/1ZzuvTxPaM-XKdWJZdxIX5OVldH2utiWFjX1BtrzAt0I/edit#gid=0
 ### 実装した機能についての画像やGIFおよびその説明
-※	実装した機能について、それぞれどのような特徴があるのかを列挙する形で記載。画像はGyazoで、GIFはGyazoGIFで撮影すること。
-金額表示の色調変化
-#### メイン画面
-https://gyazo.com/d005a23faf5baeadf7ca257a8645f3a9
+#### トップページ
+https://gyazo.com/f66bbe34f6140e07600d476b1f9c651c
+カレンダーごとに使用した金額情報が記録されている。また、残高表示はメータ（借金残高は除く）と色調変化で感覚的に分かりやすくした。
+
 #### 新規登録画面
 未入力状態 </br>
-https://gyazo.com/cf7ba7230afbd2adcf61d7304808edbf
-入力完了状態 </br>
-
+https://gyazo.com/f2c08af4befa32c625471aa86a7cb90e
+登録機能</br>
+https://gyazo.com/f46e2cc980ef028ebe90723cfa4460c0
 削除機能 </br>
-
+https://gyazo.com/f5d714912b55d57b574bf5335a47d013
 追加機能 </br>
+https://gyazo.com/7be4cb3a8559e957e229bc6715237ce5
+日付、使用目的、金額、決済方法を漏れなく入力して、初めて登録できるようにした。また、追加機能、削除機能も実装し、複数データを一括登録ができる。それにより、効率よく登録ができる。さらに、金額は色調変化により感覚的に分かりやすいようにした。
 
 #### 日付ごとの詳細画面
-https://gyazo.com/48fe86365b318b6ff3f325d78730b746
+https://gyazo.com/e4bc84233aec4d0fbf6a03d4dba10e41
+詳細画面は使用履歴、収入、支出、合計値を閲覧ができる。数値は支出の項目に色調変化を実装している。
+
 #### 編集画面
-未入力状態 </br>
-
-入力完了状態 </br>
-
-削除機能 </br>
-
-追加機能 </br>
-
+編集画面 </br>
+https://gyazo.com/028a46ba071b7291ef171e6927c066f3
+更新機能 </br>
+https://gyazo.com/a7afaa5a556958baeea159e3cc344df5
 全ての情報を削除する場合 </br>
+https://gyazo.com/34b71d9df786e8e4c092ff0860ad3c9e
+登録機能と同様、漏れなく入力することで、更新ができるようになっている。もし、すべての情報を削除したい場合は、表示されているリストをすべて削除することで、日にち分の削除ができる。すべて削除した場合は、遷移先がトップページになる。
 
-#### ユーザー情報編集画面
-
-
-金額表示は、感覚的にわかりやすいように色調変化
+#### ユーザー情報画面
+詳細画面
+https://gyazo.com/1304ba5982503ff1ae98295a17a3f383
+編集画面
+https://gyazo.com/b991ae98d09af7143e17c0b60f6442bb
+ユーザー情報は、必要に応じた変更で、数値が合わないときに対応ができる。
 
 ### 実装予定の機能
 #### グラフ実装
