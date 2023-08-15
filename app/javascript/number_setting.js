@@ -11,43 +11,58 @@ function number_setting(){
       let data_num = null;
       let data_width = null;
       let data_low = null;
+      let data_debt = null;
       let init_num = 0;
+      const bar_view = document.getElementById("money-bar");
       let canvas = document.getElementById("canvas-2");
       let low_num = document.getElementById("low_num");
       let max_width = 200;
       let canvas_width = 0;
       let canvas_len = targetNum % Math.pow(10, count_len(targetNum))
       
-      const count_up1 = () => {
-        target.innerText = `${zero_padding(init_num)}`;
-        init_num += Math.pow(10, count_len(targetNum) - 1.5);
-        if (init_num > targetNum) {
-          target.innerText = targetNum;
-          clearInterval(data_num);
+      if (bar_view.style.display != "none") {
+        const count_up1 = () => {
+          target.innerText = `${zero_padding(init_num)}`;
+          init_num += Math.pow(10, count_len(targetNum) - 1.5);
+          if (init_num > targetNum) {
+            target.innerText = targetNum;
+            clearInterval(data_num);
+          }
         }
-      }
 
-      const count_up2 = () => {
-        canvas.style.width = canvas_width + 'px';
-        canvas_width += max_width * (canvas_len / canvas_num(targetNum / 10)) / 100;
-        if(canvas_width > (max_width * (canvas_len / canvas_num(targetNum / 10)))) {
-          canvas_width = max_width * (canvas_len / canvas_num(targetNum / 10));
-          clearInterval(data_width);
+        const count_up2 = () => {
+          canvas.style.width = canvas_width + 'px';
+          canvas_width += max_width * (canvas_len / canvas_num(targetNum / 10)) / 100;
+          if(canvas_width > (max_width * (canvas_len / canvas_num(targetNum / 10)))) {
+            canvas_width = max_width * (canvas_len / canvas_num(targetNum / 10));
+            clearInterval(data_width);
+          }
         }
-      }
+  
+        const count_up3 = () => {
+          low_num.innerText = `${zero_padding_canvas(init_num)}`;
+          init_num += Math.pow(10, count_len(targetNum) - 2);
+          if (init_num > canvas_len) {
+            low_num.innerText = `${zero_padding_canvas(targetNum)}`;
+            clearInterval(data_low);
+          }
+        }
 
-      const count_up3 = () => {
-        low_num.innerText = `${zero_padding_canvas(init_num)}`;
-        init_num += Math.pow(10, count_len(targetNum) - 2);
-        if (init_num > canvas_len) {
-          low_num.innerText = `${zero_padding_canvas(targetNum)}`;
-          clearInterval(data_low);
-        }
+        data_num = setInterval(count_up1, 1);
+        data_width = setInterval(count_up2, 1);
+        data_low = setInterval(count_up3, 1);
       }
-      
-      data_num = setInterval(count_up1, 1);
-      data_width = setInterval(count_up2, 1);
-      data_low = setInterval(count_up3, 1);
+      else {
+        const count_up4 = () => {
+          target.innerText = parseInt(init_num);
+          init_num += Math.pow(10, count_len(targetNum) - 1.5);
+          if (init_num > targetNum) {
+            target.innerText = targetNum;
+            clearInterval(data_debt);
+          }
+        }
+        data_debt = setInterval(count_up4, 1);
+      }
       AddCamma(targetNum);
     }
   }

@@ -33,7 +33,7 @@ function cash_value_bar(annual_income) {
 
 function debt_value_bar(annual_income) {
   const debtNum = document.getElementById("debt-current-num");
-  debtNum.style.color = color_label(debt_future, (annual_income / 12 / 7));
+  debtNum.style.color = color_label(debt_future, annual_income);
 }
 
 function savings_value_bar(annual_income) {

@@ -40,7 +40,9 @@
   font-size: 24px;
   width: 150px;
   height: 20px;
+  background-color: rgb(200, 200, 200);
   font-family: 'League Spartan', sans-serif;
+  border: none;
 }
 
 .money_info_table_col2 {
