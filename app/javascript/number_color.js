@@ -11,7 +11,7 @@ function number_color() {
     const selectedValue = parseInt(paymentsMode.value);
     switch (selectedValue) {
       case 1:
-        cash_value_bar(annual_income);
+        cash_value_bar();
         break;
       case 2:
         debt_value_bar(annual_income);
@@ -21,14 +21,15 @@ function number_color() {
         break;
       default:
         // デフォルトの表示
-        cash_value_bar(annual_income);
+        cash_value_bar();
     }
   });
 }
 
 // メイン画面
-function cash_value_bar(annual_income) {
-  color_bar_view((cash_cons / (annual_income / 12 / 7)) * 100);
+function cash_value_bar() {
+  console.log((cash_cons / 10000) * 100);
+  color_bar_view((cash_cons / 10000) * 100);
 }
 
 function debt_value_bar(annual_income) {
