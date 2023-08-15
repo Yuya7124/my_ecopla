@@ -24,29 +24,6 @@ function form_option() {
     const deletedFormIdsInput = document.getElementById("deleted-form-ids");
     deletedFormIdsInput.value += "," + formIndex[lastIndex - 2];
 
-    // 登録ボタンの表示を更新する関数
-    const updateSubmitButtonDisplay = () => {
-      if (allInputsFilled) {
-        if (NewsubmitButton != null){
-          NewsubmitButton.style.display = "block";
-          NewsubmitButtonDeactive.style.display = "none";
-        }
-        if (UpdatesubmitButton != null) {
-          UpdatesubmitButton.style.display = "block";
-          UpdatesubmitButtonDeactive.style.display = "none";
-        }
-      } else {
-        if (NewsubmitButton != null){
-          NewsubmitButton.style.display = "none";
-          NewsubmitButtonDeactive.style.display = "block";
-        }
-        if (UpdatesubmitButton != null) {
-          UpdatesubmitButton.style.display = "none";
-          UpdatesubmitButtonDeactive.style.display = "block";
-        }
-      }
-    };
-    
     document.addEventListener('input', event => {
       const target = event.target;
       if (target.matches('.form_date, .form_purpose, .form_amount, .form_payment')) {
@@ -85,6 +62,16 @@ function form_option() {
         }
         // 非表示のフィールドから削除したフォームIDをカンマで区切って追加
         const deletedFormIdsInput = document.getElementById("deleted-form-ids");
+        const newformInputs = document.querySelectorAll('.form_date, .form_purpose, .form_amount, .form_payment');
+        allInputsFilled = true;
+        
+        newformInputs.forEach(input => {
+          if (input.value === '') {
+            console.log(input.value)
+            allInputsFilled = false;
+          }
+        });
+        updateSubmitButtonDisplay();
         if (deletedFormIdsInput != null){
           deletedFormIdsInput.value += "," + formId;
         }
@@ -96,8 +83,32 @@ function form_option() {
         }
       }
     }
+    // updateSubmitButtonDisplay();
   });
+  // 登録ボタンの表示を更新する関数
+  const updateSubmitButtonDisplay = () => {
+    if (allInputsFilled) {
+      if (NewsubmitButton != null){
+        NewsubmitButton.style.display = "block";
+        NewsubmitButtonDeactive.style.display = "none";
+      }
+      if (UpdatesubmitButton != null) {
+        UpdatesubmitButton.style.display = "block";
+        UpdatesubmitButtonDeactive.style.display = "none";
+      }
+    } else {
+      if (NewsubmitButton != null){
+        NewsubmitButton.style.display = "none";
+        NewsubmitButtonDeactive.style.display = "block";
+      }
+      if (UpdatesubmitButton != null) {
+        UpdatesubmitButton.style.display = "none";
+        UpdatesubmitButtonDeactive.style.display = "block";
+      }
+    }
+  };
 }
+
 
 // buildForm関数を変更し、selectedValueを受け取るようにする
 function buildForm(index) {

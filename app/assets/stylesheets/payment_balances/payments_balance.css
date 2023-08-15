@@ -1,5 +1,5 @@
 body {
-  background-color: rgb(150, 150, 150);
+  background-color: rgb(200, 200, 200);
   font-family: 'League Spartan', sans-serif;
 }
 
@@ -45,30 +45,26 @@ a {
   font-size: 20px;
   justify-content: center;
   font-family: 'League Spartan', sans-serif;
-  background-color: rgb(200, 200, 200);
-  border: none;
+  background-color: rgb(210, 210, 210);
 }
 
 .form_purpose {
   width: 15vw;
   font-size: 16px;
-  background-color: rgb(200, 200, 200);
-  border: none;
+  background-color: rgb(210, 210, 210);
 }
 
 .ancestry_forms {
   width: 15vw;
   font-size: 14px;
-  background-color: rgb(200, 200, 200);
-  border: none;
+  background-color: rgb(210, 210, 210);
   text-align: right;
 }
 
 .form_ancestry {
   width: 14vw;
   font-size: 14px;
-  background-color: rgb(200, 200, 200);
-  border: none;
+  background-color: rgb(210, 210, 210);
 }
 
 .form_amount {
@@ -77,18 +73,16 @@ a {
   font-size: 30px;
   font-family: 'League Spartan', sans-serif;
   color: white;
-  background-color: rgb(200, 200, 200);
+  background-color: rgb(210, 210, 210);
   font-weight: 600;
   -webkit-text-stroke: 0.5px black;
   margin: 0 5px;
-  border: none;
 }
 
 .form_payment {
   width: 12vw;
   font-size: 18px;
-  background-color: rgb(200, 200, 200);
-  border: none;
+  background-color: rgb(210, 210, 210);
 }
 
 /* 新規・編集画面 */
@@ -177,7 +171,7 @@ a {
 .tb_amount,
 .tb_payment {
   font-size: 13px;
-  color: silver;
+  color: rgb(100, 100, 100);
 }
 
 .balance_form_date,
@@ -326,7 +320,7 @@ a {
 .back {
   margin: 0 10px;
   color: white;
-  background-color: rgb(200, 200, 200);
+  background-color: rgb(225, 225, 225);
   padding-top: 5px;
   font-size: 20px;
   text-decoration: none;
@@ -342,7 +336,7 @@ a {
   text-align: center;
   margin: 0 10px;
   color: white;
-  background-color: rgb(200, 200, 200);
+  background-color: rgb(225, 225, 225);
   padding: 5px;
   font-size: 18px;
   text-decoration: none;

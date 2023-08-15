@@ -19,10 +19,10 @@ https://docs.google.com/spreadsheets/d/1ZzuvTxPaM-XKdWJZdxIX5OVldH2utiWFjX1BtrzA
 ※	実装した機能について、それぞれどのような特徴があるのかを列挙する形で記載。画像はGyazoで、GIFはGyazoGIFで撮影すること。
 金額表示の色調変化
 #### メイン画面
-
+https://gyazo.com/d005a23faf5baeadf7ca257a8645f3a9
 #### 新規登録画面
 未入力状態 </br>
-
+https://gyazo.com/cf7ba7230afbd2adcf61d7304808edbf
 入力完了状態 </br>
 
 削除機能 </br>
@@ -30,7 +30,7 @@ https://docs.google.com/spreadsheets/d/1ZzuvTxPaM-XKdWJZdxIX5OVldH2utiWFjX1BtrzA
 追加機能 </br>
 
 #### 日付ごとの詳細画面
-
+https://gyazo.com/48fe86365b318b6ff3f325d78730b746
 #### 編集画面
 未入力状態 </br>
 
@@ -48,8 +48,6 @@ https://docs.google.com/spreadsheets/d/1ZzuvTxPaM-XKdWJZdxIX5OVldH2utiWFjX1BtrzA
 金額表示は、感覚的にわかりやすいように色調変化
 
 ### 実装予定の機能
-#### 金額の色調変化
-ユーザーによって金銭感覚、年収が異なるため、それに沿った金額の表示色の色調変化を実装したい。
 #### グラフ実装
 カテゴリー別、月別のグラフの実装により、より使用状況が把握できるようにするために実装したい。
 # データベース設計
