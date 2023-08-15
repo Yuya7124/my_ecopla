@@ -69,7 +69,7 @@ h3 {
 
 .new_user, 
 .back_btn_login {
-  color: white;
+  color: navy;
   background-color: rgb(200, 200, 200);
   padding: 5px;
   font-size: 18px;
@@ -83,7 +83,7 @@ h3 {
 }
 
 .sign_up {
-  color: white;
+  color: navy;
   background-color: rgb(200, 200, 200);
   font-size: 16px;
   text-align: center;
