@@ -5,9 +5,9 @@ class PaymentsBalancesController < ApplicationController
   before_action :no_found_page, only: :show
   before_action :amount_calculation, only: :index
   before_action :day_amount_calculation, only: :show
+  before_action :user_data, only: [:index, :new, :edit, :show]
 
   def index
-    @user = current_user
     @payments_balances = PaymentsBalance.where(user_id: current_user.id)
     payments_balance_id = params[:payments_balance_id]
     date = params[:date]
@@ -133,5 +133,9 @@ class PaymentsBalancesController < ApplicationController
     # 合計値を表示
     @total_income = @cash_plus + @atm_plus
     @total_expend = @cash_minus + @atm_minus + @debt_num_past + @atm_charge + @cashless_charge
+  end
+
+  def user_data
+    @user = current_user
   end
 end

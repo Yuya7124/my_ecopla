@@ -52,7 +52,6 @@ function form_option() {
       if (target.matches('.form_date, .form_purpose, .form_amount, .form_payment')) {
         const newformInputs = document.querySelectorAll('.form_date, .form_purpose, .form_amount, .form_payment');
         allInputsFilled = true;
-        console.log(newformInputs)
         
         newformInputs.forEach(input => {
           if (input.value === '') {
@@ -157,7 +156,6 @@ function buildForm(index) {
   // 選択フォームを繰り返し表示
   const selectChildElement = (selectForm) => { 
     if (document.getElementById(selectForm) !== null) {
-      console.log(selectForm)
       document.getElementById(selectForm).remove()
     }
   }
@@ -200,7 +198,6 @@ function buildForm(index) {
   const appendChildSelect = (purposes) => {
     const childWrap = document.createElement('td');
     const childSelect = document.createElement('select');
-    console.log(selectWrap)
 
     childWrap.setAttribute('id', `new-child-select-wrap-${index}`);
     childWrap.setAttribute('class', 'ancestry_forms');
@@ -227,7 +224,6 @@ function buildForm(index) {
 
     XHR.onload = () => {
     const GrandChildItems = XHR.response.purpose;
-    console.log(GrandChildItems.length);
     if (GrandChildItems.length != 0) {
       appendGrandChildSelect(GrandChildItems);
     }
@@ -240,9 +236,6 @@ function buildForm(index) {
     const childWrap = formNode.querySelector(`#new-child-select-wrap-${index}`)
     const grandchildWrap = document.createElement('td')
     const grandchildSelect = document.createElement('select')
-    
-
-    console.log(selectWrap)
 
     grandchildWrap.setAttribute('id', `new-grand-child-select-wrap-${index}`);
     grandchildWrap.setAttribute('class', 'ancestry_forms');

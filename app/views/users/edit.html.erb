@@ -47,7 +47,8 @@
 
   <div class="money_info_annual_income">
     <%= f.label :annual_income, "年収(大体でOK)" %>:
-    <%= f.text_field :annual_income, class: "form_text", type: "number", placeholder: "0", style: "text-align:right", id:"user-annual-income" %>万
+    <%= f.text_field :annual_income, class: "form_text", type: "number", placeholder: "0", style: "text-align:right", id:"user-annual-income" %>
+      <span class="more_ten_thousands">万</span>
   </div>
 </div>
 

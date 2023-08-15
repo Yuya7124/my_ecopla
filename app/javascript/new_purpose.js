@@ -2,9 +2,6 @@ function new_purpose() {
   let formIndex = [];
   let forms = document.querySelectorAll(".balance_forms");
   let lastIndex = forms.length;
-  const formInputs = document.querySelectorAll('.form_date, .form_purpose, .form_amount, .form_payment');
-  const submitButton = document.getElementById("save-button");
-  let allInputsFilled = true;
   
   for (let i = 0; i < lastIndex - 1; i++) {
     formIndex.push(i);

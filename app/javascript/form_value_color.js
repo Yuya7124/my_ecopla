@@ -1,32 +1,35 @@
 // import {color_label, removeComma} from number_color;
 
 function form_value_color() {
+  const annual = annual_income;
   const formInputs = document.querySelectorAll('.form_date, .form_purpose, .form_amount, .form_payment');
   for (let pblist = 0; pblist < formInputs.length; pblist++){
+    
     const PbListParent = document.querySelectorAll('.form_purpose');
     const PbListAmount = document.getElementById(`inputform-amount-${pblist}`);
     if (PbListAmount != null){
       const pbl_value = PbListAmount.value;
+      // 数値変更時
       PbListAmount.addEventListener('change', () => {
-        console.log(PbListParent.item(pblist).value)
-        if (PbListParent.item(pblist).value == 2) {
-          PbListAmount.style.color = color_label(pbl_value);
+        if (PbListParent.item(pblist).value == "2") {
+          PbListAmount.style.color = color_label(pbl_value, annual);
         }
-        else if (PbListParent.item(pblist).value == 4) {
-          PbListAmount.style.color = color_label(pbl_value);
+        else if (PbListParent.item(pblist).value == "4") {
+          PbListAmount.style.color = color_label(pbl_value, annual);
         }
         else {
-          PbListAmount.style.color = color_label(0);
+          PbListAmount.style.color = color_label(0, annual);
         }
       });
-      if (PbListParent.item(pblist).value == 2) {
-        PbListAmount.style.color = color_label(pbl_value);
+      // 読み込み時
+      if (PbListParent.item(pblist).value == "2") {
+        PbListAmount.style.color = color_label(pbl_value, annual);
       }
-      else if (PbListParent.item(pblist).value == 4) {
-        PbListAmount.style.color = color_label(pbl_value);
+      else if (PbListParent.item(pblist).value == "4") {
+        PbListAmount.style.color = color_label(pbl_value, annual);
       }
       else {
-        PbListAmount.style.color = color_label(0);
+        PbListAmount.style.color = color_label(0, annual);
       }
     }
   }
@@ -37,12 +40,13 @@ function color_change(red, green, blue) {
   return "rgb(" + red + "," + green + "," + blue + ")";
 }
 
-function color_label(color) {
+function color_label(color, annual_income) {
   //出費額段階
-  const OutPut_Lv_1 = 1000;
-  const OutPut_Lv_2 = 5000;
-  const OutPut_Lv_3 = 7500;
-  const OutPut_Lv_4 = 10000;
+  const week_income = annual_income / 12 / 7
+  const OutPut_Lv_1 = week_income / 10;
+  const OutPut_Lv_2 = week_income / 8;
+  const OutPut_Lv_3 = week_income / 3.2;
+  const OutPut_Lv_4 = week_income / 2;
   
   //表示色
   let r = 255;

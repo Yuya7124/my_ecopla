@@ -6,7 +6,6 @@
   font-size: 24px;
 }
 
-
 .user_info_amount {
   width: 60%;
   margin: 100px 20vw 0 20vw;
@@ -26,7 +25,7 @@
 
 .table_col2 {
   width: 25vw;
-  font-size: 24px;
+  font-size: 28px;
   text-align: right;
   border: 1px solid #333;
 }
@@ -38,8 +37,8 @@
 }
 
 .form_text {
-  font-size: 20px;
-  width: 120px;
+  font-size: 24px;
+  width: 150px;
   height: 20px;
   font-family: 'League Spartan', sans-serif;
 }
@@ -50,6 +49,18 @@
   text-align: right;
   border: 1px solid #333;
   margin-left: 5px;
+}
+
+.more_ten_thousands {
+  margin-top: 3px;
+  font-size: 18px;
+}
+
+#total-exact-amount,
+#debt_future,
+#current_savings {
+  padding: 5px;
+  font-size: 30px;
 }
 
 .money_info_annual_income {

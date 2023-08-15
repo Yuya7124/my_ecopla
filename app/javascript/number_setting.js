@@ -9,32 +9,45 @@ function number_setting(){
       }
 
       let data_num = null;
+      let data_width = null;
+      let data_low = null;
       let init_num = 0;
       let canvas = document.getElementById("canvas-2");
       let low_num = document.getElementById("low_num");
       let max_width = 200;
       let canvas_width = 0;
       let canvas_len = targetNum % Math.pow(10, count_len(targetNum))
-
-      low_num.innerText = `${zero_padding(canvas_len, targetNum / 10)}`;
-
-      const count_up = () => {
-        target.innerText = `${zero_padding(init_num, targetNum)}`;
-        init_num += Math.pow(10, count_len(targetNum) - 2);
-        
-        canvas.style.width = canvas_width + 'px';
-        
-        canvas_width += max_width * (canvas_len / canvas_num(targetNum / 10)) / 100;
+      
+      const count_up1 = () => {
+        target.innerText = `${zero_padding(init_num)}`;
+        init_num += Math.pow(10, count_len(targetNum) - 1.5);
         if (init_num > targetNum) {
           target.innerText = targetNum;
           clearInterval(data_num);
         }
+      }
+
+      const count_up2 = () => {
+        canvas.style.width = canvas_width + 'px';
+        canvas_width += max_width * (canvas_len / canvas_num(targetNum / 10)) / 100;
         if(canvas_width > (max_width * (canvas_len / canvas_num(targetNum / 10)))) {
           canvas_width = max_width * (canvas_len / canvas_num(targetNum / 10));
+          clearInterval(data_width);
+        }
+      }
+
+      const count_up3 = () => {
+        low_num.innerText = `${zero_padding_canvas(init_num)}`;
+        init_num += Math.pow(10, count_len(targetNum) - 2);
+        if (init_num > canvas_len) {
+          low_num.innerText = `${zero_padding_canvas(targetNum)}`;
+          clearInterval(data_low);
         }
       }
       
-      data_num = setInterval(count_up, 1);
+      data_num = setInterval(count_up1, 1);
+      data_width = setInterval(count_up2, 1);
+      data_low = setInterval(count_up3, 1);
       AddCamma(targetNum);
     }
   }
@@ -93,14 +106,37 @@ function number_setting(){
 function color_change(red, green, blue) {
   return "rgb(" + red + "," + green + "," + blue + ")";
 }
-
-function zero_padding(num, max_num){
+function zero_padding(num) {
   let len = parseInt(Math.log10(num)) + 1;
-  let max_len = parseInt(Math.log10(max_num)) + 1;
   if (len <= 2 || num <= 0) {
     len = 2;
   }
-  return (Array(len).join('0') + num).slice(-max_len);
+  return ('0'.repeat(len) + num).slice(-len);
+}
+
+function zero_padding_canvas(num) {
+
+  //0埋め処理
+  let pd = parseInt(Math.log10(num));
+  if (pd <= 2)
+  {
+    pd = 2;
+  }
+  let pn = Math.pow(10, pd);
+  let dn = (num % pn);
+  let pdn = new Array;
+  let n = "";
+  for (let k = 1; k <= pd; k++)
+  {
+      pdn[k - 1] = parseInt(dn) % 10;
+      dn -= pdn[k - 1];
+      dn /= 10;
+  }
+  for (let l = parseInt(pd - 1); l >= 0; l--)
+  {
+      n += pdn[l].toString();
+  }
+  return n.toString();
 }
 
 function count_len(max_num) {
@@ -126,7 +162,6 @@ function Stock(cons_num, max_num) {
   }
   let pn = Math.pow(10, pd);
   // let t = parseInt(cons_num / pn);
-  // let dn = (cons_num % pn);
   const stock = document.getElementById("tank");
   //ストック処理
   stock.innerHTML = "";

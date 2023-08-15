@@ -6,6 +6,7 @@
 
 .canvas_view {
   display: flex;
+  color: rgb(0, 150, 255);
 }
 
 #canvas-frame-2,
@@ -16,7 +17,7 @@
 }
 
 #canvas-frame-2 {
-  background-color: rgba(0, 150, 255, 0.1);
+  background-color: rgba(150, 150, 150, 0.1);
   display: flex;
 }
 
@@ -39,26 +40,28 @@
   width: 60px;
   height: 40px;
   font-size: 20px;
+  background-color: rgb(200, 200, 200);
 }
 
 .current_num {
   font-size: 30px;
   font-family: 'Kdam Thmor Pro', sans-serif;
-  color: rgb(0, 150, 255);
+  
 }
 
 .num_view {
   display: flex;
+  color: rgb(0, 150, 255);
 }
 
 #low_num {
   font-size: 8px;
   font-weight: 600;
   font-family: 'Kdam Thmor Pro', sans-serif;
-  color: rgb(0, 150, 255);
   padding-top: 4px;
 }
 
-#tank {
-  color: rgb(0, 150, 255);
+#alert {
+  font-size: 20px;
+  padding-top: 4px;
 }

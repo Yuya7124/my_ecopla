@@ -24,7 +24,9 @@
           </tr>
           <tr>
             <th class="table_col1">年収</th>
-            <td class="table_col2"><%= (@annual_income).to_s(:delimited, delimiter: ',') %>万</td>
+            <td class="table_col2"><%= (@annual_income).to_s(:delimited, delimiter: ',') %>
+              <span class="more_ten_thousands">万</span>
+            </td>
           </tr>
         </tbody>
       </table>

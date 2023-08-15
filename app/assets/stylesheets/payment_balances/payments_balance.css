@@ -1,5 +1,5 @@
 body {
-  background-color: aliceblue;
+  background-color: rgb(121, 121, 121);
   font-family: 'League Spartan', sans-serif;
 }
 
@@ -326,7 +326,7 @@ a {
 .back {
   margin: 0 10px;
   color: white;
-  background-color: dodgerblue;
+  background-color: rgb(200, 200, 200);
   padding-top: 5px;
   font-size: 20px;
   text-decoration: none;
@@ -342,7 +342,7 @@ a {
   text-align: center;
   margin: 0 10px;
   color: white;
-  background-color: dodgerblue;
+  background-color: rgb(200, 200, 200);
   padding: 5px;
   font-size: 18px;
   text-decoration: none;
