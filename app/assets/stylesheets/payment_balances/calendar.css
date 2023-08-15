@@ -8,7 +8,6 @@
   font-size: 32px;
 }
 
-
 /* 曜日 */
 tr.calendar_top>*:first-child {
   color: crimson;
@@ -28,8 +27,8 @@ tr.calendar_top>*:last-child {
 .day-wday-5-past-prev-month,
 .day-wday-6-past-prev-month
 {
-  color: gray;
-  border: 1px solid #000000;
+  color:silver;
+  border: 1px solid #101010;
 }
 
 .day-wday-0-past-current-month,
@@ -40,8 +39,7 @@ tr.calendar_top>*:last-child {
 .day-wday-5-past-current-month,
 .day-wday-6-past-current-month
 {
-  
-  border: 1px solid #000000;
+  border: 1px solid #101010;
 }
 
 .day-wday-0-today-current-month,
@@ -84,7 +82,7 @@ tr.calendar_top>*:last-child {
 .day-wday-5-future-next-month,
 .day-wday-6-future-next-month
 {
-  color: gray;
+  color: silver;
 }
 
 .day-wday-0-past-current-month,

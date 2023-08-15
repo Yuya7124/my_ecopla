@@ -109,7 +109,7 @@ a {
 
 .tb_date,
 .balance_form_date {
-  border: 1px solid #333;
+  border: 1px solid #101010;
   width: 15vw;
   padding: 3px;
 }
@@ -123,7 +123,7 @@ a {
 
 .tb_purpose,
 .balance_form_purpose {
-  border: 1px solid #333;
+  border: 1px solid #101010;;
   width: 15vw;
   padding: 3px;
 }
@@ -138,7 +138,7 @@ a {
 
 .tb_amount,
 .balance_form_amount {
-  border: 1px solid #333;
+  border: 1px solid #101010;
   width: 15vw;
   padding: 3px;
 }
@@ -153,7 +153,7 @@ a {
 
 .tb_payment,
 .balance_form_payment {
-  border: 1px solid #333;
+  border: 1px solid #101010;
   width: 12vw;
   padding: 3px;
 }
@@ -177,7 +177,7 @@ a {
 .tb_amount,
 .tb_payment {
   font-size: 13px;
-  color: gray;
+  color: silver;
 }
 
 .balance_form_date,
@@ -201,62 +201,62 @@ a {
 /* 詳細画面 */
 
 .show_tb_purpose {
-  border: 1px solid #333;
+  border: 1px solid #101010;
   width: 250px;
 }
 
 .show_tb_amount {
-  border: 1px solid #333;
+  border: 1px solid #101010;
   width: 160px;
 }
 
 .show_tb_payment {
-  border: 1px solid #333;
+  border: 1px solid #101010;
   width: 120px;
 }
 
 .blance_propuse {
   padding-left: 10px;
-  border: 1px solid #333;
+  border: 1px solid #101010;
 }
 
 .blance_amount {
   padding-right: 15px;
-  border: 1px solid #333;
+  border: 1px solid #101010;
 }
 
 .blance_payment {
-  border: 1px solid #333;
+  border: 1px solid #101010;
 }
 
 .tb_income  {
-  border:1px solid #333;
+  border:1px solid #101010;
   width: 120px;
 }
 
 .tb_expend  {
-  border: 1px solid #333;
+  border: 1px solid #101010;
   width: 120px;
 }
 
 .tb_total_amount {
-  border: 1px solid #333;
+  border: 1px solid #101010;
   width: 120px;
 }
 
 .income  {
   padding-right: 15px;
-  border: 1px solid #333;
+  border: 1px solid #101010;
 }
 
 .expend  {
   padding-right: 15px;
-  border: 1px solid #333;
+  border: 1px solid #101010;
 }
 
 .total_amount {
   padding-right: 15px;
-  border: 1px solid #333;
+  border: 1px solid #101010;
 }
 
 .show_payments,
@@ -331,7 +331,7 @@ a {
   font-size: 20px;
   text-decoration: none;
   justify-content: center;
-  border: 1px solid #333;
+  border: 1px solid #101010;
   border-radius: 5px;
   width: 120px;
   height: 30px;
@@ -347,7 +347,7 @@ a {
   font-size: 18px;
   text-decoration: none;
   justify-content: center;
-  border: 1px solid #333;
+  border: 1px solid #101010;
   border-radius: 5px;
   width: 100px;
   height: 20px;
