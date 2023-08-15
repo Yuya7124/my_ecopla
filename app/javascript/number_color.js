@@ -133,15 +133,19 @@ function color_bar_view(per_num) {
   const alert_text = document.getElementById("alert");
   if (per_num >= 100) {   //青
     color_bar(100, 100, per_num);
+    alert_text.innerText = "";
   }
   if (per_num < 100 && per_num >= 87) {   //青→水
     color_bar(100, 87, per_num);
+    alert_text.innerText = "";
   }
   if (per_num < 87 && per_num >= 75) {   //水→緑
     color_bar(87, 75, per_num);
+    alert_text.innerText = "";
   }
   if (per_num < 75 && per_num >= 50) {   //緑→黄
     color_bar(75, 50, per_num);
+    alert_text.innerText = "";
   }
   if (per_num < 50 && per_num >= 25) {   //黄→赤
     color_bar(50, 25, per_num);
