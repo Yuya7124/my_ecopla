@@ -27,7 +27,7 @@ tr.calendar_top>*:last-child {
 .day-wday-5-past-prev-month,
 .day-wday-6-past-prev-month
 {
-  color:silver;
+  color: gray;
   border: 1px solid #101010;
 }
 
@@ -82,7 +82,7 @@ tr.calendar_top>*:last-child {
 .day-wday-5-future-next-month,
 .day-wday-6-future-next-month
 {
-  color: silver;
+  color: gray;
 }
 
 .day-wday-0-past-current-month,
@@ -106,7 +106,7 @@ tr.calendar_top>*:last-child {
 .day-wday-0-future-prev-month,
 .day-wday-0-future-next-month
 {
-  color: lightcoral;
+  color:indianred;
 }
 
 .day-wday-6-past-prev-month,
@@ -114,7 +114,7 @@ tr.calendar_top>*:last-child {
 .day-wday-6-future-prev-month,
 .day-wday-6-future-next-month
 {
-  color: lightsteelblue;
+  color:steelblue;
 }
 
 .date_info {
