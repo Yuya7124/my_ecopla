@@ -5,7 +5,7 @@ lock "~> 3.17.3"
 set :application, "my_ecopla"
 
 # どのリポジトリからアプリをpullするかを指定する
-set :repo_url, "Yuya7124/my_ecopla.git"
+set :repo_url, 'https://github.com/Yuya7124/my_ecopla.git'
 
 # バージョンが変わっても共通で参照するディレクトリを指定
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads')
