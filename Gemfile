@@ -76,4 +76,4 @@ gem 'jquery-rails'
 gem "simple_calendar", "~> 2.4"
 gem 'rails-i18n'
 
-gem 'cocoon'
+gem "aws-sdk-s3", require: false
