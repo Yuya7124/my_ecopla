@@ -61,11 +61,15 @@ gem 'mini_magick'
 gem 'image_processing', '~> 1.2'
 
 group :production do
-  gem 'pg'
+  # gem 'pg'
 end
 
 group :development do
   gem 'rubocop', require: false
+end
+
+group :production do
+  gem 'unicorn', '5.4.1'
 end
 
 gem 'devise'
