@@ -57,6 +57,7 @@ production:
   <<: *default
   adapter: postgresql
   url: <%= ENV['DATABASE_URL'] %>
+  host: dpg-chidtdjhp8u7g28rso8g-a
 
 production:
   <<: *default
