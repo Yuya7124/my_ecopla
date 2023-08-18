@@ -80,6 +80,8 @@ group :development, :test do
   gem 'capistrano3-unicorn'
 end
 
+gem 'net-http'
+
 gem 'devise'
 gem 'active_hash'
 gem 'ancestry'
