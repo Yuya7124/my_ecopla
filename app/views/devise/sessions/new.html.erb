@@ -21,8 +21,9 @@
     <div class="login">
       <%= image_tag "4396.png", size: "30x30" %>
       <%= f.submit "ログイン", class: "sign_up" %>
-    <div>
+    </div>
+  </div>
+  <div class="reset_pass">
+    <%= link_to "パスワード忘れたら？", new_password_reset_path %><br />
   </div>
 <% end %>
-
-<%# <%= render "devise/shared/links" %> 
