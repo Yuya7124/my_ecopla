@@ -16,5 +16,6 @@ class PasswordResetsController < ApplicationController
   end
 
   def edit
+    
   end
 end
