@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  attr_accessor :remember_token, :activation_token, :reset_token
   before_action :amount_calculation, only: [:show, :edit]
   before_action :set_user, only: [:edit, :update]
   before_action :user_info, only: [:show, :edit]
@@ -23,6 +24,18 @@ class UsersController < ApplicationController
     end
     # 無効化を解除
     @user.skip_password_validation = false
+  end
+
+  # パスワード再設定の属性を設定する
+  def created_at_before_last_save
+    self.reset_token = User.new_token
+    update_attribute(:reset_password_token,  User.digest(reset_token))
+    update_attribute(:reset_password_sent_at, Time.zone.now)
+  end
+
+  # パスワード再設定のメールを送信する
+  def send_password_change_notification
+    UserMailer.password_reset(self).deliver_now
   end
 
   private
