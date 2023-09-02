@@ -12,5 +12,5 @@ Rails.application.routes.draw do
   resources :purposes, only:[:new, :edit], shallow: true
   get 'purpose/:id', to: 'purposes#search'
   resources :users, only: [:show, :edit, :update]
-  resources :password_resets, only: [:new, :create, :edit, :update]
+  # resources :passwords, only: [:new, :create, :edit, :update]
 end
