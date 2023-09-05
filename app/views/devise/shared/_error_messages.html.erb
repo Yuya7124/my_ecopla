@@ -1,6 +1,6 @@
 <% if model.errors.any? %>
   <div id="error_explanation" data-turbo-cache="false">
-    <h2>
+    <h2 class="errors_messages">
       <%= I18n.t('errors.messages.not_saved',
                  count: model.errors.count,
                  resource: model.class.model_name.human.downcase)
