@@ -45,8 +45,6 @@ Rails.application.configure do
   host = 'localhost:3000'
   config.action_mailer.default_url_options = { host: host, protocol: 'http' }
 
-  host = 'my-ecopla.onrender.com'
-  Rails.application.routes.default_url_options[:host] = host
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :amazon
 

@@ -1,52 +1,50 @@
 <%= render "devise/shared/login_header" %>
 
-<h2>Edit <%= current_user %></h2>
+<h2>Edit Account</h2>
 
-<%= form_with model: @user, url: edit_user_password_path(current_user), class: 'registration_main', local: true do |f| %>
+<%= form_with model: @user, url: user_registration_path, class: 'registration_main', local: true do |f| %>
   <%= render "devise/shared/error_messages", model: f.object %>
+  <div class="field">
+    <%= f.label :nickname, "ユーザー名", class: "label" %><br />
+    <%= f.text_field :nickname, id:"user_name", class: "user_form"%>
+  </div>
 
-  <div class="user_info">
-    <div class="field">
-      <%= f.label :nickname, "ユーザー名", class: "label" %><br />
-      <%= f.text_field :nickname, id:"user_name", class: "user_form"%>
-    </div>
+  <div class="field">
+    <%= f.label :email, "メールアドレス", class: "label" %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "email_form" %>
+  </div>
 
-    <div class="field">
-      <%= f.label :email, "メールアドレス", class: "label" %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "email_form" %>
-    </div>
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
 
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-    <% end %>
+  <div class="field">
+    <%= f.label :current_password, class: "label" %>
+    <%= f.password_field :current_password, autocomplete: "current-password", class: "password_form" %>
+  </div>
 
-    <div class="field">
-      <%= f.label :password, "パスワード", class: "label" %> <i>(leave blank if you don't want to change it)</i><br />
-      <%= f.password_field :password, autocomplete: "new-password", class: "password_form" %>
-      <% if @minimum_password_length %>
-        <br />
-        <em><%= @minimum_password_length %> characters minimum</em>
-      <% end %>
-    </div>
+  <div class="field">
+    <%= f.label :password, "新しいパスワード", class: "label" %>
+    <% if @minimum_password_length %>
+      (<%= @minimum_password_length %> 文字以上)
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "new-password", class: "password_form" %>
+  </div>
 
-    <div class="field">
-      <%= f.label :password_confirmation, "パスワード確認", class: "label" %><br />
-      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "password_form" %>
-    </div>
-
-    <div class="field">
-      <%= f.label :current_password, class: "label" %> <i>(we need your current password to confirm your changes)</i><br />
-      <%= f.password_field :current_password, autocomplete: "current-password", class: "password_form" %>
-    </div>
+  <div class="field">
+    <%= f.label :password_confirmation, "新しいパスワード(再入力)", class: "label" %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "password_form" %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Update" class: "sign_up" %>
+    <div class="login">
+      <%= image_tag "登録アイコン.png", size: "30x30" %>
+      <%= f.submit "更新", class: "sign_up" %>
+    </div>
+    <div class="back_login">
+      <%= image_tag "Uターン矢印 1.png", size: "20x20" %>
+      <%= link_to "戻る", root_path, class: "back_btn_login" %>
+    </div>
   </div>
 <% end %>
 
-<h3>Cancel my account</h3>
-
-<div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
-
-<%= link_to "Back", :back %>

@@ -48,12 +48,14 @@
   <div class="option_menu_bar" id="option-menu">
   
   <ul class="menu_elements">設定
-    
+    <li class="pull-down-list">
+      <%= image_tag "おこづかいアイコン1.png", size: "20x25" %>
+      <%= link_to "金銭情報", "/users/#{current_user.id}" %>
+    </li>
     <li class="pull-down-list">
       <%= image_tag "9736.png", size: "20x25" %>
-      <%= link_to "ユーザー情報", "/users/#{current_user.id}" %>
+      <%= link_to "アカウント情報変更", edit_user_registration_path %>
     </li>
-    <%# <li class="pull-down-list"><%= link_to "オプション", "#" </li> %><%# 追加実装フェイズで実装 %>
   </ul>
 <div>
 

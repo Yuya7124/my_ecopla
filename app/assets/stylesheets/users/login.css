@@ -14,6 +14,10 @@ h3 {
   font-size: 24px;
 }
 
+i {
+  font-size: 12px;
+}
+
 .registration_main,
 .new_user,
 .edit_user {
