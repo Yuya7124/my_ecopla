@@ -5,7 +5,12 @@ class PasswordsController < ApplicationController
 
   def create
     @user = User.find_by(email: password_reset_params)
-    if @user.present?     
+    if @user.present?
+      # @user.created_at_before_last_save
+      # # @user.send_password_change_notification
+      # PasswordResetMailer.with(user: @user).reset.deliver_later
+      # flash[:success] = "Email sent with password reset instructions"
+      
       user&.send_reset_password_instructions
       render json: {}
       redirect_to root_path
